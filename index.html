@@ -2,12 +2,9 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
     <meta name="description" content="پیش‌فاکتور هوشمند محصولات خانگی ماماسیس">
     <meta name="theme-color" content="#d45a2b">
-    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-    <meta http-equiv="Pragma" content="no-cache">
-    <meta http-equiv="Expires" content="0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
     <title>ماماسیس | فاکتور هوشمند</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
@@ -23,7 +20,7 @@
             --brown: #4e2e1e;
             --brown-2: #6b3f2a;
             --text: #3e2c22;
-            --text-muted: #8a6a58;
+            --text-muted: #766355;
             --border: #f0e0d3;
             --shadow-sm: 0 2px 8px rgba(180, 120, 80, 0.06);
             --shadow-md: 0 8px 24px rgba(180, 120, 80, 0.12);
@@ -33,8 +30,10 @@
             --radius-lg: 28px;
             --radius-xl: 32px;
             --basket: #2d7a5f;
-            --basket-light: #e8f5f0;
             --basket-dark: #1f5c46;
+            --warning: #c0392b;
+            --warning-bg: #fde8e5;
+            --success: #27ae60;
         }
 
         body {
@@ -42,20 +41,15 @@
             background: linear-gradient(160deg, #fdf6f0 0%, #f9ece3 40%, #f5e0d2 100%);
             background-attachment: fixed;
             padding: 1rem 0.7rem 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            color: var(--text);
-            gap: 1.2rem;
+            display: flex; flex-direction: column; align-items: center;
+            min-height: 100vh; color: var(--text); gap: 1.2rem;
         }
 
         .invoice-container {
             max-width: 620px; width: 100%;
             background: rgba(255, 255, 255, 0.88);
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
             padding: 1.6rem 1.3rem;
             border: 1px solid rgba(255, 245, 235, 0.9);
         }
@@ -84,10 +78,8 @@
 
         .budget-tool {
             background: linear-gradient(135deg, #fff9f4, #fdf0e8);
-            border-radius: var(--radius-md);
-            padding: 1.1rem 1.3rem;
-            margin-bottom: 1.5rem;
-            border: 1px solid #f5ddd0;
+            border-radius: var(--radius-md); padding: 1.1rem 1.3rem;
+            margin-bottom: 1.5rem; border: 1px solid #f5ddd0;
             box-shadow: var(--shadow-sm);
             display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
         }
@@ -99,20 +91,14 @@
             box-shadow: 0 4px 12px rgba(212, 90, 43, 0.3);
         }
         .budget-tool .txt { flex: 1; min-width: 120px; }
-        .budget-tool .txt strong {
-            display: block; font-size: 0.9rem; color: var(--brown-2); margin-bottom: 2px;
-        }
-        .budget-tool .txt small {
-            font-size: 0.72rem; color: var(--text-muted);
-        }
+        .budget-tool .txt strong { display: block; font-size: 0.9rem; color: var(--brown-2); margin-bottom: 2px; }
+        .budget-tool .txt small { font-size: 0.72rem; color: var(--text-muted); }
         .btn-random {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white; border: none;
-            padding: 0.7rem 1.3rem; border-radius: 30px;
+            color: white; border: none; padding: 0.7rem 1.3rem; border-radius: 30px;
             font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.88rem;
             cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; gap: 6px;
-            white-space: nowrap;
+            display: flex; align-items: center; gap: 6px; white-space: nowrap;
             box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
         }
         .btn-random:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35); }
@@ -139,11 +125,9 @@
 
         .item {
             display: flex; align-items: center;
-            background: var(--cream);
-            padding: 0.8rem 0.95rem; border-radius: var(--radius-sm);
-            border: 1px solid var(--border);
-            transition: all 0.18s ease;
-            gap: 10px; flex-wrap: wrap;
+            background: var(--cream); padding: 0.8rem 0.95rem;
+            border-radius: var(--radius-sm); border: 1px solid var(--border);
+            transition: all 0.18s ease; gap: 10px; flex-wrap: wrap;
         }
         .item.active {
             background: #fff5ee; border-color: var(--primary);
@@ -158,9 +142,8 @@
             display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
         }
         .item-name .badge {
-            background: #e9d9cf; color: var(--brown-2);
-            font-size: 0.65rem; padding: 0.1rem 0.55rem;
-            border-radius: 30px; font-weight: 500; white-space: nowrap;
+            background: #e9d9cf; color: var(--brown-2); font-size: 0.65rem;
+            padding: 0.1rem 0.55rem; border-radius: 30px; font-weight: 500; white-space: nowrap;
         }
         .item-meta {
             font-size: 0.83rem; color: var(--text-muted);
@@ -191,7 +174,6 @@
             border-color: var(--primary); color: white;
             box-shadow: 0 3px 8px rgba(212, 90, 43, 0.25);
         }
-        .qty-btn.plus:active { background: var(--primary-dark); }
         .qty-btn.basket-plus {
             background: linear-gradient(135deg, var(--basket), var(--basket-dark));
             border-color: var(--basket); color: white;
@@ -204,11 +186,106 @@
         }
         .item-total small { font-weight: 400; font-size: 0.65rem; color: #a18170; }
 
+        .item-basket-progress {
+            flex-basis: 100%; width: 100%;
+            margin-top: 6px; padding: 0.6rem 0.8rem;
+            background: linear-gradient(135deg, #f0faf5, #e6f5ed);
+            border-radius: 12px;
+            border: 1.5px solid rgba(45, 122, 95, 0.25);
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+        .item-basket-progress.visible { display: block; }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .item-basket-progress .ibp-header {
+            display: flex; justify-content: space-between; align-items: center;
+            font-size: 0.72rem; font-weight: 700; color: var(--basket-dark);
+            margin-bottom: 5px; gap: 6px; flex-wrap: wrap;
+        }
+        .item-basket-progress .ibp-badge {
+            background: var(--basket); color: white;
+            padding: 0.15rem 0.55rem; border-radius: 20px;
+            font-size: 0.66rem; font-weight: 700; transition: all 0.3s;
+        }
+        .item-basket-progress .ibp-badge.complete {
+            background: linear-gradient(135deg, var(--success), #1e8449);
+        }
+        .item-basket-progress .ibp-bar-wrap {
+            height: 10px; background: rgba(255,255,255,0.7);
+            border-radius: 20px; overflow: hidden;
+            border: 1px solid rgba(45, 122, 95, 0.2);
+        }
+        .item-basket-progress .ibp-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--basket), var(--success));
+            border-radius: 20px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 8px rgba(39, 174, 96, 0.35);
+        }
+        .item-basket-progress .ibp-hint {
+            font-size: 0.68rem; color: var(--basket-dark);
+            margin-top: 4px; font-weight: 600;
+        }
+        .item-basket-progress .ibp-hint.complete { color: var(--success); font-weight: 800; }
+
+        .basket-summary-panel {
+            background: linear-gradient(135deg, #eaf7f1, #dff0e8);
+            border-radius: var(--radius-md); padding: 1.1rem 1.2rem;
+            margin: 1.2rem 0; border: 2px solid var(--basket);
+            box-shadow: 0 8px 24px rgba(45, 122, 95, 0.15);
+            display: none;
+        }
+        .basket-summary-panel.visible { display: block; }
+        .basket-summary-title {
+            font-size: 0.95rem; font-weight: 800; color: var(--basket-dark);
+            display: flex; align-items: center; gap: 7px;
+            margin-bottom: 0.8rem; padding-bottom: 0.6rem;
+            border-bottom: 1.5px dashed rgba(45, 122, 95, 0.3);
+        }
+        .basket-summary-title .bs-count {
+            margin-right: auto;
+            background: var(--basket); color: white;
+            font-size: 0.68rem; padding: 0.15rem 0.6rem;
+            border-radius: 20px; font-weight: 700;
+        }
+        .basket-summary-list { display: flex; flex-direction: column; gap: 0.5rem; }
+        .basket-summary-item {
+            background: rgba(255,255,255,0.7); border-radius: 12px;
+            padding: 0.55rem 0.8rem; display: flex; flex-direction: column;
+            gap: 4px; border: 1px solid rgba(45, 122, 95, 0.15);
+        }
+        .basket-summary-item .bsi-row {
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 6px; flex-wrap: wrap;
+        }
+        .basket-summary-item .bsi-name {
+            font-size: 0.78rem; font-weight: 700; color: var(--basket-dark);
+            display: flex; align-items: center; gap: 4px;
+        }
+        .basket-summary-item .bsi-weight {
+            font-size: 0.7rem; font-weight: 700; color: var(--basket-dark);
+        }
+        .basket-summary-item .bsi-weight.complete { color: var(--success); }
+        .basket-summary-item .bsi-bar-wrap {
+            height: 7px; background: rgba(45, 122, 95, 0.15);
+            border-radius: 20px; overflow: hidden;
+        }
+        .basket-summary-item .bsi-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--basket), var(--success));
+            border-radius: 20px; transition: width 0.5s;
+        }
+        .basket-summary-item.complete .bsi-bar {
+            background: linear-gradient(90deg, var(--success), #1e8449);
+        }
+
         .note-box {
             background: linear-gradient(135deg, #fcf2ea, #fae8dc);
-            border-radius: var(--radius-sm);
-            padding: 0.9rem 1.2rem; margin: 1.3rem 0 1rem;
-            border-right: 4px solid var(--primary);
+            border-radius: var(--radius-sm); padding: 0.9rem 1.2rem;
+            margin: 1.3rem 0 1rem; border-right: 4px solid var(--primary);
             color: var(--brown-2); font-size: 0.78rem; line-height: 1.8;
         }
         .note-box p { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 0.3rem; }
@@ -216,8 +293,7 @@
 
         .payment-card {
             background: linear-gradient(135deg, #2c3e50, #34495e);
-            border-radius: var(--radius-md);
-            padding: 1.1rem 1.3rem; margin: 1rem 0;
+            border-radius: var(--radius-md); padding: 1.1rem 1.3rem; margin: 1rem 0;
             color: #fff; display: flex; flex-direction: column; gap: 0.6rem;
             box-shadow: 0 10px 24px rgba(44, 62, 80, 0.3);
             position: relative; overflow: hidden;
@@ -230,10 +306,7 @@
             content: "💳"; position: absolute; left: 12px; bottom: 8px;
             font-size: 3.2rem; opacity: 0.08; transform: rotate(-15deg);
         }
-        .card-label {
-            font-size: 0.72rem; color: #bdc3c7; font-weight: 500;
-            display: flex; align-items: center; gap: 5px;
-        }
+        .card-label { font-size: 0.72rem; color: #bdc3c7; font-weight: 500; display: flex; align-items: center; gap: 5px; }
         .card-number-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         .card-number {
             font-family: 'Vazirmatn', monospace; font-size: 1.2rem; font-weight: 800;
@@ -254,28 +327,21 @@
         .summary-sticky {
             position: sticky; bottom: 0.5rem;
             background: linear-gradient(135deg, #f7ede4, #fce6d8);
-            border-radius: var(--radius-md);
-            padding: 1.1rem 1.2rem;
+            border-radius: var(--radius-md); padding: 1.1rem 1.2rem;
             box-shadow: 0 -4px 20px rgba(180, 120, 80, 0.18), 0 10px 28px rgba(180, 120, 80, 0.12);
             display: flex; flex-direction: column; gap: 0.7rem;
-            margin-top: 1rem;
-            border: 1px solid rgba(255, 245, 235, 0.9);
+            margin-top: 1rem; border: 1px solid rgba(255, 245, 235, 0.9);
             backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-        .summary-top {
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 0.6rem;
-        }
+        .summary-top { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.6rem; }
         .total-items {
             font-weight: 700; color: var(--brown-2); font-size: 0.8rem;
-            background: rgba(237, 224, 214, 0.9);
-            padding: 0.35rem 0.9rem; border-radius: 30px;
-            display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
+            background: rgba(237, 224, 214, 0.9); padding: 0.35rem 0.9rem;
+            border-radius: 30px; display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
         }
         .total-items .cal-badge {
             font-size: 0.72rem; color: #a0765e;
-            background: rgba(255, 255, 255, 0.7);
-            padding: 0.12rem 0.55rem; border-radius: 20px;
+            background: rgba(255, 255, 255, 0.7); padding: 0.12rem 0.55rem; border-radius: 20px;
         }
         .total-price {
             font-weight: 800; font-size: 1.35rem; color: #1f1a16;
@@ -293,87 +359,11 @@
         .btn-clear:hover { background: #fae6db; }
         .btn-clear:active { transform: scale(0.96); }
 
-        .basket-panel {
-            background: linear-gradient(135deg, #eaf7f1, #dff0e8);
-            border-radius: var(--radius-md);
-            padding: 1.2rem 1.3rem;
-            margin: 1.2rem 0;
-            border: 2px solid var(--basket);
-            box-shadow: 0 8px 24px rgba(45, 122, 95, 0.15);
-            position: relative; overflow: hidden;
-        }
-        .basket-panel::before {
-            content: "🧺"; position: absolute; top: 8px; left: 12px;
-            font-size: 2.5rem; opacity: 0.1; transform: rotate(-10deg);
-        }
-        .basket-header {
-            display: flex; align-items: center; justify-content: space-between;
-            flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.9rem;
-        }
-        .basket-title {
-            font-size: 1.05rem; font-weight: 800; color: var(--basket-dark);
-            display: flex; align-items: center; gap: 7px;
-        }
-        .basket-weight-badge {
-            background: var(--basket); color: white;
-            font-size: 0.72rem; font-weight: 700;
-            padding: 0.25rem 0.8rem; border-radius: 30px;
-            display: flex; align-items: center; gap: 4px;
-            box-shadow: 0 3px 8px rgba(45, 122, 95, 0.3);
-            transition: all 0.3s;
-        }
-        .basket-weight-badge.complete {
-            background: linear-gradient(135deg, #27ae60, #1e8449);
-            animation: pop 0.4s ease;
-        }
-        @keyframes pop {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-        .basket-desc {
-            font-size: 0.78rem; color: var(--basket-dark); line-height: 1.7;
-            margin-bottom: 0.8rem;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 0.6rem 0.9rem; border-radius: 12px;
-        }
-        .basket-progress-wrap {
-            background: rgba(255, 255, 255, 0.7);
-            border-radius: 30px; height: 16px; overflow: hidden;
-            position: relative; margin-bottom: 0.5rem;
-            border: 1px solid rgba(45, 122, 95, 0.2);
-        }
-        .basket-progress-bar {
-            height: 100%;
-            background: linear-gradient(90deg, var(--basket), #27ae60);
-            border-radius: 30px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            box-shadow: 0 0 10px rgba(39, 174, 96, 0.4);
-        }
-        .basket-progress-bar::after {
-            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
-        }
-        .basket-stats {
-            display: flex; justify-content: space-between; align-items: center;
-            flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem;
-            color: var(--basket-dark); font-weight: 600;
-        }
-        .basket-stats .remaining { color: #c0392b; }
-        .basket-stats .complete-msg { color: #27ae60; font-weight: 700; }
-
         .final-invoice-card {
             max-width: 620px; width: 100%;
             background: linear-gradient(135deg, #ffffff, #fef8f3);
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-lg);
-            padding: 1.5rem 1.3rem;
-            border: 2px solid var(--primary);
+            border-radius: var(--radius-xl); box-shadow: var(--shadow-lg);
+            padding: 1.5rem 1.3rem; border: 2px solid var(--primary);
             position: relative; overflow: hidden;
         }
         .final-invoice-card::before {
@@ -428,8 +418,8 @@
             border-radius: 40px; font-size: 0.82rem; font-weight: 600;
             box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
             opacity: 0; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 2000; pointer-events: none; white-space: nowrap;
-            max-width: calc(100% - 30px);
+            z-index: 2000; pointer-events: none;
+            max-width: calc(100% - 30px); text-align: center;
         }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
@@ -438,15 +428,12 @@
             z-index: 3000; opacity: 0; pointer-events: none;
             transition: opacity 0.3s ease;
             backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
-            display: flex; align-items: center; justify-content: center;
-            padding: 20px;
+            display: flex; align-items: center; justify-content: center; padding: 20px;
         }
         .modal-overlay.active { opacity: 1; pointer-events: auto; }
-
         .modal-card {
             background: linear-gradient(160deg, #ffffff, #fef8f3);
-            border-radius: var(--radius-lg);
-            padding: 1.8rem 1.5rem 1.5rem;
+            border-radius: var(--radius-lg); padding: 1.8rem 1.5rem 1.5rem;
             max-width: 380px; width: 100%;
             box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
             border: 2px solid var(--primary-light);
@@ -455,7 +442,6 @@
             position: relative;
         }
         .modal-overlay.active .modal-card { transform: scale(1) translateY(0); }
-
         .modal-icon {
             width: 60px; height: 60px; border-radius: 20px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
@@ -463,50 +449,33 @@
             font-size: 1.8rem; margin: 0 auto 1rem;
             box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35);
         }
-        .modal-title {
-            font-size: 1.15rem; font-weight: 800; color: var(--brown);
-            text-align: center; margin-bottom: 0.4rem;
-        }
-        .modal-desc {
-            font-size: 0.8rem; color: var(--text-muted);
-            text-align: center; margin-bottom: 1.3rem; line-height: 1.7;
-        }
-        .modal-input-wrap {
-            position: relative; margin-bottom: 0.8rem;
-        }
+        .modal-icon.warning { background: linear-gradient(135deg, var(--warning), #96281b); }
+        .modal-title { font-size: 1.15rem; font-weight: 800; color: var(--brown); text-align: center; margin-bottom: 0.4rem; }
+        .modal-desc { font-size: 0.8rem; color: var(--text-muted); text-align: center; margin-bottom: 1.3rem; line-height: 1.7; }
+        .modal-input-wrap { position: relative; margin-bottom: 0.8rem; }
         .modal-input {
             width: 100%; padding: 0.9rem 1rem 0.9rem 3rem;
             border-radius: 16px; border: 2px solid var(--border);
             background: #fff; font-family: 'Vazirmatn', Tahoma, sans-serif;
             font-size: 1.1rem; font-weight: 700; color: var(--text);
-            direction: ltr; text-align: left; outline: none;
-            transition: all 0.2s;
+            direction: ltr; text-align: left; outline: none; transition: all 0.2s;
         }
-        .modal-input:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 4px rgba(212, 90, 43, 0.1);
-        }
+        .modal-input:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(212, 90, 43, 0.1); }
         .modal-input::placeholder { color: #c9b5a8; font-weight: 400; }
         .modal-input-suffix {
-            position: absolute; left: 14px; top: 50%;
-            transform: translateY(-50%);
-            font-size: 0.78rem; color: var(--text-muted); font-weight: 600;
-            pointer-events: none;
+            position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+            font-size: 0.78rem; color: var(--text-muted); font-weight: 600; pointer-events: none;
         }
-        .modal-quick-budgets {
-            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem;
-        }
+        .modal-quick-budgets { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem; }
         .quick-budget-btn {
             flex: 1; min-width: calc(33% - 6px);
             background: #fdf2ea; border: 1.5px solid #f0d5c2;
             color: var(--primary-dark); padding: 0.5rem 0.4rem;
             border-radius: 12px; font-family: 'Vazirmatn', Tahoma, sans-serif;
-            font-size: 0.72rem; font-weight: 700; cursor: pointer;
-            transition: all 0.15s;
+            font-size: 0.72rem; font-weight: 700; cursor: pointer; transition: all 0.15s;
         }
         .quick-budget-btn:hover { background: #fae6db; border-color: var(--primary); }
         .quick-budget-btn:active { transform: scale(0.95); }
-
         .modal-actions { display: flex; gap: 8px; }
         .modal-btn {
             flex: 1; padding: 0.75rem 1rem; border-radius: 40px;
@@ -515,109 +484,225 @@
             display: flex; align-items: center; justify-content: center; gap: 5px;
         }
         .modal-btn:active { transform: scale(0.96); }
-        .modal-btn-primary {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white; box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
-        }
-        .modal-btn-ghost {
-            background: #f5ede7; color: var(--brown-2);
-            border: 1.5px solid #e6cdbb;
-        }
+        .modal-btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3); }
+        .modal-btn-danger { background: linear-gradient(135deg, var(--warning), #96281b); color: white; box-shadow: 0 6px 16px rgba(192, 57, 43, 0.3); }
+        .modal-btn-ghost { background: #f5ede7; color: var(--brown-2); border: 1.5px solid #e6cdbb; }
+
+        /* ==================================================== */
+        /* ============ تور راهنما — طراحی جدید ============ */
+        /* ==================================================== */
 
         .tour-overlay {
-            position: fixed; inset: 0; background: rgba(30, 20, 15, 0.75);
-            z-index: 4000; opacity: 0; pointer-events: none;
-            transition: opacity 0.3s ease;
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at center, rgba(30, 20, 15, 0.55) 0%, rgba(30, 20, 15, 0.85) 100%);
+            z-index: 4000;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.4s ease;
+            backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
         }
         .tour-overlay.active { opacity: 1; pointer-events: auto; }
+
         .tour-spotlight {
             position: fixed; z-index: 4001; pointer-events: none;
-            border-radius: 20px; box-shadow: 0 0 0 9999px rgba(30, 20, 15, 0.75);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 20px;
+            box-shadow:
+                0 0 0 9999px rgba(30, 20, 15, 0.78),
+                0 0 0 4px var(--primary),
+                0 0 30px 8px rgba(212, 90, 43, 0.35);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             opacity: 0;
+            animation: spotlightPulse 2s ease-in-out infinite;
         }
         .tour-spotlight.active { opacity: 1; }
+        @keyframes spotlightPulse {
+            0%, 100% { box-shadow: 0 0 0 9999px rgba(30, 20, 15, 0.78), 0 0 0 4px var(--primary), 0 0 30px 8px rgba(212, 90, 43, 0.35); }
+            50% { box-shadow: 0 0 0 9999px rgba(30, 20, 15, 0.78), 0 0 0 5px var(--primary), 0 0 45px 14px rgba(212, 90, 43, 0.5); }
+        }
+
         .tour-tooltip {
             position: fixed; z-index: 4002;
-            background: linear-gradient(160deg, #ffffff, #fef8f3);
-            border-radius: 20px; padding: 1.1rem 1.3rem;
-            max-width: 300px; width: calc(100% - 40px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(160deg, #ffffff 0%, #fef8f3 60%, #fce6d8 100%);
+            border-radius: 22px;
+            padding: 0;
+            max-width: 340px; width: calc(100% - 32px);
+            box-shadow:
+                0 25px 60px rgba(0, 0, 0, 0.35),
+                0 10px 20px rgba(212, 90, 43, 0.15),
+                inset 0 1px 0 rgba(255,255,255,0.9);
             border: 2px solid var(--primary);
             opacity: 0; pointer-events: none;
-            transform: translateY(10px) scale(0.95);
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(15px) scale(0.92);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            overflow: hidden;
         }
         .tour-tooltip.active {
             opacity: 1; pointer-events: auto;
             transform: translateY(0) scale(1);
         }
         .tour-tooltip::before {
-            content: ""; position: absolute; width: 14px; height: 14px;
-            background: #fff; border: 2px solid var(--primary);
+            content: ""; position: absolute; width: 16px; height: 16px;
+            background: linear-gradient(135deg, #fce6d8, var(--primary));
+            border: 2px solid var(--primary);
             transform: rotate(45deg);
+            z-index: -1;
         }
         .tour-tooltip.arrow-top::before {
-            top: -9px; left: 50%; margin-left: -7px;
+            top: -10px; left: var(--arrow-left, 50%);
+            margin-left: -8px;
             border-bottom: none; border-left: none;
+            background: linear-gradient(135deg, #ffffff, #fce6d8);
         }
         .tour-tooltip.arrow-bottom::before {
-            bottom: -9px; left: 50%; margin-left: -7px;
+            bottom: -10px; left: var(--arrow-left, 50%);
+            margin-left: -8px;
             border-top: none; border-right: none;
+            background: linear-gradient(135deg, #fce6d8, #f9ece3);
         }
+
+        .tour-progress-bar {
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), #f5a623, var(--primary));
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 8px rgba(212, 90, 43, 0.5);
+        }
+
+        .tour-tooltip-content { padding: 1.2rem 1.3rem 1.1rem; }
+
         .tour-step-badge {
-            display: inline-block; background: var(--primary); color: white;
-            font-size: 0.65rem; font-weight: 700;
-            padding: 0.15rem 0.65rem; border-radius: 30px;
-            margin-bottom: 0.5rem;
+            display: inline-flex; align-items: center; gap: 4px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white;
+            font-size: 0.68rem; font-weight: 700;
+            padding: 0.25rem 0.75rem; border-radius: 30px;
+            margin-bottom: 0.7rem;
+            box-shadow: 0 3px 10px rgba(212, 90, 43, 0.35);
+            letter-spacing: 0.3px;
         }
+        .tour-step-badge::before {
+            content: "◆"; font-size: 0.6rem; opacity: 0.85;
+        }
+
         .tour-title {
-            font-size: 1rem; font-weight: 800; color: var(--brown);
-            margin-bottom: 0.4rem; display: flex; align-items: center; gap: 6px;
+            font-size: 1.08rem; font-weight: 800; color: var(--brown);
+            margin-bottom: 0.5rem;
+            display: flex; align-items: center; gap: 8px;
+            line-height: 1.4;
         }
-        .tour-desc { font-size: 0.82rem; color: #6b544a; line-height: 1.7; margin-bottom: 0.9rem; }
-        .tour-actions { display: flex; gap: 0.5rem; }
+        .tour-title .tour-title-emoji {
+            font-size: 1.3rem;
+            filter: drop-shadow(0 2px 4px rgba(212,90,43,0.2));
+        }
+
+        .tour-desc {
+            font-size: 0.84rem; color: #5a4338;
+            line-height: 1.85; margin-bottom: 1.1rem;
+            font-weight: 500;
+        }
+
+        .tour-actions {
+            display: flex; gap: 8px;
+        }
         .tour-btn {
-            flex: 1; padding: 0.55rem 0.9rem; border-radius: 30px;
-            font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.78rem;
+            flex: 1; padding: 0.65rem 0.9rem; border-radius: 30px;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            font-weight: 700; font-size: 0.82rem;
             cursor: pointer; transition: all 0.2s; border: none;
-            display: flex; align-items: center; justify-content: center; gap: 4px;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
         }
-        .tour-btn:active { transform: scale(0.95); }
+        .tour-btn:active { transform: scale(0.94); }
         .tour-btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white; box-shadow: 0 4px 12px rgba(212, 90, 43, 0.3);
+            color: white;
+            box-shadow: 0 6px 16px rgba(212, 90, 43, 0.35);
         }
-        .tour-btn-ghost { background: #f5ede7; color: var(--brown-2); border: 1.5px solid #e6cdbb; }
-        .tour-dots { display: flex; gap: 5px; justify-content: center; margin-top: 0.7rem; }
+        .tour-btn-primary:hover {
+            box-shadow: 0 8px 22px rgba(212, 90, 43, 0.45);
+            transform: translateY(-1px);
+        }
+        .tour-btn-ghost {
+            background: #f5ede7; color: var(--brown-2);
+            border: 1.5px solid #e6cdbb;
+            flex: 0 0 auto;
+            min-width: 80px;
+        }
+        .tour-btn-ghost:hover { background: #fae6db; }
+
+        .tour-dots {
+            display: flex; gap: 6px; justify-content: center;
+            margin-top: 0.9rem; padding-top: 0.7rem;
+            border-top: 1px dashed rgba(212, 90, 43, 0.2);
+        }
         .tour-dot {
-            width: 7px; height: 7px; border-radius: 50%;
-            background: #e6cdbb; transition: all 0.25s;
+            width: 8px; height: 8px; border-radius: 50%;
+            background: #e6cdbb;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
         }
-        .tour-dot.active { background: var(--primary); width: 20px; border-radius: 10px; }
+        .tour-dot:hover { transform: scale(1.3); background: #d4b8a5; }
+        .tour-dot.active {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            width: 24px; border-radius: 10px;
+            box-shadow: 0 2px 6px rgba(212, 90, 43, 0.4);
+        }
+        .tour-dot.completed { background: #b8d4c8; }
 
         .tour-restart-btn {
             position: fixed; bottom: 80px; left: 15px;
-            width: 46px; height: 46px; border-radius: 50%;
+            width: 52px; height: 52px; border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white; border: none; cursor: pointer;
-            box-shadow: 0 6px 18px rgba(212, 90, 43, 0.4);
-            font-size: 1.2rem; z-index: 500;
+            box-shadow:
+                0 8px 24px rgba(212, 90, 43, 0.45),
+                0 0 0 0 rgba(212, 90, 43, 0.5);
+            font-size: 1.35rem; z-index: 500;
             display: flex; align-items: center; justify-content: center;
-            transition: all 0.2s;
+            transition: all 0.3s;
+            animation: tourBtnPulse 2.5s infinite;
         }
-        .tour-restart-btn:active { transform: scale(0.9); }
+        @keyframes tourBtnPulse {
+            0%, 100% { box-shadow: 0 8px 24px rgba(212, 90, 43, 0.45), 0 0 0 0 rgba(212, 90, 43, 0.5); }
+            50% { box-shadow: 0 8px 24px rgba(212, 90, 43, 0.45), 0 0 0 12px rgba(212, 90, 43, 0); }
+        }
+        .tour-restart-btn:hover { transform: scale(1.08); }
+        .tour-restart-btn:active { transform: scale(0.92); }
         .tour-restart-btn::after {
-            content: "؟"; position: absolute; top: -3px; right: -3px;
-            background: #fff; color: var(--primary); width: 18px; height: 18px;
-            border-radius: 50%; font-size: 0.7rem; font-weight: 800;
+            content: "؟";
+            position: absolute; top: -4px; right: -4px;
+            background: #fff; color: var(--primary);
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            font-size: 0.75rem; font-weight: 800;
             display: flex; align-items: center; justify-content: center;
-            border: 1.5px solid var(--primary);
+            border: 2px solid var(--primary);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+        }
+
+        /* کیبورد اسپات‌لایت هنگام اجرای تور */
+        .tour-active .invoice-container,
+        .tour-active .final-invoice-card {
+            position: relative;
+            z-index: 1;
+        }
+
+        .noscript-msg {
+            background: var(--warning-bg); color: var(--warning);
+            padding: 1rem 1.5rem; border-radius: var(--radius-md);
+            max-width: 620px; width: 100%; text-align: center;
+            font-weight: 700; border: 2px solid var(--warning);
         }
 
         ::-webkit-scrollbar { width: 5px; height: 5px; }
         ::-webkit-scrollbar-thumb { background: #e6cdbb; border-radius: 10px; }
         ::-webkit-scrollbar-track { background: transparent; }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
 
         @media (max-width: 400px) {
             body { padding: 0.5rem 0.4rem 1.5rem; }
@@ -633,10 +718,14 @@
             .card-number { font-size: 0.95rem; letter-spacing: 1px; }
             .final-invoice-card { padding: 1.2rem 0.85rem; }
             .modal-card { padding: 1.5rem 1.1rem 1.2rem; }
-            .basket-panel { padding: 1rem 0.9rem; }
             .budget-tool { padding: 0.9rem 1rem; gap: 8px; }
             .budget-tool .icon { width: 38px; height: 38px; font-size: 1.1rem; }
             .btn-random { padding: 0.6rem 1rem; font-size: 0.8rem; }
+            .tour-tooltip { max-width: calc(100% - 24px); }
+            .tour-tooltip-content { padding: 1rem 1rem 0.9rem; }
+            .tour-title { font-size: 1rem; }
+            .tour-desc { font-size: 0.8rem; }
+            .tour-restart-btn { width: 48px; height: 48px; font-size: 1.2rem; bottom: 70px; }
         }
         @media (min-width: 601px) {
             .invoice-container { padding: 2rem 1.9rem; }
@@ -648,10 +737,15 @@
             .total-price { font-size: 1.55rem; }
             .card-number { font-size: 1.4rem; }
             .final-invoice-card { padding: 2rem 1.9rem; }
+            .tour-tooltip { max-width: 360px; }
         }
     </style>
 </head>
 <body>
+    <noscript>
+        <div class="noscript-msg">⚠️ برای استفاده از این صفحه، لطفاً جاوااسکریپت مرورگر خود را فعال کنید.</div>
+    </noscript>
+
     <div class="invoice-container">
         <div class="header" data-tour="header">
             <h1>🍃 ماماسیس <span>خانگی</span> 🍃</h1>
@@ -663,277 +757,55 @@
         </div>
 
         <div class="budget-tool" data-tour="budget">
-            <div class="icon">💰</div>
+            <div class="icon" aria-hidden="true">💰</div>
             <div class="txt">
                 <strong>خرید هوشمند با بودجه</strong>
                 <small>بودجه‌تون رو بگید، سبد رو براتون می‌چینیم</small>
             </div>
-            <button class="btn-random" id="randomBtn" type="button">
-                <span>🎲</span> رندوم
+            <button class="btn-random" id="randomBtn" type="button" aria-label="باز کردن پاپ‌آپ خرید رندوم">
+                <span aria-hidden="true">🎲</span> رندوم
             </button>
         </div>
 
         <div class="category">
             <div class="category-title">سوسیس‌ها <span style="font-size:0.7rem; font-weight:500; color:#ab8b7a;">(نیم کیلو)</span></div>
-            <div class="item-grid">
-                <div class="item" data-tour="first-item" data-price="650000" data-cal="1200" data-name="آلمانی" data-unit="نیم کیلو" data-weight="0.5">
-                    <div class="item-info">
-                        <div class="item-name">🟣 آلمانی <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۲۰۰ کالری</span>
-                            <span class="price-unit">۶۵۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="680000" data-cal="1050" data-name="کوکتل مرغ" data-unit="نیم کیلو" data-weight="0.5">
-                    <div class="item-info">
-                        <div class="item-name">🟣 کوکتل مرغ <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۰۵۰ کالری</span>
-                            <span class="price-unit">۶۸۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="750000" data-cal="1300" data-name="کوکتل پنیری" data-unit="نیم کیلو" data-weight="0.5">
-                    <div class="item-info">
-                        <div class="item-name">🟣 کوکتل پنیری <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۳۰۰ کالری</span>
-                            <span class="price-unit">۷۵۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="700000" data-cal="1150" data-name="بلغاری" data-unit="نیم کیلو" data-weight="0.5">
-                    <div class="item-info">
-                        <div class="item-name">🟣 بلغاری <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۱۵۰ کالری</span>
-                            <span class="price-unit">۷۰۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="990000" data-cal="1400" data-name="هاتداگ گوشت" data-unit="نیم کیلو" data-weight="0.5">
-                    <div class="item-info">
-                        <div class="item-name">🟣 هاتداگ گوشت <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۴۰۰ کالری</span>
-                            <span class="price-unit">۹۹۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-            </div>
+            <div class="item-grid" id="sausageGrid"></div>
         </div>
 
         <div class="category" data-tour="basket-category">
             <div class="category-title">
                 کالباس و ژامبون‌ها
                 <span style="font-size:0.7rem; font-weight:500; color:#ab8b7a;">(نیم کیلو)</span>
-                <span class="basket-tag">🧺 زنبیل</span>
+                <span class="basket-tag" aria-label="محصولات زنبیل">🧺 زنبیل</span>
             </div>
-            <div class="item-grid">
-                <div class="item basket-item" data-price="830000" data-cal="1100" data-name="ژامبون مرغ و قارچ لوکس" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
-                    <div class="item-info">
-                        <div class="item-name">🟣 ژامبون مرغ و قارچ لوکس <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۱۰۰ کالری</span>
-                            <span class="price-unit">۸۳۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item basket-item" data-price="1100000" data-cal="1450" data-name="ژامبون گوشت لوکس" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
-                    <div class="item-info">
-                        <div class="item-name">🟣 ژامبون گوشت لوکس <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۴۵۰ کالری</span>
-                            <span class="price-unit">۱,۱۰۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item basket-item" data-price="700000" data-cal="1000" data-name="کالباس مارتادلا" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
-                    <div class="item-info">
-                        <div class="item-name">🟣 کالباس مارتادلا <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۰۰۰ کالری</span>
-                            <span class="price-unit">۷۰۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item basket-item" data-price="850000" data-cal="1150" data-name="کالباس لیونر" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
-                    <div class="item-info">
-                        <div class="item-name">🟣 کالباس لیونر <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۱۵۰ کالری</span>
-                            <span class="price-unit">۸۵۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-            </div>
+            <div class="item-grid" id="basketGrid"></div>
         </div>
 
-        <div class="basket-panel" data-tour="basket-panel">
-            <div class="basket-header">
-                <div class="basket-title">🧺 زنبیل رزرو</div>
-                <div class="basket-weight-badge" id="basketWeightBadge">۰ / ۲.۵ کیلو</div>
+        <div class="basket-summary-panel" id="basketSummaryPanel">
+            <div class="basket-summary-title">
+                🧺 محصولات زنبیل شما
+                <span class="bs-count" id="basketSummaryCount">۰</span>
             </div>
-            <div class="basket-desc">
-                📌 برای محصولات کالباس و ژامبون، حداقل <strong>۲.۵ کیلوگرم</strong> سفارش لازمه تا تولید شروع بشه. محصولات زنبیل با چند مشترک جمع می‌شن.
-            </div>
-            <div class="basket-progress-wrap">
-                <div class="basket-progress-bar" id="basketProgressBar" style="width: 0%"></div>
-            </div>
-            <div class="basket-stats">
-                <span id="basketWeightText">وزن زنبیل: ۰ کیلو</span>
-                <span class="remaining" id="basketRemaining">۲.۵ کیلو مونده</span>
-            </div>
+            <div class="basket-summary-list" id="basketSummaryList"></div>
         </div>
 
         <div class="category">
             <div class="category-title">نیمه آماده‌ها <span style="font-size:0.7rem; font-weight:500; color:#ab8b7a;">(نیم کیلو / تعدادی)</span></div>
-            <div class="item-grid">
-                <div class="item" data-price="650000" data-cal="1250" data-name="ناگت مرغ" data-unit="نیم کیلو" data-weight="0.5">
-                    <div class="item-info">
-                        <div class="item-name">🟣 ناگت مرغ <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۲۵۰ کالری</span>
-                            <span class="price-unit">۶۵۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="730000" data-cal="1350" data-name="ناگت پنیری" data-unit="نیم کیلو" data-weight="0.5">
-                    <div class="item-info">
-                        <div class="item-name">🟣 ناگت پنیری <span class="badge">نیم کیلو</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۳۵۰ کالری</span>
-                            <span class="price-unit">۷۳۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="325000" data-cal="350" data-name="برگر ممتاز ۱۲۵ گرمی" data-unit="عددی" data-weight="0.125">
-                    <div class="item-info">
-                        <div class="item-name">🟣 برگر ممتاز <span class="badge">۱۲۵ گرمی عددی</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۳۵۰ کالری</span>
-                            <span class="price-unit">۳۲۵,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="200000" data-cal="220" data-name="کباب لقمه گوشت" data-unit="عددی" data-weight="0.05">
-                    <div class="item-info">
-                        <div class="item-name">🟣 کباب لقمه گوشت <span class="badge">عددی</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۲۲۰ کالری</span>
-                            <span class="price-unit">۲۰۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-                <div class="item" data-price="150000" data-cal="180" data-name="کباب لقمه مرغ زعفرانی" data-unit="عددی" data-weight="0.05">
-                    <div class="item-info">
-                        <div class="item-name">🟣 کباب لقمه مرغ زعفرانی <span class="badge">عددی</span></div>
-                        <div class="item-meta">
-                            <span class="cal">۱۸۰ کالری</span>
-                            <span class="price-unit">۱۵۰,۰۰۰ ت</span>
-                        </div>
-                    </div>
-                    <div class="qty-controls">
-                        <button class="qty-btn minus" type="button" disabled>−</button>
-                        <span class="qty-value">۰</span>
-                        <button class="qty-btn plus" type="button">+</button>
-                    </div>
-                    <div class="item-total">۰ <small>ت</small></div>
-                </div>
-            </div>
+            <div class="item-grid" id="readyGrid"></div>
         </div>
 
         <div class="note-box">
             <p>✅️ تمامی محصولات با گوشت و مرغ گرم و تازه کشتار روز تهیه می‌شود.</p>
             <p>📈 قیمت‌ها با نوسان بازار تغییر می‌کند.</p>
-            <p>🧺 محصولات زنبیل با رسیدن به ۲.۵ کیلو وارد مرحله تولید می‌شن.</p>
+            <p>🧺 هر محصول زنبیل به تنهایی به ۲.۵ کیلوگرم می‌رسه تا تولیدش شروع بشه.</p>
         </div>
 
         <div class="payment-card" data-tour="payment">
             <div class="card-label">💳 واریز به کارت مقصد</div>
             <div class="card-number-row">
                 <div class="card-number" id="cardNumber">6037-9982-2975-7330</div>
-                <button class="btn-copy" id="copyCardBtn" type="button">
-                    <span>📋</span> کپی
+                <button class="btn-copy" id="copyCardBtn" type="button" aria-label="کپی شماره کارت">
+                    <span aria-hidden="true">📋</span> کپی
                 </button>
             </div>
             <div class="card-owner">
@@ -950,11 +822,11 @@
                 <div class="total-price" id="totalPriceDisplay">۰ <span>تومان</span></div>
             </div>
             <div class="summary-actions">
-                <button class="btn-clear" id="clearAllBtn" type="button">
-                    <span>🧹</span> پاک کردن
+                <button class="btn-clear" id="clearAllBtn" type="button" aria-label="پاک کردن همه انتخاب‌ها">
+                    <span aria-hidden="true">🧹</span> پاک کردن
                 </button>
-                <button class="btn-clear" id="randomAgainBtn" type="button" style="border-color:var(--primary); color:var(--primary-dark);">
-                    <span>🎲</span> رندوم مجدد
+                <button class="btn-clear" id="randomAgainBtn" type="button" style="border-color:var(--primary); color:var(--primary-dark);" aria-label="خرید رندوم مجدد">
+                    <span aria-hidden="true">🎲</span> رندوم مجدد
                 </button>
             </div>
         </div>
@@ -973,21 +845,23 @@
             <div class="empty-state">هنوز محصولی انتخاب نشده است...</div>
         </div>
         <div class="final-actions">
-            <button class="btn-copy-final" id="copyFinalBtn" type="button" disabled>
-                <span>📋</span> کپی فاکتور برای ارسال به ادمین
+            <button class="btn-copy-final" id="copyFinalBtn" type="button" disabled aria-label="کپی فاکتور برای ارسال به ادمین">
+                <span aria-hidden="true">📋</span> کپی فاکتور برای ارسال به ادمین
             </button>
         </div>
     </div>
 
-    <div class="toast" id="toast"></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <div class="modal-overlay" id="budgetModal">
+    <!-- مودال بودجه -->
+    <div class="modal-overlay" id="budgetModal" role="dialog" aria-modal="true" aria-labelledby="budgetModalTitle">
         <div class="modal-card">
-            <div class="modal-icon">🎲</div>
-            <div class="modal-title">بودجه‌تون رو وارد کنید</div>
+            <div class="modal-icon" aria-hidden="true">🎲</div>
+            <div class="modal-title" id="budgetModalTitle">بودجه‌تون رو وارد کنید</div>
             <div class="modal-desc">سیستم بر اساس بودجه شما یه سبد متناسب می‌سازه</div>
             <div class="modal-input-wrap">
-                <input type="text" class="modal-input" id="modalBudgetInput" placeholder="مثلاً 2,000,000" inputmode="numeric" autocomplete="off">
+                <label for="modalBudgetInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">مبلغ بودجه به تومان</label>
+                <input type="tel" class="modal-input" id="modalBudgetInput" placeholder="مثلاً 2,000,000" inputmode="numeric" autocomplete="off">
                 <span class="modal-input-suffix">تومان</span>
             </div>
             <div class="modal-quick-budgets">
@@ -1005,35 +879,129 @@
         </div>
     </div>
 
-    <button class="tour-restart-btn" id="tourRestartBtn" type="button" title="راهنمای استفاده">🎓</button>
+    <!-- مودال تأیید پاک کردن -->
+    <div class="modal-overlay" id="clearModal" role="dialog" aria-modal="true" aria-labelledby="clearModalTitle">
+        <div class="modal-card">
+            <div class="modal-icon warning" aria-hidden="true">🧹</div>
+            <div class="modal-title" id="clearModalTitle">پاک کردن همه انتخاب‌ها؟</div>
+            <div class="modal-desc">همه محصولات انتخاب‌شده حذف می‌شن. این عمل قابل بازگشت نیست.</div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-ghost" id="clearCancelBtn" type="button">انصراف</button>
+                <button class="modal-btn modal-btn-danger" id="clearConfirmBtn" type="button">بله، پاک کن</button>
+            </div>
+        </div>
+    </div>
 
+    <button class="tour-restart-btn" id="tourRestartBtn" type="button" title="راهنمای استفاده" aria-label="شروع تور راهنما">🎓</button>
+
+    <!-- ====== تور راهنما ====== -->
     <div class="tour-overlay" id="tourOverlay"></div>
     <div class="tour-spotlight" id="tourSpotlight"></div>
-    <div class="tour-tooltip" id="tourTooltip">
-        <span class="tour-step-badge" id="tourStepBadge">۱ از ۷</span>
-        <div class="tour-title" id="tourTitle"></div>
-        <div class="tour-desc" id="tourDesc"></div>
-        <div class="tour-actions">
-            <button class="tour-btn tour-btn-ghost" id="tourSkipBtn" type="button">رد کردن</button>
-            <button class="tour-btn tour-btn-primary" id="tourNextBtn" type="button">بعدی ←</button>
+    <div class="tour-tooltip" id="tourTooltip" role="dialog" aria-modal="true" aria-labelledby="tourTitle">
+        <div class="tour-progress-bar" id="tourProgressBar"></div>
+        <div class="tour-tooltip-content">
+            <span class="tour-step-badge" id="tourStepBadge">۱ از ۷</span>
+            <div class="tour-title" id="tourTitle"></div>
+            <div class="tour-desc" id="tourDesc"></div>
+            <div class="tour-actions">
+                <button class="tour-btn tour-btn-ghost" id="tourSkipBtn" type="button">رد کردن</button>
+                <button class="tour-btn tour-btn-primary" id="tourNextBtn" type="button">بعدی ←</button>
+            </div>
+            <div class="tour-dots" id="tourDots"></div>
         </div>
-        <div class="tour-dots" id="tourDots"></div>
     </div>
 
     <script>
     (function() {
         'use strict';
+        var DEBUG = false;
 
-        // لاگ خطا برای دیباگ
-        window.addEventListener('error', function(e) {
-            console.error('[ماماسیس] خطا:', e.message, '| فایل:', e.filename, '| خط:', e.lineno);
-        });
+        // ==================== داده محصولات ====================
+        var PRODUCTS = {
+            sausage: [
+                { id: 's1', name: 'آلمانی', price: 650000, cal: 1200, weight: 0.5, unit: 'نیم کیلو' },
+                { id: 's2', name: 'کوکتل مرغ', price: 680000, cal: 1050, weight: 0.5, unit: 'نیم کیلو' },
+                { id: 's3', name: 'کوکتل پنیری', price: 750000, cal: 1300, weight: 0.5, unit: 'نیم کیلو' },
+                { id: 's4', name: 'بلغاری', price: 700000, cal: 1150, weight: 0.5, unit: 'نیم کیلو' },
+                { id: 's5', name: 'هاتداگ گوشت', price: 990000, cal: 1400, weight: 0.5, unit: 'نیم کیلو' }
+            ],
+            basket: [
+                { id: 'b1', name: 'ژامبون مرغ و قارچ لوکس', price: 830000, cal: 1100, weight: 0.5, unit: 'نیم کیلو', isBasket: true },
+                { id: 'b2', name: 'ژامبون گوشت لوکس', price: 1100000, cal: 1450, weight: 0.5, unit: 'نیم کیلو', isBasket: true },
+                { id: 'b3', name: 'کالباس مارتادلا', price: 700000, cal: 1000, weight: 0.5, unit: 'نیم کیلو', isBasket: true },
+                { id: 'b4', name: 'کالباس لیونر', price: 850000, cal: 1150, weight: 0.5, unit: 'نیم کیلو', isBasket: true }
+            ],
+            ready: [
+                { id: 'r1', name: 'ناگت مرغ', price: 650000, cal: 1250, weight: 0.5, unit: 'نیم کیلو' },
+                { id: 'r2', name: 'ناگت پنیری', price: 730000, cal: 1350, weight: 0.5, unit: 'نیم کیلو' },
+                { id: 'r3', name: 'برگر ممتاز ۱۲۵ گرمی', price: 325000, cal: 350, weight: 0.125, unit: 'عددی' },
+                { id: 'r4', name: 'کباب لقمه گوشت', price: 200000, cal: 220, weight: 0.05, unit: 'عددی' },
+                { id: 'r5', name: 'کباب لقمه مرغ زعفرانی', price: 150000, cal: 180, weight: 0.05, unit: 'عددی' }
+            ]
+        };
 
-        // شروع پس از لود کامل DOM
+        var BASKET_MIN_WEIGHT = 2.5;
+
+        // ==================== ابزارها ====================
+        var persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+        function toPersianDigits(num) { return String(num).replace(/\d/g, function(d) { return persianDigits[d]; }); }
+        function toEnglishNumber(str) { return String(str).replace(/[۰-۹]/g, function(d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); }); }
+        function fa(num, type) {
+            if (type === 'price' || type === 'count') return Number(num).toLocaleString('fa-IR');
+            if (type === 'weight') {
+                if (num === 0) return '۰';
+                return Number(num).toLocaleString('fa-IR', { maximumFractionDigits: 2 });
+            }
+            return toPersianDigits(num);
+        }
+
+        // ==================== منطق ====================
         function init() {
             try {
-                // ============ عناصر ============
-                var items = document.querySelectorAll('.item');
+                var allProducts = [];
+                Object.keys(PRODUCTS).forEach(function(cat) { PRODUCTS[cat].forEach(function(p) { allProducts.push(p); }); });
+
+                function buildItem(p) {
+                    var basketClass = p.isBasket ? ' basket-item' : '';
+                    var plusClass = p.isBasket ? 'qty-btn plus basket-plus' : 'qty-btn plus';
+                    var basketProgressHTML = p.isBasket ? (
+                        '<div class="item-basket-progress" data-basket-progress="' + p.id + '">' +
+                            '<div class="ibp-header"><span>🧺 پیشرفت رزرو این محصول</span><span class="ibp-badge">۰ / ۲.۵ کیلو</span></div>' +
+                            '<div class="ibp-bar-wrap"><div class="ibp-bar" style="width:0%"></div></div>' +
+                            '<div class="ibp-hint">۲.۵ کیلو مونده</div>' +
+                        '</div>'
+                    ) : '';
+                    return (
+                        '<div class="item' + basketClass + '" data-product-id="' + p.id + '" data-price="' + p.price + '" data-cal="' + p.cal + '" data-name="' + p.name + '" data-unit="' + p.unit + '" data-weight="' + p.weight + '"' + (p.isBasket ? ' data-basket="true"' : '') + '>' +
+                            '<div class="item-info">' +
+                                '<div class="item-name">🟣 ' + p.name + ' <span class="badge">' + p.unit + '</span></div>' +
+                                '<div class="item-meta">' +
+                                    '<span class="cal">' + fa(p.cal, 'count') + ' کالری</span>' +
+                                    '<span class="price-unit">' + fa(p.price, 'price') + ' ت</span>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="qty-controls">' +
+                                '<button class="qty-btn minus" type="button" disabled aria-label="کاهش تعداد ' + p.name + '">−</button>' +
+                                '<span class="qty-value" aria-live="polite">۰</span>' +
+                                '<button class="' + plusClass + '" type="button" aria-label="افزایش تعداد ' + p.name + '">+</button>' +
+                            '</div>' +
+                            '<div class="item-total">۰ <small>ت</small></div>' +
+                            basketProgressHTML +
+                        '</div>'
+                    );
+                }
+
+                var sausageGrid = document.getElementById('sausageGrid');
+                var basketGrid = document.getElementById('basketGrid');
+                var readyGrid = document.getElementById('readyGrid');
+
+                sausageGrid.innerHTML = PRODUCTS.sausage.map(buildItem).join('');
+                basketGrid.innerHTML = PRODUCTS.basket.map(buildItem).join('');
+                readyGrid.innerHTML = PRODUCTS.ready.map(buildItem).join('');
+
+                var items = Array.prototype.slice.call(document.querySelectorAll('.item'));
+
+                // ==================== عناصر ====================
                 var totalItemsDisplay = document.getElementById('totalItemsDisplay');
                 var totalPriceDisplay = document.getElementById('totalPriceDisplay');
                 var clearBtn = document.getElementById('clearAllBtn');
@@ -1052,305 +1020,358 @@
                 var modalConfirmBtn = document.getElementById('modalConfirmBtn');
                 var quickBudgetBtns = document.querySelectorAll('.quick-budget-btn');
 
-                var basketWeightBadge = document.getElementById('basketWeightBadge');
-                var basketProgressBar = document.getElementById('basketProgressBar');
-                var basketWeightText = document.getElementById('basketWeightText');
-                var basketRemaining = document.getElementById('basketRemaining');
+                var clearModal = document.getElementById('clearModal');
+                var clearCancelBtn = document.getElementById('clearCancelBtn');
+                var clearConfirmBtn = document.getElementById('clearConfirmBtn');
 
-                var BASKET_MIN_WEIGHT = 2.5;
+                var basketSummaryPanel = document.getElementById('basketSummaryPanel');
+                var basketSummaryList = document.getElementById('basketSummaryList');
+                var basketSummaryCount = document.getElementById('basketSummaryCount');
 
-                // ============ ابزارها ============
-                var persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-                function toPersianNumber(num) {
-                    return String(num).replace(/\d/g, function(d) { return persianDigits[d]; });
-                }
-                function toEnglishNumber(str) {
-                    return String(str).replace(/[۰-۹]/g, function(d) {
-                        return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d);
-                    });
-                }
-                function formatWeight(kg) {
-                    if (kg === 0) return '۰';
-                    return kg.toLocaleString('fa-IR', { maximumFractionDigits: 2 });
+                var STORAGE_KEY = 'mamasis_state_v3';
+                var TOUR_KEY = 'mamasis_tour_v3';
+                var LAST_BUDGET_KEY = 'mamasis_last_budget';
+
+                // ==================== ذخیره state ====================
+                var saveTimeout;
+                function saveState() {
+                    clearTimeout(saveTimeout);
+                    saveTimeout = setTimeout(function() {
+                        try {
+                            var state = {};
+                            items.forEach(function(item) {
+                                var qty = getQty(item);
+                                if (qty > 0) state[item.dataset.productId] = qty;
+                            });
+                            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+                        } catch (e) {}
+                    }, 400);
                 }
 
+                function loadState() {
+                    try {
+                        var raw = localStorage.getItem(STORAGE_KEY);
+                        if (!raw) return;
+                        var state = JSON.parse(raw);
+                        items.forEach(function(item) {
+                            var id = item.dataset.productId;
+                            if (state[id] && state[id] > 0) applyQty(item, state[id]);
+                        });
+                    } catch (e) {}
+                }
+
+                // ==================== toast ====================
                 var toastTimeout;
                 function showToast(msg) {
                     if (!toast) return;
                     clearTimeout(toastTimeout);
                     toast.textContent = msg;
                     toast.classList.add('show');
-                    toastTimeout = setTimeout(function() {
-                        toast.classList.remove('show');
-                    }, 2800);
+                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
                 }
 
+                // ==================== qty ====================
                 function getQty(item) {
                     var val = item.querySelector('.qty-value').textContent;
                     return parseInt(toEnglishNumber(val), 10) || 0;
                 }
 
-                function setQty(item, qty) {
+                function applyQty(item, qty) {
                     if (qty < 0) qty = 0;
                     var price = parseInt(item.dataset.price, 10) || 0;
                     var qtyValue = item.querySelector('.qty-value');
                     var minusBtn = item.querySelector('.qty-btn.minus');
                     var itemTotal = item.querySelector('.item-total');
-
-                    qtyValue.textContent = toPersianNumber(qty);
+                    qtyValue.textContent = fa(qty, 'count');
                     minusBtn.disabled = qty === 0;
-                    itemTotal.innerHTML = (price * qty).toLocaleString('fa-IR') + ' <small>ت</small>';
-
-                    if (qty > 0) item.classList.add('active');
-                    else item.classList.remove('active');
-
-                    updateSummary();
+                    itemTotal.innerHTML = fa(price * qty, 'price') + ' <small>ت</small>';
+                    if (qty > 0) item.classList.add('active'); else item.classList.remove('active');
+                    if (item.dataset.basket === 'true') updateItemBasketProgress(item, qty);
                 }
 
-                function updateBasket() {
-                    var totalWeight = 0;
+                function setQty(item, qty, silent) {
+                    applyQty(item, qty);
+                    if (!silent) { updateSummary(); saveState(); }
+                }
+
+                function updateItemBasketProgress(item, qty) {
+                    var progressEl = item.querySelector('.item-basket-progress');
+                    if (!progressEl) return;
+                    var weightPer = parseFloat(item.dataset.weight) || 0;
+                    var totalWeight = qty * weightPer;
+                    var percent = Math.min((totalWeight / BASKET_MIN_WEIGHT) * 100, 100);
+                    var isComplete = totalWeight >= BASKET_MIN_WEIGHT;
+                    if (qty === 0) { progressEl.classList.remove('visible'); return; }
+                    progressEl.classList.add('visible');
+                    var badge = progressEl.querySelector('.ibp-badge');
+                    var bar = progressEl.querySelector('.ibp-bar');
+                    var hint = progressEl.querySelector('.ibp-hint');
+                    bar.style.width = percent + '%';
+                    if (isComplete) {
+                        badge.textContent = '✅ ' + fa(totalWeight, 'weight') + ' / ۲.۵ کیلو';
+                        badge.classList.add('complete');
+                        hint.textContent = '🎉 حد نصاب این محصول تکمیل شد!';
+                        hint.className = 'ibp-hint complete';
+                    } else {
+                        var remaining = BASKET_MIN_WEIGHT - totalWeight;
+                        badge.textContent = fa(totalWeight, 'weight') + ' / ۲.۵ کیلو';
+                        badge.classList.remove('complete');
+                        hint.textContent = fa(remaining, 'weight') + ' کیلو مونده به حد نصاب';
+                        hint.className = 'ibp-hint';
+                    }
+                }
+
+                function updateBasketSummary() {
+                    var basketItems = [];
                     items.forEach(function(item) {
                         if (item.dataset.basket === 'true') {
                             var qty = getQty(item);
-                            var weightPer = parseFloat(item.dataset.weight) || 0;
-                            totalWeight += qty * weightPer;
+                            if (qty > 0) {
+                                var weightPer = parseFloat(item.dataset.weight) || 0;
+                                var totalWeight = qty * weightPer;
+                                basketItems.push({
+                                    name: item.dataset.name, qty: qty, weight: totalWeight,
+                                    price: parseInt(item.dataset.price, 10) || 0,
+                                    lineTotal: (parseInt(item.dataset.price, 10) || 0) * qty,
+                                    isComplete: totalWeight >= BASKET_MIN_WEIGHT
+                                });
+                            }
                         }
                     });
-
-                    var percent = Math.min((totalWeight / BASKET_MIN_WEIGHT) * 100, 100);
-                    if (basketProgressBar) basketProgressBar.style.width = percent + '%';
-                    if (basketWeightText) basketWeightText.textContent = 'وزن زنبیل: ' + formatWeight(totalWeight) + ' کیلو';
-
-                    if (basketWeightBadge && basketRemaining) {
-                        if (totalWeight >= BASKET_MIN_WEIGHT) {
-                            basketWeightBadge.textContent = '✅ ' + formatWeight(totalWeight) + ' / ۲.۵ کیلو';
-                            basketWeightBadge.classList.add('complete');
-                            basketRemaining.className = 'complete-msg';
-                            basketRemaining.textContent = '🎉 حد نصاب تکمیل شد!';
-                        } else {
-                            var remaining = BASKET_MIN_WEIGHT - totalWeight;
-                            basketWeightBadge.textContent = formatWeight(totalWeight) + ' / ۲.۵ کیلو';
-                            basketWeightBadge.classList.remove('complete');
-                            basketRemaining.className = 'remaining';
-                            basketRemaining.textContent = formatWeight(remaining) + ' کیلو مونده';
-                        }
+                    if (basketItems.length === 0) {
+                        basketSummaryPanel.classList.remove('visible');
+                        basketSummaryCount.textContent = '۰';
+                        return;
                     }
-                    return totalWeight;
+                    basketSummaryPanel.classList.add('visible');
+                    basketSummaryCount.textContent = fa(basketItems.length, 'count') + ' محصول';
+                    var html = '';
+                    basketItems.forEach(function(b) {
+                        var percent = Math.min((b.weight / BASKET_MIN_WEIGHT) * 100, 100);
+                        var completeClass = b.isComplete ? ' complete' : '';
+                        var weightDisplay = b.isComplete
+                            ? '✅ ' + fa(b.weight, 'weight') + ' / ۲.۵ کیلو'
+                            : fa(b.weight, 'weight') + ' / ۲.۵ کیلو';
+                        html += (
+                            '<div class="basket-summary-item' + completeClass + '">' +
+                                '<div class="bsi-row">' +
+                                    '<span class="bsi-name">🧺 ' + b.name + '</span>' +
+                                    '<span class="bsi-weight' + (b.isComplete ? ' complete' : '') + '">' + weightDisplay + '</span>' +
+                                '</div>' +
+                                '<div class="bsi-bar-wrap"><div class="bsi-bar" style="width:' + percent + '%"></div></div>' +
+                            '</div>'
+                        );
+                    });
+                    basketSummaryList.innerHTML = html;
                 }
 
                 function updateSummary() {
                     var totalPrice = 0, totalCal = 0, totalCount = 0;
                     var selectedItems = [];
-
+                    var incompleteBasketItems = [];
                     items.forEach(function(item) {
                         var qty = getQty(item);
                         if (qty > 0) {
                             var price = parseInt(item.dataset.price, 10) || 0;
                             var cal = parseInt(item.dataset.cal, 10) || 0;
+                            var weightPer = parseFloat(item.dataset.weight) || 0;
+                            var isBasket = item.dataset.basket === 'true';
+                            var totalWeight = qty * weightPer;
                             totalPrice += price * qty;
                             totalCal += cal * qty;
                             totalCount += qty;
+                            if (isBasket && totalWeight < BASKET_MIN_WEIGHT) {
+                                incompleteBasketItems.push({
+                                    name: item.dataset.name, weight: totalWeight,
+                                    remaining: BASKET_MIN_WEIGHT - totalWeight
+                                });
+                            }
                             selectedItems.push({
-                                name: item.dataset.name,
-                                unit: item.dataset.unit,
-                                qty: qty,
-                                price: price,
-                                cal: cal,
-                                lineTotal: price * qty,
-                                isBasket: item.dataset.basket === 'true'
+                                name: item.dataset.name, unit: item.dataset.unit,
+                                qty: qty, price: price, cal: cal,
+                                lineTotal: price * qty, isBasket: isBasket,
+                                totalWeight: totalWeight,
+                                isBasketComplete: isBasket ? totalWeight >= BASKET_MIN_WEIGHT : false
                             });
                         }
                     });
-
-                    var basketWeight = updateBasket();
-
+                    updateBasketSummary();
                     if (totalItemsDisplay) {
-                        totalItemsDisplay.innerHTML = '<span>' + toPersianNumber(totalCount) + ' مورد</span>' +
-                            '<span class="cal-badge">' + toPersianNumber(totalCal) + ' کالری</span>';
+                        totalItemsDisplay.innerHTML = '<span>' + fa(totalCount, 'count') + ' مورد</span>' +
+                            '<span class="cal-badge">' + fa(totalCal, 'count') + ' کالری</span>';
                     }
                     if (totalPriceDisplay) {
-                        totalPriceDisplay.innerHTML = totalPrice.toLocaleString('fa-IR') + ' <span>تومان</span>';
+                        totalPriceDisplay.innerHTML = fa(totalPrice, 'price') + ' <span>تومان</span>';
                     }
-                    if (finalItemCount) finalItemCount.textContent = toPersianNumber(totalCount) + ' مورد';
-
+                    if (finalItemCount) finalItemCount.textContent = fa(totalCount, 'count') + ' مورد';
                     if (!finalInvoiceBody) return;
-
                     if (selectedItems.length === 0) {
                         finalInvoiceBody.innerHTML = '<div class="empty-state">هنوز محصولی انتخاب نشده است...</div>';
                         if (copyFinalBtn) copyFinalBtn.disabled = true;
                     } else {
+                        var cardNum = cardNumberEl ? cardNumberEl.textContent.trim() : '';
                         var text = '';
                         text += '🍃 فاکتور نهایی ماماسیس 🍃\n';
                         text += '─────────────────────\n';
                         selectedItems.forEach(function(item) {
                             var basketMark = item.isBasket ? '🧺 ' : '';
                             text += basketMark + item.name + ' (' + item.unit + ')\n';
-                            text += '   تعداد: ' + toPersianNumber(item.qty) + ' × ' + item.price.toLocaleString('fa-IR') + ' ت\n';
-                            text += '   جمع: ' + item.lineTotal.toLocaleString('fa-IR') + ' ت | کالری: ' + toPersianNumber(item.cal * item.qty) + '\n';
+                            text += '   تعداد: ' + fa(item.qty, 'count') + ' × ' + fa(item.price, 'price') + ' ت\n';
+                            text += '   جمع: ' + fa(item.lineTotal, 'price') + ' ت | کالری: ' + fa(item.cal * item.qty, 'count') + '\n';
+                            if (item.isBasket) {
+                                if (item.isBasketComplete) text += '   ✅ وزن: ' + fa(item.totalWeight, 'weight') + ' کیلو (حد نصاب تکمیل)\n';
+                                else text += '   ⏳ وزن: ' + fa(item.totalWeight, 'weight') + ' از ۲.۵ کیلو\n';
+                            }
                             text += '─────────────────────\n';
                         });
-                        text += '📦 تعداد کل: ' + toPersianNumber(totalCount) + ' مورد\n';
-                        text += '🔥 کالری کل: ' + toPersianNumber(totalCal) + '\n';
-                        text += '💰 مبلغ کل: ' + totalPrice.toLocaleString('fa-IR') + ' تومان\n';
-
-                        if (basketWeight > 0) {
-                            text += '🧺 ─── زنبیل ───\n';
-                            text += 'وزن زنبیل: ' + formatWeight(basketWeight) + ' از ۲.۵ کیلو\n';
-                            if (basketWeight >= BASKET_MIN_WEIGHT) {
-                                text += '✅ حد نصاب زنبیل تکمیل شد!\n';
-                            } else {
-                                text += '⏳ ' + formatWeight(BASKET_MIN_WEIGHT - basketWeight) + ' کیلو مونده به حد نصاب\n';
-                            }
+                        text += '📦 تعداد کل: ' + fa(totalCount, 'count') + ' مورد\n';
+                        text += '🔥 کالری کل: ' + fa(totalCal, 'count') + '\n';
+                        text += '💰 مبلغ کل: ' + fa(totalPrice, 'price') + ' تومان\n';
+                        if (incompleteBasketItems.length > 0) {
+                            text += '─────────────────────\n';
+                            text += '⚠️ توجه: ' + fa(incompleteBasketItems.length, 'count') + ' محصول زنبیل به حد نصاب نرسیدن:\n';
+                            incompleteBasketItems.forEach(function(b) {
+                                text += '• ' + b.name + ': ' + fa(b.weight, 'weight') + ' از ۲.۵ کیلو (' + fa(b.remaining, 'weight') + ' مونده)\n';
+                            });
+                            text += 'تولید این محصولات بعد از رسیدن به ۲.۵ کیلو شروع می‌شه.\n';
                         }
-
                         text += '─────────────────────\n';
-                        text += '💳 کارت مقصد:\n';
-                        text += '6037-9982-2975-7330\n';
+                        text += '💳 کارت مقصد:\n' + cardNum + '\n';
                         text += 'به نام: ماندانا جهاني تكليمي\n';
                         text += '─────────────────────\n';
                         text += '✅ محصولات با گوشت تازه کشتار روز\n';
                         text += '📈 قیمت‌ها با نوسان بازار تغییر می‌کند';
-
                         finalInvoiceBody.textContent = text;
                         if (copyFinalBtn) copyFinalBtn.disabled = false;
                     }
                 }
 
                 function randomSelect(budget) {
-                    items.forEach(function(item) { setQty(item, 0); });
-
-                    if (!budget || budget <= 0) {
-                        showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید');
-                        return;
-                    }
-
-                    var itemData = [];
-                    items.forEach(function(item) {
-                        itemData.push({
+                    if (!budget || budget <= 0) { showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید'); return; }
+                    items.forEach(function(item) { applyQty(item, 0); });
+                    var itemData = items.map(function(item) {
+                        return {
                             element: item,
                             price: parseInt(item.dataset.price, 10) || 0,
-                            cal: parseInt(item.dataset.cal, 10) || 0,
-                            isNumeric: item.dataset.unit === 'عددی'
-                        });
+                            isNumeric: item.dataset.unit === 'عددی',
+                            isBasket: item.dataset.basket === 'true',
+                            weightPer: parseFloat(item.dataset.weight) || 0
+                        };
                     });
-
-                    function getMinQty(data) { return data.isNumeric ? 2 : 1; }
-
-                    var remaining = budget, selectedCount = 0, attempts = 0;
-                    var maxAttempts = 300;
-
-                    while (attempts < maxAttempts && remaining > 0) {
-                        var available = itemData.filter(function(item) {
-                            var currentQty = getQty(item.element);
-                            var minQty = getMinQty(item);
-                            if (currentQty < minQty) return true;
-                            return item.price <= remaining && item.price > 0;
+                    function getMinQty(d) {
+                        if (d.isBasket) return Math.ceil(BASKET_MIN_WEIGHT / d.weightPer);
+                        return d.isNumeric ? 2 : 1;
+                    }
+                    var remaining = budget, selectedCount = 0, stallCount = 0;
+                    var maxStall = 60, hardLimit = 5000, iterations = 0;
+                    while (remaining > 0 && stallCount < maxStall && iterations < hardLimit) {
+                        iterations++;
+                        var progressed = false;
+                        var incompleteBasket = itemData.filter(function(d) {
+                            if (!d.isBasket) return false;
+                            var q = getQty(d.element);
+                            if (q === 0) return false;
+                            return q * d.weightPer < BASKET_MIN_WEIGHT && d.price <= remaining;
                         });
-                        if (available.length === 0) break;
-
-                        var underMin = available.filter(function(item) {
-                            return getQty(item.element) < getMinQty(item);
-                        });
-                        var chosen = underMin.length > 0
-                            ? underMin[Math.floor(Math.random() * underMin.length)]
-                            : available[Math.floor(Math.random() * available.length)];
-
-                        var currentQty = getQty(chosen.element);
-                        var minQty = getMinQty(chosen);
-
-                        if (currentQty < minQty) {
-                            var needed = minQty - currentQty;
-                            var cost = needed * chosen.price;
-                            if (cost <= remaining) {
-                                setQty(chosen.element, minQty);
-                                remaining -= cost;
-                                selectedCount += needed;
-                            } else {
-                                itemData.splice(itemData.indexOf(chosen), 1);
-                                continue;
-                            }
-                        } else {
-                            if (chosen.price <= remaining) {
-                                setQty(chosen.element, currentQty + 1);
-                                remaining -= chosen.price;
-                                selectedCount++;
+                        if (incompleteBasket.length > 0) {
+                            var pick = incompleteBasket[Math.floor(Math.random() * incompleteBasket.length)];
+                            applyQty(pick.element, getQty(pick.element) + 1);
+                            remaining -= pick.price; selectedCount++; progressed = true;
+                        }
+                        if (!progressed) {
+                            var freshBasket = itemData.filter(function(d) {
+                                if (!d.isBasket) return false;
+                                if (getQty(d.element) > 0) return false;
+                                return getMinQty(d) * d.price <= remaining;
+                            });
+                            if (freshBasket.length > 0 && Math.random() < 0.5) {
+                                var pickB = freshBasket[Math.floor(Math.random() * freshBasket.length)];
+                                var fullQty = getMinQty(pickB);
+                                applyQty(pickB.element, fullQty);
+                                remaining -= fullQty * pickB.price;
+                                selectedCount += fullQty; progressed = true;
                             }
                         }
-                        attempts++;
+                        if (!progressed) {
+                            var underMin = itemData.filter(function(d) {
+                                if (d.isBasket) return false;
+                                return getQty(d.element) < getMinQty(d);
+                            });
+                            if (underMin.length > 0) {
+                                var pick2 = underMin[Math.floor(Math.random() * underMin.length)];
+                                var needed = getMinQty(pick2) - getQty(pick2.element);
+                                var cost = needed * pick2.price;
+                                if (cost <= remaining) {
+                                    applyQty(pick2.element, getMinQty(pick2));
+                                    remaining -= cost; selectedCount += needed; progressed = true;
+                                }
+                            }
+                        }
+                        if (!progressed) {
+                            var available = itemData.filter(function(d) { return d.price > 0 && d.price <= remaining; });
+                            if (available.length === 0) break;
+                            var chosen = available[Math.floor(Math.random() * available.length)];
+                            applyQty(chosen.element, getQty(chosen.element) + 1);
+                            remaining -= chosen.price; selectedCount++; progressed = true;
+                        }
+                        if (progressed) stallCount = 0; else stallCount++;
                     }
-
-                    if (selectedCount === 0) {
-                        var cheapest = itemData.reduce(function(min, item) {
-                            return item.price < min.price ? item : min;
-                        }, itemData[0]);
-                        if (cheapest && cheapest.price <= budget) {
-                            var minQ = getMinQty(cheapest);
-                            if (minQ * cheapest.price <= budget) {
-                                setQty(cheapest.element, minQ);
-                                selectedCount = minQ;
-                            } else showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
-                        } else showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
-                    }
-
                     updateSummary();
-                    if (selectedCount > 0) showToast('🎲 ' + toPersianNumber(selectedCount) + ' محصول انتخاب شد');
+                    saveState();
+                    if (selectedCount === 0) { showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست'); return; }
+                    var usedPercent = Math.round(((budget - remaining) / budget) * 100);
+                    showToast('🎲 ' + fa(selectedCount, 'count') + ' محصول انتخاب شد • ' + fa(usedPercent, 'count') + '٪ بودجه مصرف شد');
                 }
 
-                // ============ پاپ‌آپ ============
                 var modalOpen = false;
-
+                var lastFocusedElement = null;
                 function openBudgetModal() {
                     if (modalOpen || !budgetModal) return;
-                    modalOpen = true;
+                    modalOpen = true; lastFocusedElement = document.activeElement;
                     budgetModal.classList.add('active');
-                    modalBudgetInput.value = '';
+                    try {
+                        var lastBudget = localStorage.getItem(LAST_BUDGET_KEY);
+                        if (lastBudget && parseInt(lastBudget, 10) > 0) {
+                            modalBudgetInput.value = parseInt(lastBudget, 10).toLocaleString('en-US');
+                        } else modalBudgetInput.value = '';
+                    } catch (e) { modalBudgetInput.value = ''; }
                     setTimeout(function() { modalBudgetInput.focus(); }, 300);
                 }
-
                 function closeBudgetModal() {
                     if (!modalOpen || !budgetModal) return;
                     modalOpen = false;
                     budgetModal.classList.remove('active');
                     modalBudgetInput.blur();
+                    if (lastFocusedElement) lastFocusedElement.focus();
                 }
-
                 function formatNumberInput(val) {
                     var digits = val.replace(/[^0-9]/g, '');
                     if (!digits) return '';
                     return parseInt(digits, 10).toLocaleString('en-US');
                 }
-
                 if (modalBudgetInput) {
-                    modalBudgetInput.addEventListener('input', function() {
-                        this.value = formatNumberInput(this.value);
-                    });
+                    modalBudgetInput.addEventListener('input', function() { this.value = formatNumberInput(this.value); });
                     modalBudgetInput.addEventListener('keydown', function(e) {
-                        if (e.key === 'Enter') {
-                            e.preventDefault();
-                            confirmBudget();
+                        if (e.key === 'Enter') { e.preventDefault(); confirmBudget(); }
+                        if (e.key === 'Tab') {
+                            var focusable = budgetModal.querySelectorAll('button, input');
+                            var first = focusable[0]; var last = focusable[focusable.length - 1];
+                            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+                            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
                         }
                     });
                 }
-
                 function confirmBudget() {
                     var raw = modalBudgetInput.value.replace(/[^0-9]/g, '');
                     var budget = parseInt(raw, 10);
-                    if (!budget || budget <= 0) {
-                        showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید');
-                        return;
-                    }
+                    if (!budget || budget <= 0) { showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید'); return; }
+                    try { localStorage.setItem(LAST_BUDGET_KEY, String(budget)); } catch (e) {}
                     closeBudgetModal();
                     setTimeout(function() { randomSelect(budget); }, 250);
                 }
-
                 if (modalConfirmBtn) modalConfirmBtn.addEventListener('click', confirmBudget);
                 if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeBudgetModal);
-                if (budgetModal) {
-                    budgetModal.addEventListener('click', function(e) {
-                        if (e.target === budgetModal) closeBudgetModal();
-                    });
-                }
-
+                if (budgetModal) budgetModal.addEventListener('click', function(e) { if (e.target === budgetModal) closeBudgetModal(); });
                 quickBudgetBtns.forEach(function(btn) {
                     btn.addEventListener('click', function() {
                         var val = parseInt(this.dataset.budget, 10);
@@ -1358,11 +1379,39 @@
                         modalBudgetInput.focus();
                     });
                 });
-
                 if (randomBtn) randomBtn.addEventListener('click', openBudgetModal);
                 if (randomAgainBtn) randomAgainBtn.addEventListener('click', openBudgetModal);
 
-                // ============ کپی ============
+                var clearModalOpen = false;
+                function openClearModal() {
+                    var hasSelection = false;
+                    items.forEach(function(item) { if (getQty(item) > 0) hasSelection = true; });
+                    if (!hasSelection) { showToast('ℹ️ هنوز چیزی انتخاب نکردید'); return; }
+                    if (clearModalOpen || !clearModal) return;
+                    clearModalOpen = true; lastFocusedElement = document.activeElement;
+                    clearModal.classList.add('active');
+                }
+                function closeClearModal() {
+                    if (!clearModalOpen || !clearModal) return;
+                    clearModalOpen = false;
+                    clearModal.classList.remove('active');
+                    if (lastFocusedElement) lastFocusedElement.focus();
+                }
+                if (clearBtn) clearBtn.addEventListener('click', openClearModal);
+                if (clearCancelBtn) clearCancelBtn.addEventListener('click', closeClearModal);
+                if (clearConfirmBtn) clearConfirmBtn.addEventListener('click', function() {
+                    items.forEach(function(item) { applyQty(item, 0); });
+                    updateSummary(); saveState(); closeClearModal();
+                    showToast('🧹 همه انتخاب‌ها پاک شد');
+                });
+                if (clearModal) clearModal.addEventListener('click', function(e) { if (e.target === clearModal) closeClearModal(); });
+
+                function copyText(text, successMsg) {
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(function() { showToast(successMsg); })
+                            .catch(function() { fallbackCopy(text, successMsg); });
+                    } else fallbackCopy(text, successMsg);
+                }
                 function fallbackCopy(text, successMsg) {
                     var textarea = document.createElement('textarea');
                     textarea.value = text;
@@ -1370,81 +1419,58 @@
                     textarea.style.opacity = '0';
                     document.body.appendChild(textarea);
                     textarea.select();
-                    try {
-                        document.execCommand('copy');
-                        showToast(successMsg);
-                    } catch (err) {
-                        showToast('⚠️ کپی نشد، دستی انتخاب کنید');
-                    }
+                    try { document.execCommand('copy'); showToast(successMsg); }
+                    catch (err) { showToast('⚠️ کپی نشد، دستی انتخاب کنید'); }
                     document.body.removeChild(textarea);
                 }
-
-                function copyCardNumber() {
+                if (copyCardBtn) copyCardBtn.addEventListener('click', function() {
                     if (!cardNumberEl) return;
-                    var rawNumber = cardNumberEl.textContent.replace(/[^0-9]/g, '');
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(rawNumber).then(function() {
-                            showToast('📋 شماره کارت کپی شد');
-                        }).catch(function() {
-                            fallbackCopy(rawNumber, '📋 شماره کارت کپی شد');
-                        });
-                    } else fallbackCopy(rawNumber, '📋 شماره کارت کپی شد');
-                }
-
-                function copyFinalInvoice() {
+                    copyText(cardNumberEl.textContent.replace(/[^0-9]/g, ''), '📋 شماره کارت کپی شد');
+                });
+                if (copyFinalBtn) copyFinalBtn.addEventListener('click', function() {
                     if (!finalInvoiceBody) return;
                     var text = finalInvoiceBody.textContent;
                     if (!text || text.trim() === '' || finalInvoiceBody.querySelector('.empty-state')) {
-                        showToast('⚠️ فاکتوری برای کپی وجود ندارد');
-                        return;
+                        showToast('⚠️ فاکتوری برای کپی وجود ندارد'); return;
                     }
-                    if (navigator.clipboard && navigator.clipboard.writeText) {
-                        navigator.clipboard.writeText(text).then(function() {
-                            showToast('📋 فاکتور کپی شد - برای ادمین بفرستید');
-                        }).catch(function() {
-                            fallbackCopy(text, '📋 فاکتور کپی شد');
-                        });
-                    } else fallbackCopy(text, '📋 فاکتور کپی شد');
-                }
+                    copyText(text, '📋 فاکتور کپی شد - برای ادمین بفرستید');
+                });
 
-                // ============ رویدادها ============
                 items.forEach(function(item) {
                     var plusBtn = item.querySelector('.qty-btn.plus');
                     var minusBtn = item.querySelector('.qty-btn.minus');
-                    if (plusBtn) plusBtn.addEventListener('click', function() {
-                        setQty(item, getQty(item) + 1);
-                    });
-                    if (minusBtn) minusBtn.addEventListener('click', function() {
-                        setQty(item, getQty(item) - 1);
-                    });
+                    if (plusBtn) plusBtn.addEventListener('click', function() { setQty(item, getQty(item) + 1); });
+                    if (minusBtn) minusBtn.addEventListener('click', function() { setQty(item, getQty(item) - 1); });
                 });
 
-                if (clearBtn) clearBtn.addEventListener('click', function() {
-                    items.forEach(function(item) { setQty(item, 0); });
-                    showToast('🧹 همه انتخاب‌ها پاک شد');
-                });
-
-                if (copyCardBtn) copyCardBtn.addEventListener('click', copyCardNumber);
-                if (copyFinalBtn) copyFinalBtn.addEventListener('click', copyFinalInvoice);
-
+                loadState();
                 updateSummary();
 
-                // ============ تور راهنما ============
-                var TOUR_KEY = 'mamasis_tour_v2';
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        if (modalOpen) closeBudgetModal();
+                        else if (clearModalOpen) closeClearModal();
+                        else if (tourActive) endTour();
+                    }
+                });
 
+                // ============================================
+                // ============ تور راهنما ============
+                // ============================================
                 var tourSteps = [
-                    { target: '[data-tour="header"]', title: '🍃 به ماماسیس خوش آمدید!', desc: 'اینجا می‌تونید محصولات خانگی تازه انتخاب کنید و فاکتور نهایی بگیرید. سریع همه‌چیز رو نشونتون می‌دم.' },
-                    { target: '[data-tour="budget"]', title: '💰 خرید هوشمند با بودجه', desc: 'دکمه 🎲 رندوم رو بزنید، بودجه‌تون رو وارد کنید و سیستم خودش یه سبد متناسب براتون می‌چینه.' },
-                    { target: '[data-tour="first-item"]', title: '🛒 انتخاب محصولات', desc: 'با دکمه‌های + و − تعداد هر محصول رو تنظیم کنید. قیمت و کالری هر آیتم زنده به‌روز می‌شه.' },
-                    { target: '[data-tour="basket-category"]', title: '🧺 زنبیل رزرو', desc: 'محصولات کالباس و ژامبون برچسب زنبیل دارن! با رسیدن به ۲.۵ کیلو، تولید شروع می‌شه.' },
-                    { target: '[data-tour="basket-panel"]', title: '📊 نوار پیشرفت زنبیل', desc: 'اینجا می‌بینید چقدر به حد نصاب ۲.۵ کیلو مونده. با سبز شدن نوار، سفارش وارد مرحله تولید می‌شه!' },
-                    { target: '[data-tour="summary"]', title: '📊 جمع کل زنده', desc: 'تعداد کل، کالری کل و مبلغ نهایی اینجاست. با 🧹 همه انتخاب‌ها پاک می‌شن.' },
-                    { target: '[data-tour="final"]', title: '📋 فاکتور نهایی', desc: 'فاکتور کامل با جزئیات زنبیل اینجاست. با دکمه کپی برای ادمین بفرستید!' }
+                    { target: '[data-tour="header"]', emoji: '🍃', title: 'به ماماسیس خوش آمدید!', desc: 'اینجا می‌تونید محصولات خانگی تازه انتخاب کنید، با بودجه خرید رندوم کنید و فاکتور نهایی بگیرید.' },
+                    { target: '[data-tour="budget"]', emoji: '💰', title: 'خرید هوشمند با بودجه', desc: 'دکمه 🎲 رندوم رو بزنید و بودجه‌تون رو وارد کنید. سیستم خودش یه سبد متناسب با بودجه‌تون می‌چینه.' },
+                    { target: '[data-tour="first-item"]', emoji: '🛒', title: 'انتخاب محصولات', desc: 'با دکمه‌های + و − تعداد هر محصول رو تنظیم کنید. قیمت و کالری هر آیتم زنده به‌روز می‌شه.' },
+                    { target: '[data-tour="basket-category"]', emoji: '🧺', title: 'زنبیل رزرو', desc: 'هر محصول کالباس/ژامبون باید جداگانه به ۲.۵ کیلو برسه. زیر هر محصول نوار پیشرفت خودش رو ببینید.' },
+                    { target: '[data-tour="summary"]', emoji: '📊', title: 'جمع کل زنده', desc: 'تعداد کل، کالری کل و مبلغ نهایی همیشه اینجاست. با 🧹 همه انتخاب‌ها پاک می‌شن.' },
+                    { target: '[data-tour="payment"]', emoji: '💳', title: 'کارت مقصد', desc: 'شماره کارت برای واریز اینجاست. با دکمه 📋 سریع کپی کنید.' },
+                    { target: '[data-tour="final"]', emoji: '📋', title: 'فاکتور نهایی', desc: 'فاکتور کامل با هشدار محصولات زنبیل ناقص اینجاست. با دکمه کپی برای ادمین بفرستید!' }
                 ];
 
                 var tourOverlay = document.getElementById('tourOverlay');
                 var tourSpotlight = document.getElementById('tourSpotlight');
                 var tourTooltip = document.getElementById('tourTooltip');
+                var tourProgressBar = document.getElementById('tourProgressBar');
                 var tourStepBadge = document.getElementById('tourStepBadge');
                 var tourTitle = document.getElementById('tourTitle');
                 var tourDesc = document.getElementById('tourDesc');
@@ -1454,49 +1480,64 @@
                 var tourRestartBtn = document.getElementById('tourRestartBtn');
 
                 if (!tourOverlay || !tourSpotlight || !tourTooltip || !tourDots) {
-                    console.warn('[ماماسیس] عناصر تور پیدا نشدند');
+                    if (DEBUG) console.warn('[ماماسیس] عناصر تور پیدا نشدند');
                     return;
                 }
 
                 var currentStep = 0;
                 var tourActive = false;
+                var isAutoScrolling = false;
 
+                // ساخت نقطه‌ها
                 tourSteps.forEach(function(_, i) {
                     var dot = document.createElement('div');
                     dot.className = 'tour-dot' + (i === 0 ? ' active' : '');
+                    dot.setAttribute('data-step', i);
+                    dot.setAttribute('aria-label', 'مرحله ' + (i + 1));
+                    dot.addEventListener('click', function() {
+                        if (tourActive) showStep(i);
+                    });
                     tourDots.appendChild(dot);
                 });
 
                 function positionTooltip(targetEl) {
                     var rect = targetEl.getBoundingClientRect();
-                    var tooltipWidth = Math.min(300, window.innerWidth - 40);
+                    var tooltipWidth = Math.min(340, window.innerWidth - 32);
                     tourTooltip.style.width = tooltipWidth + 'px';
 
+                    // محاسبه ارتفاع بعد از رندر
+                    var tooltipHeight = tourTooltip.offsetHeight || 220;
+
                     var top, arrowClass;
-                    if (rect.bottom + 220 < window.innerHeight || rect.top < 100) {
-                        top = rect.bottom + 18;
+                    // تصمیم: بالا یا پایین
+                    var spaceBelow = window.innerHeight - rect.bottom;
+                    var spaceAbove = rect.top;
+
+                    if (spaceBelow > tooltipHeight + 40 || spaceBelow > spaceAbove) {
+                        top = rect.bottom + 20;
                         arrowClass = 'arrow-top';
                     } else {
-                        top = rect.top - 18 - tourTooltip.offsetHeight;
+                        top = rect.top - tooltipHeight - 20;
                         arrowClass = 'arrow-bottom';
                     }
 
+                    // محدود کردن top به محدوده قابل مشاهده
+                    top = Math.max(12, Math.min(top, window.innerHeight - tooltipHeight - 12));
+
                     var left = rect.left + rect.width / 2 - tooltipWidth / 2;
-                    left = Math.max(15, Math.min(left, window.innerWidth - tooltipWidth - 15));
+                    left = Math.max(12, Math.min(left, window.innerWidth - tooltipWidth - 12));
 
                     tourTooltip.style.top = top + 'px';
                     tourTooltip.style.left = left + 'px';
                     tourTooltip.className = 'tour-tooltip active ' + arrowClass;
 
                     var arrowLeft = rect.left + rect.width / 2 - left;
-                    var styleEl = tourTooltip.querySelector('style') || document.createElement('style');
-                    if (!styleEl.parentNode) tourTooltip.appendChild(styleEl);
-                    styleEl.textContent = '#tourTooltip::before { left: ' + Math.max(20, Math.min(arrowLeft, tooltipWidth - 20)) + 'px; margin-left: -7px; }';
+                    tourTooltip.style.setProperty('--arrow-left', Math.max(20, Math.min(arrowLeft, tooltipWidth - 20)) + 'px');
                 }
 
                 function positionSpotlight(targetEl) {
                     var rect = targetEl.getBoundingClientRect();
-                    var padding = 8;
+                    var padding = 10;
                     tourSpotlight.style.top = (rect.top - padding) + 'px';
                     tourSpotlight.style.left = (rect.left - padding) + 'px';
                     tourSpotlight.style.width = (rect.width + padding * 2) + 'px';
@@ -1509,46 +1550,71 @@
                     currentStep = index;
                     var step = tourSteps[index];
                     var targetEl = document.querySelector(step.target);
-                    if (!targetEl) return;
 
-                    var rect = targetEl.getBoundingClientRect();
-                    if (rect.top < 80 || rect.bottom > window.innerHeight - 80) {
-                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                        setTimeout(function() {
-                            positionSpotlight(targetEl);
-                            positionTooltip(targetEl);
-                        }, 400);
-                    } else {
-                        positionSpotlight(targetEl);
-                        positionTooltip(targetEl);
+                    if (!targetEl) {
+                        if (DEBUG) console.warn('[ماماسیس] هدف تور پیدا نشد:', step.target);
+                        // برو مرحله بعد
+                        if (index < tourSteps.length - 1) showStep(index + 1);
+                        return;
                     }
 
-                    if (tourStepBadge) tourStepBadge.textContent = toPersianNumber(index + 1) + ' از ' + toPersianNumber(tourSteps.length);
-                    if (tourTitle) tourTitle.textContent = step.title;
+                    // پر کردن محتوا
+                    if (tourStepBadge) tourStepBadge.textContent = fa(index + 1, 'count') + ' از ' + fa(tourSteps.length, 'count');
+                    if (tourTitle) tourTitle.innerHTML = '<span class="tour-title-emoji">' + step.emoji + '</span>' + step.title;
                     if (tourDesc) tourDesc.textContent = step.desc;
 
+                    // دکمه بعدی
                     if (tourNextBtn) {
                         if (index === tourSteps.length - 1) tourNextBtn.innerHTML = '✓ متوجه شدم';
                         else tourNextBtn.innerHTML = 'بعدی ←';
                     }
 
+                    // progress bar
+                    if (tourProgressBar) {
+                        tourProgressBar.style.width = ((index + 1) / tourSteps.length * 100) + '%';
+                    }
+
+                    // نقطه‌ها
                     tourDots.querySelectorAll('.tour-dot').forEach(function(dot, i) {
                         dot.classList.toggle('active', i === index);
+                        dot.classList.toggle('completed', i < index);
                     });
+
+                    // اسکرول + موقعیت‌دهی
+                    var rect = targetEl.getBoundingClientRect();
+                    if (rect.top < 80 || rect.bottom > window.innerHeight - 80) {
+                        isAutoScrolling = true;
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        setTimeout(function() {
+                            isAutoScrolling = false;
+                            positionSpotlight(targetEl);
+                            positionTooltip(targetEl);
+                        }, 500);
+                    } else {
+                        positionSpotlight(targetEl);
+                        // صبر کمی برای رندر شدن محتوا
+                        setTimeout(function() { positionTooltip(targetEl); }, 30);
+                    }
                 }
 
                 function startTour() {
                     if (tourActive) return;
                     tourActive = true;
                     currentStep = 0;
+                    document.body.classList.add('tour-active');
                     tourOverlay.classList.add('active');
                     tourTooltip.classList.add('active');
-                    setTimeout(function() { showStep(0); }, 100);
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    // صبر برای رندر بعد از اسکرول
+                    setTimeout(function() {
+                        window.scrollTo({ top: 0, behavior: 'smooth' });
+                        setTimeout(function() { showStep(0); }, 400);
+                    }, 100);
                 }
 
                 function endTour() {
                     tourActive = false;
+                    document.body.classList.remove('tour-active');
                     tourOverlay.classList.remove('active');
                     tourTooltip.classList.remove('active');
                     tourSpotlight.classList.remove('active');
@@ -1567,7 +1633,12 @@
                     showToast('با دکمه 🎓 هر وقت خواستید تور رو دوباره ببینید');
                 });
 
-                if (tourRestartBtn) tourRestartBtn.addEventListener('click', startTour);
+                if (tourRestartBtn) tourRestartBtn.addEventListener('click', function() {
+                    // ریست TOUR_KEY تا دوباره اجرا بشه
+                    try { localStorage.removeItem(TOUR_KEY); } catch (e) {}
+                    startTour();
+                });
+
                 tourOverlay.addEventListener('click', endTour);
 
                 var resizeTimeout;
@@ -1575,40 +1646,42 @@
                     clearTimeout(resizeTimeout);
                     resizeTimeout = setTimeout(function() {
                         if (tourActive) showStep(currentStep);
-                    }, 150);
+                    }, 200);
                 });
 
                 var scrollTimeout;
                 window.addEventListener('scroll', function() {
-                    if (!tourActive) return;
+                    if (!tourActive || isAutoScrolling) return;
                     clearTimeout(scrollTimeout);
                     scrollTimeout = setTimeout(function() {
                         var step = tourSteps[currentStep];
                         var targetEl = document.querySelector(step.target);
-                        if (targetEl) {
-                            positionSpotlight(targetEl);
-                            positionTooltip(targetEl);
-                        }
+                        if (targetEl) { positionSpotlight(targetEl); positionTooltip(targetEl); }
                     }, 100);
                 }, { passive: true });
 
-                document.addEventListener('keydown', function(e) {
-                    if (e.key === 'Escape') {
-                        if (modalOpen) closeBudgetModal();
-                        if (tourActive) endTour();
-                    }
-                });
-
+                // ============ اجرای خودکار تور ============
+                // با requestAnimationFrame برای اطمینان از آماده بودن DOM
                 var hasSeenTour = false;
                 try { hasSeenTour = localStorage.getItem(TOUR_KEY) === 'true'; } catch (e) {}
-                if (!hasSeenTour) setTimeout(startTour, 900);
+
+                if (!hasSeenTour) {
+                    requestAnimationFrame(function() {
+                        setTimeout(function() {
+                            try {
+                                startTour();
+                            } catch (e) {
+                                if (DEBUG) console.error('[ماماسیس] خطای شروع تور:', e);
+                            }
+                        }, 1200);
+                    });
+                }
 
             } catch (err) {
-                console.error('[ماماسیس] خطای اجرای اسکریپت:', err);
+                if (DEBUG) console.error('[ماماسیس] خطا:', err);
             }
         }
 
-        // اجرا
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
