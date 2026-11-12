@@ -3,828 +3,692 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
-    <title>ماماسیس | فاکتور نهایی</title>
+    <meta name="description" content="پیش‌فاکتور هوشمند محصولات خانگی ماماسیس">
+    <meta name="theme-color" content="#d45a2b">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
+    <title>ماماسیس | فاکتور هوشمند</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
     <style>
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            -webkit-tap-highlight-color: transparent;
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+        :root {
+            --primary: #d45a2b;
+            --primary-dark: #b84a1f;
+            --primary-light: #fce6d8;
+            --cream: #fefaf7;
+            --cream-2: #fdf6f0;
+            --brown: #4e2e1e;
+            --brown-2: #6b3f2a;
+            --text: #3e2c22;
+            --text-muted: #8a6a58;
+            --border: #f0e0d3;
+            --shadow-sm: 0 2px 8px rgba(180, 120, 80, 0.06);
+            --shadow-md: 0 8px 24px rgba(180, 120, 80, 0.12);
+            --shadow-lg: 0 20px 40px rgba(180, 120, 80, 0.18);
+            --radius-sm: 14px;
+            --radius-md: 20px;
+            --radius-lg: 28px;
+            --radius-xl: 32px;
+            --basket: #2d7a5f;
+            --basket-light: #e8f5f0;
+            --basket-dark: #1f5c46;
         }
 
         body {
             font-family: 'Vazirmatn', sans-serif;
-            background: linear-gradient(145deg, #fdf6f0 0%, #f9ece3 100%);
+            background: linear-gradient(160deg, #fdf6f0 0%, #f9ece3 40%, #f5e0d2 100%);
+            background-attachment: fixed;
             padding: 1rem 0.7rem 2rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             min-height: 100vh;
-            color: #3e2c22;
+            color: var(--text);
             gap: 1.2rem;
         }
 
         .invoice-container {
-            max-width: 600px;
-            width: 100%;
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border-radius: 32px;
-            box-shadow: 0 20px 40px rgba(200, 140, 100, 0.15), 0 6px 16px rgba(180, 120, 80, 0.08);
-            padding: 1.5rem 1.2rem;
-            border: 1px solid rgba(255, 245, 235, 0.8);
+            max-width: 620px; width: 100%;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 1.6rem 1.3rem;
+            border: 1px solid rgba(255, 245, 235, 0.9);
         }
 
-        /* کارت فاکتور نهایی (جداگانه) */
-        .final-invoice-card {
-            max-width: 600px;
-            width: 100%;
-            background: linear-gradient(135deg, #ffffff, #fef8f3);
-            border-radius: 32px;
-            box-shadow: 0 12px 30px rgba(180, 120, 80, 0.15);
-            padding: 1.5rem 1.2rem;
-            border: 2px solid #d45a2b;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .final-invoice-card::before {
-            content: "📋";
-            position: absolute;
-            top: 10px;
-            left: 15px;
-            font-size: 2rem;
-            opacity: 0.15;
-            transform: rotate(-10deg);
-        }
-
-        .final-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-            padding-bottom: 0.7rem;
-            border-bottom: 2px dashed #f0d5c2;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-
-        .final-header h2 {
-            font-size: 1.2rem;
-            font-weight: 800;
-            color: #4e2e1e;
-        }
-
-        .final-header h2 span {
-            color: #d45a2b;
-        }
-
-        .final-badge {
-            background: #d45a2b;
-            color: white;
-            font-size: 0.65rem;
-            padding: 0.2rem 0.7rem;
-            border-radius: 30px;
-            font-weight: 600;
-        }
-
-        .final-body {
-            font-family: 'Vazirmatn', monospace;
-            font-size: 0.82rem;
-            line-height: 1.9;
-            color: #3e2c22;
-            white-space: pre-wrap;
-            background: #fdf6f0;
-            padding: 1rem 1.2rem;
-            border-radius: 16px;
-            border: 1px solid #f5e3d6;
-            max-height: 350px;
-            overflow-y: auto;
-            direction: rtl;
-        }
-
-        .final-body .empty-state {
-            color: #ab8b7a;
-            text-align: center;
-            padding: 1rem;
-            font-style: italic;
-        }
-
-        .final-actions {
-            display: flex;
-            gap: 0.5rem;
-            margin-top: 1rem;
-        }
-
-        .btn-copy-final {
-            flex: 1;
-            background: linear-gradient(135deg, #d45a2b, #c04a1f);
-            color: white;
-            border: none;
-            padding: 0.7rem 1rem;
-            border-radius: 40px;
-            font-family: 'Vazirmatn', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            box-shadow: 0 4px 12px rgba(212, 90, 43, 0.25);
-        }
-
-        .btn-copy-final:active {
-            transform: scale(0.96);
-        }
-
-        .btn-copy-final:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* هدر گرافیکی */
-        .header {
-            text-align: center;
-            margin-bottom: 1.2rem;
-            position: relative;
-        }
-
+        /* ====== هدر ====== */
+        .header { text-align: center; margin-bottom: 1.5rem; }
         .header h1 {
-            font-size: 1.7rem;
-            font-weight: 800;
-            color: #4e2e1e;
-            letter-spacing: -0.5px;
+            font-size: 1.7rem; font-weight: 800; color: var(--brown);
             display: inline-block;
-            background: linear-gradient(135deg, #fff3e6, #fce6d8);
-            padding: 0.4rem 1.6rem;
-            border-radius: 60px;
-            box-shadow: 0 4px 10px rgba(212, 90, 43, 0.1);
-            border: 1px solid rgba(250, 219, 200, 0.8);
-            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #fff8f0, var(--primary-light));
+            padding: 0.5rem 1.8rem; border-radius: 60px;
+            box-shadow: 0 6px 16px rgba(212, 90, 43, 0.12);
+            border: 1px solid rgba(250, 219, 200, 0.9);
+            margin-bottom: 0.7rem;
         }
-
-        .header h1 span {
-            color: #d45a2b;
-        }
-
+        .header h1 span { color: var(--primary); }
         .subhead {
-            color: #9b7b6b;
-            font-size: 0.85rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            flex-wrap: wrap;
+            color: var(--text-muted); font-size: 0.85rem;
+            display: flex; align-items: center; justify-content: center;
+            gap: 8px; flex-wrap: wrap;
         }
-
         .subhead i {
-            font-style: normal;
-            background: #fce6d8;
-            padding: 0.15rem 0.7rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            color: #b2502a;
+            font-style: normal; background: var(--primary-light);
+            padding: 0.2rem 0.8rem; border-radius: 30px;
+            font-size: 0.72rem; color: var(--primary-dark); font-weight: 500;
         }
 
-        /* ابزار بودجه */
+        /* ====== ابزار بودجه ====== */
         .budget-tool {
-            background: linear-gradient(135deg, #fff7f2, #fdf0e8);
-            border-radius: 22px;
-            padding: 1rem 1.2rem;
+            background: linear-gradient(135deg, #fff9f4, #fdf0e8);
+            border-radius: var(--radius-md);
+            padding: 1.1rem 1.3rem;
             margin-bottom: 1.5rem;
             border: 1px solid #f5ddd0;
-            box-shadow: 0 2px 8px rgba(180, 120, 80, 0.05);
+            box-shadow: var(--shadow-sm);
+            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
         }
-
-        .budget-row {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
+        .budget-tool .icon {
+            width: 42px; height: 42px; border-radius: 14px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.3rem; flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(212, 90, 43, 0.3);
         }
-
-        .budget-label {
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #6b3f2a;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
+        .budget-tool .txt { flex: 1; min-width: 120px; }
+        .budget-tool .txt strong {
+            display: block; font-size: 0.9rem; color: var(--brown-2); margin-bottom: 2px;
         }
-
-        .budget-input {
-            flex: 1;
-            min-width: 100px;
-            padding: 0.6rem 1rem;
-            border-radius: 30px;
-            border: 1.5px solid #e6cdbb;
-            background: #fff;
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.95rem;
-            color: #3e2c22;
-            direction: ltr;
-            text-align: left;
-            outline: none;
-            transition: border-color 0.2s;
+        .budget-tool .txt small {
+            font-size: 0.72rem; color: var(--text-muted);
         }
-
-        .budget-input:focus {
-            border-color: #d45a2b;
-            box-shadow: 0 0 0 3px rgba(212, 90, 43, 0.1);
-        }
-
         .btn-random {
-            background: linear-gradient(135deg, #d45a2b, #c04a1f);
-            color: white;
-            border: none;
-            padding: 0.6rem 1.2rem;
-            border-radius: 30px;
-            font-family: 'Vazirmatn', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 5px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; border: none;
+            padding: 0.7rem 1.3rem; border-radius: 30px;
+            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.88rem;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 6px;
             white-space: nowrap;
-            box-shadow: 0 4px 12px rgba(212, 90, 43, 0.25);
+            box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
         }
+        .btn-random:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35); }
+        .btn-random:active { transform: scale(0.96); }
 
-        .btn-random:active {
-            transform: scale(0.96);
-            box-shadow: 0 2px 6px rgba(212, 90, 43, 0.2);
-        }
-
-        .budget-hint {
-            font-size: 0.7rem;
-            color: #ab8b7a;
-            margin-top: 0.5rem;
-            text-align: center;
-        }
-
-        /* دسته‌بندی */
-        .category {
-            margin-bottom: 1.5rem;
-        }
-
+        /* ====== دسته‌بندی ====== */
+        .category { margin-bottom: 1.6rem; }
         .category-title {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: #6b3f2a;
-            padding-bottom: 0.4rem;
-            margin-bottom: 0.8rem;
+            font-size: 1.1rem; font-weight: 800; color: var(--brown-2);
+            padding-bottom: 0.5rem; margin-bottom: 0.9rem;
             border-bottom: 2px dashed #f0d5c2;
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+        }
+        .category-title::before { content: "🌸"; font-size: 1.15rem; }
+        .category-title .basket-tag {
+            margin-right: auto;
+            background: linear-gradient(135deg, var(--basket), var(--basket-dark));
+            color: white; font-size: 0.65rem; font-weight: 600;
+            padding: 0.25rem 0.7rem; border-radius: 30px;
+            display: flex; align-items: center; gap: 4px;
+            box-shadow: 0 3px 8px rgba(45, 122, 95, 0.3);
         }
 
-        .category-title::before {
-            content: "🌸";
-            font-size: 1.1rem;
-        }
-
-        .item-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
+        .item-grid { display: flex; flex-direction: column; gap: 0.55rem; }
 
         .item {
-            display: flex;
-            align-items: center;
-            background: #fefaf7;
-            padding: 0.75rem 0.9rem;
-            border-radius: 18px;
-            border: 1px solid #f5e3d6;
-            transition: all 0.15s ease;
-            gap: 8px;
-            flex-wrap: wrap;
+            display: flex; align-items: center;
+            background: var(--cream);
+            padding: 0.8rem 0.95rem; border-radius: var(--radius-sm);
+            border: 1px solid var(--border);
+            transition: all 0.18s ease;
+            gap: 10px; flex-wrap: wrap;
         }
-
         .item.active {
-            background: #fff5ee;
-            border-color: #d45a2b;
-            box-shadow: 0 3px 10px rgba(212, 90, 43, 0.1);
+            background: #fff5ee; border-color: var(--primary);
+            box-shadow: 0 4px 14px rgba(212, 90, 43, 0.12);
         }
+        .item.basket-item { border-right: 3px solid var(--basket); }
+        .item.basket-item.active { border-color: var(--primary); border-right-color: var(--basket); }
 
-        .item-info {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            min-width: 0;
-        }
-
+        .item-info { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
         .item-name {
-            font-weight: 700;
-            color: #3e2c22;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            flex-wrap: wrap;
+            font-weight: 700; color: var(--text); font-size: 0.95rem;
+            display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
         }
-
         .item-name .badge {
-            background: #e9d9cf;
-            color: #6f4d3a;
-            font-size: 0.65rem;
-            padding: 0.1rem 0.5rem;
-            border-radius: 30px;
-            font-weight: 400;
-            white-space: nowrap;
+            background: #e9d9cf; color: var(--brown-2);
+            font-size: 0.65rem; padding: 0.1rem 0.55rem;
+            border-radius: 30px; font-weight: 500; white-space: nowrap;
         }
-
-        /* قیمت و کالری بزرگتر */
         .item-meta {
-            font-size: 0.85rem;
-            color: #8a6a58;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            font-weight: 500;
+            font-size: 0.83rem; color: var(--text-muted);
+            display: flex; align-items: center; gap: 12px;
+            flex-wrap: wrap; font-weight: 500;
         }
-
         .item-meta .cal {
-            background: #fef0e8;
-            padding: 0.15rem 0.5rem;
-            border-radius: 20px;
-            font-size: 0.78rem;
+            background: #fef0e8; padding: 0.15rem 0.55rem;
+            border-radius: 20px; font-size: 0.76rem; color: #a06040;
         }
+        .item-meta .cal::before { content: "🔥 "; font-size: 0.7rem; }
+        .item-meta .price-unit { color: var(--primary-dark); font-weight: 700; font-size: 0.88rem; }
 
-        .item-meta .cal::before {
-            content: "🔥 ";
-            font-size: 0.7rem;
-        }
-
-        .item-meta .price-unit {
-            color: #b24c25;
-            font-weight: 700;
-            font-size: 0.9rem;
-        }
-
-        /* دکمه‌های کم و زیاد */
-        .qty-controls {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            flex-shrink: 0;
-        }
-
+        /* ====== دکمه‌های کم و زیاد ====== */
+        .qty-controls { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
         .qty-btn {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 1.5px solid #e6cdbb;
-            background: #fff;
-            color: #b24c25;
-            font-size: 1.15rem;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.15s;
-            font-family: 'Vazirmatn', sans-serif;
-            line-height: 1;
-            padding: 0;
+            width: 34px; height: 34px; border-radius: 50%;
+            border: 1.5px solid #e6cdbb; background: #fff; color: var(--primary-dark);
+            font-size: 1.2rem; font-weight: 700; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.15s; font-family: 'Vazirmatn', sans-serif;
+            line-height: 1; padding: 0;
         }
-
-        .qty-btn:active {
-            transform: scale(0.9);
-            background: #fae6db;
-        }
-
-        .qty-btn:disabled {
-            opacity: 0.3;
-            cursor: not-allowed;
-            transform: none;
-        }
-
+        .qty-btn:hover:not(:disabled) { background: #fdf2ea; }
+        .qty-btn:active { transform: scale(0.9); }
+        .qty-btn:disabled { opacity: 0.3; cursor: not-allowed; }
         .qty-btn.plus {
-            background: #d45a2b;
-            border-color: #d45a2b;
-            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-color: var(--primary); color: white;
+            box-shadow: 0 3px 8px rgba(212, 90, 43, 0.25);
         }
-
-        .qty-btn.plus:active {
-            background: #b84a1f;
+        .qty-btn.plus:active { background: var(--primary-dark); }
+        .qty-btn.basket-plus {
+            background: linear-gradient(135deg, var(--basket), var(--basket-dark));
+            border-color: var(--basket); color: white;
+            box-shadow: 0 3px 8px rgba(45, 122, 95, 0.25);
         }
-
-        .qty-value {
-            min-width: 26px;
-            text-align: center;
-            font-weight: 700;
-            font-size: 0.95rem;
-            color: #3e2c22;
-        }
-
+        .qty-value { min-width: 28px; text-align: center; font-weight: 800; font-size: 0.95rem; color: var(--text); }
         .item-total {
-            font-weight: 700;
-            color: #b24c25;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            direction: ltr;
-            text-align: left;
-            min-width: 75px;
+            font-weight: 800; color: var(--primary-dark); font-size: 0.9rem;
+            white-space: nowrap; direction: ltr; text-align: left; min-width: 78px;
         }
+        .item-total small { font-weight: 400; font-size: 0.65rem; color: #a18170; }
 
-        .item-total small {
-            font-weight: 400;
-            font-size: 0.65rem;
-            color: #a18170;
-        }
-
-        /* توضیحات */
+        /* ====== توضیحات ====== */
         .note-box {
-            background: #fcf2ea;
-            border-radius: 18px;
-            padding: 0.8rem 1.1rem;
-            margin: 1.2rem 0 1rem;
-            border-right: 4px solid #d45a2b;
-            color: #4a372d;
-            font-size: 0.78rem;
-            line-height: 1.7;
+            background: linear-gradient(135deg, #fcf2ea, #fae8dc);
+            border-radius: var(--radius-sm);
+            padding: 0.9rem 1.2rem; margin: 1.3rem 0 1rem;
+            border-right: 4px solid var(--primary);
+            color: var(--brown-2); font-size: 0.78rem; line-height: 1.8;
         }
+        .note-box p { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 0.3rem; }
+        .note-box p:last-child { margin-bottom: 0; }
 
-        .note-box p {
-            display: flex;
-            align-items: flex-start;
-            gap: 6px;
-            margin-bottom: 0.3rem;
-        }
-
-        .note-box p:last-child {
-            margin-bottom: 0;
-        }
-
-        /* کارت مقصد */
+        /* ====== کارت پرداخت ====== */
         .payment-card {
             background: linear-gradient(135deg, #2c3e50, #34495e);
-            border-radius: 20px;
-            padding: 1rem 1.3rem;
-            margin: 1rem 0;
-            color: #fff;
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-            box-shadow: 0 8px 20px rgba(44, 62, 80, 0.25);
-            position: relative;
-            overflow: hidden;
+            border-radius: var(--radius-md);
+            padding: 1.1rem 1.3rem; margin: 1rem 0;
+            color: #fff; display: flex; flex-direction: column; gap: 0.6rem;
+            box-shadow: 0 10px 24px rgba(44, 62, 80, 0.3);
+            position: relative; overflow: hidden;
         }
-
         .payment-card::before {
-            content: "";
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 200px;
-            height: 200px;
-            background: rgba(255,255,255,0.03);
-            border-radius: 50%;
+            content: ""; position: absolute; top: -50%; right: -20%;
+            width: 220px; height: 220px; background: rgba(255,255,255,0.04); border-radius: 50%;
         }
-
         .payment-card::after {
-            content: "💳";
-            position: absolute;
-            left: 10px;
-            bottom: 5px;
-            font-size: 3rem;
-            opacity: 0.08;
-            transform: rotate(-15deg);
+            content: "💳"; position: absolute; left: 12px; bottom: 8px;
+            font-size: 3.2rem; opacity: 0.08; transform: rotate(-15deg);
         }
-
         .card-label {
-            font-size: 0.7rem;
-            color: #bdc3c7;
-            font-weight: 400;
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            font-size: 0.72rem; color: #bdc3c7; font-weight: 500;
+            display: flex; align-items: center; gap: 5px;
         }
-
-        .card-number-row {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 8px;
-        }
-
+        .card-number-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
         .card-number {
-            font-family: 'Vazirmatn', monospace;
-            font-size: 1.2rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            direction: ltr;
-            color: #ecf0f1;
-            word-break: break-all;
+            font-family: 'Vazirmatn', monospace; font-size: 1.2rem; font-weight: 800;
+            letter-spacing: 2px; direction: ltr; color: #ecf0f1; word-break: break-all;
         }
-
         .btn-copy {
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.25);
-            color: #ecf0f1;
-            padding: 0.3rem 0.8rem;
-            border-radius: 30px;
-            font-family: 'Vazirmatn', sans-serif;
-            font-size: 0.7rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            white-space: nowrap;
-            flex-shrink: 0;
+            background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28);
+            color: #ecf0f1; padding: 0.35rem 0.9rem; border-radius: 30px;
+            font-family: 'Vazirmatn', sans-serif; font-size: 0.72rem;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 4px;
+            white-space: nowrap; flex-shrink: 0; font-weight: 600;
         }
+        .btn-copy:active { transform: scale(0.94); background: rgba(255,255,255,0.28); }
+        .card-owner { font-size: 0.8rem; color: #ecf0f1; display: flex; align-items: center; gap: 6px; }
+        .card-owner span { color: #bdc3c7; font-size: 0.72rem; }
 
-        .btn-copy:active {
-            transform: scale(0.94);
-            background: rgba(255,255,255,0.25);
-        }
-
-        .card-owner {
-            font-size: 0.78rem;
-            color: #ecf0f1;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .card-owner span {
-            color: #bdc3c7;
-            font-size: 0.7rem;
-        }
-
-        /* جمع کل - چسبان */
+        /* ====== جمع کل ====== */
         .summary-sticky {
-            position: sticky;
-            bottom: 0.5rem;
+            position: sticky; bottom: 0.5rem;
             background: linear-gradient(135deg, #f7ede4, #fce6d8);
-            border-radius: 24px;
-            padding: 1rem 1.2rem;
-            box-shadow: 0 -4px 20px rgba(180, 120, 80, 0.15), 0 8px 24px rgba(180, 120, 80, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 0.6rem;
+            border-radius: var(--radius-md);
+            padding: 1.1rem 1.2rem;
+            box-shadow: 0 -4px 20px rgba(180, 120, 80, 0.18), 0 10px 28px rgba(180, 120, 80, 0.12);
+            display: flex; flex-direction: column; gap: 0.7rem;
             margin-top: 1rem;
             border: 1px solid rgba(255, 245, 235, 0.9);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
         }
-
         .summary-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 0.5rem;
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 0.6rem;
         }
-
         .total-items {
-            font-weight: 600;
-            color: #4e382b;
-            font-size: 0.8rem;
-            background: rgba(237, 224, 214, 0.8);
-            padding: 0.3rem 0.9rem;
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            flex-wrap: wrap;
+            font-weight: 700; color: var(--brown-2); font-size: 0.8rem;
+            background: rgba(237, 224, 214, 0.9);
+            padding: 0.35rem 0.9rem; border-radius: 30px;
+            display: flex; align-items: center; gap: 6px; flex-wrap: wrap;
         }
-
         .total-items .cal-badge {
-            font-size: 0.7rem;
-            color: #a0765e;
-            background: rgba(255, 255, 255, 0.6);
-            padding: 0.1rem 0.5rem;
-            border-radius: 20px;
+            font-size: 0.72rem; color: #a0765e;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 0.12rem 0.55rem; border-radius: 20px;
         }
-
         .total-price {
-            font-weight: 800;
-            font-size: 1.3rem;
-            color: #1f1a16;
-            display: flex;
-            align-items: baseline;
-            gap: 4px;
+            font-weight: 800; font-size: 1.35rem; color: #1f1a16;
+            display: flex; align-items: baseline; gap: 4px;
         }
-
-        .total-price span {
-            font-size: 0.75rem;
-            font-weight: 400;
-            color: #7c6558;
-        }
-
-        .summary-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
+        .total-price span { font-size: 0.75rem; font-weight: 400; color: #7c6558; }
+        .summary-actions { display: flex; gap: 0.5rem; }
         .btn-clear {
-            flex: 1;
-            background: #fff;
-            border: 1.5px solid #e6cdbb;
-            color: #6b3f2a;
-            padding: 0.55rem 0.8rem;
-            border-radius: 40px;
-            font-family: 'Vazirmatn', sans-serif;
-            font-weight: 600;
-            font-size: 0.78rem;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 5px;
+            flex: 1; background: #fff; border: 1.5px solid #e6cdbb;
+            color: var(--brown-2); padding: 0.6rem 0.9rem; border-radius: 40px;
+            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.8rem;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
         }
+        .btn-clear:hover { background: #fae6db; }
+        .btn-clear:active { transform: scale(0.96); }
 
-        .btn-clear:active {
-            transform: scale(0.96);
-            background: #fae6db;
+        /* ====== زنبیل ====== */
+        .basket-panel {
+            background: linear-gradient(135deg, #eaf7f1, #dff0e8);
+            border-radius: var(--radius-md);
+            padding: 1.2rem 1.3rem;
+            margin: 1.2rem 0;
+            border: 2px solid var(--basket);
+            box-shadow: 0 8px 24px rgba(45, 122, 95, 0.15);
+            position: relative; overflow: hidden;
         }
+        .basket-panel::before {
+            content: "🧺"; position: absolute; top: 8px; left: 12px;
+            font-size: 2.5rem; opacity: 0.1; transform: rotate(-10deg);
+        }
+        .basket-header {
+            display: flex; align-items: center; justify-content: space-between;
+            flex-wrap: wrap; gap: 0.6rem; margin-bottom: 0.9rem;
+        }
+        .basket-title {
+            font-size: 1.05rem; font-weight: 800; color: var(--basket-dark);
+            display: flex; align-items: center; gap: 7px;
+        }
+        .basket-weight-badge {
+            background: var(--basket); color: white;
+            font-size: 0.72rem; font-weight: 700;
+            padding: 0.25rem 0.8rem; border-radius: 30px;
+            display: flex; align-items: center; gap: 4px;
+            box-shadow: 0 3px 8px rgba(45, 122, 95, 0.3);
+            transition: all 0.3s;
+        }
+        .basket-weight-badge.complete {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            animation: pop 0.4s ease;
+        }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        .basket-desc {
+            font-size: 0.78rem; color: var(--basket-dark); line-height: 1.7;
+            margin-bottom: 0.8rem;
+            background: rgba(255, 255, 255, 0.6);
+            padding: 0.6rem 0.9rem; border-radius: 12px;
+        }
+        .basket-progress-wrap {
+            background: rgba(255, 255, 255, 0.7);
+            border-radius: 30px; height: 16px; overflow: hidden;
+            position: relative; margin-bottom: 0.5rem;
+            border: 1px solid rgba(45, 122, 95, 0.2);
+        }
+        .basket-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--basket), #27ae60);
+            border-radius: 30px; transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            box-shadow: 0 0 10px rgba(39, 174, 96, 0.4);
+        }
+        .basket-progress-bar::after {
+            content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        .basket-stats {
+            display: flex; justify-content: space-between; align-items: center;
+            flex-wrap: wrap; gap: 0.5rem; font-size: 0.75rem;
+            color: var(--basket-dark); font-weight: 600;
+        }
+        .basket-stats .remaining { color: #c0392b; }
+        .basket-stats .complete-msg { color: #27ae60; font-weight: 700; }
 
-        /* پاورقی */
+        /* ====== فاکتور نهایی ====== */
+        .final-invoice-card {
+            max-width: 620px; width: 100%;
+            background: linear-gradient(135deg, #ffffff, #fef8f3);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-lg);
+            padding: 1.5rem 1.3rem;
+            border: 2px solid var(--primary);
+            position: relative; overflow: hidden;
+        }
+        .final-invoice-card::before {
+            content: "📋"; position: absolute; top: 10px; left: 15px;
+            font-size: 2.2rem; opacity: 0.12; transform: rotate(-10deg);
+        }
+        .final-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1rem; padding-bottom: 0.8rem;
+            border-bottom: 2px dashed #f0d5c2; flex-wrap: wrap; gap: 0.5rem;
+        }
+        .final-header h2 { font-size: 1.2rem; font-weight: 800; color: var(--brown); }
+        .final-header h2 span { color: var(--primary); }
+        .final-badge {
+            background: var(--primary); color: white; font-size: 0.68rem;
+            padding: 0.25rem 0.8rem; border-radius: 30px; font-weight: 700;
+        }
+        .final-body {
+            font-family: 'Vazirmatn', monospace; font-size: 0.82rem; line-height: 2;
+            color: var(--text); white-space: pre-wrap;
+            background: var(--cream-2); padding: 1.1rem 1.3rem; border-radius: 16px;
+            border: 1px solid var(--border); max-height: 400px; overflow-y: auto; direction: rtl;
+        }
+        .final-body .empty-state { color: #ab8b7a; text-align: center; padding: 1rem; font-style: italic; }
+        .final-actions { display: flex; gap: 0.5rem; margin-top: 1rem; }
+        .btn-copy-final {
+            flex: 1; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; border: none; padding: 0.75rem 1rem; border-radius: 40px;
+            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.85rem;
+            cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
+        }
+        .btn-copy-final:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35); }
+        .btn-copy-final:active { transform: scale(0.96); }
+        .btn-copy-final:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ====== پاورقی ====== */
         .footer-note {
-            text-align: center;
-            margin-top: 1rem;
-            font-size: 0.72rem;
-            color: #ab9487;
-            padding-top: 0.8rem;
-            border-top: 1px dashed #e6d6cb;
+            text-align: center; margin-top: 1rem; font-size: 0.72rem; color: #ab9487;
+            padding-top: 0.8rem; border-top: 1px dashed #e6d6cb;
         }
-
         .footer-note i {
-            font-style: normal;
-            display: inline-block;
-            background: rgba(241, 228, 219, 0.8);
-            padding: 0.1rem 0.7rem;
-            border-radius: 20px;
+            font-style: normal; display: inline-block;
+            background: rgba(241, 228, 219, 0.8); padding: 0.15rem 0.8rem; border-radius: 20px;
         }
 
-        /* توست / پیام */
+        /* ====== توست ====== */
         .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
+            position: fixed; bottom: 20px; left: 50%;
             transform: translateX(-50%) translateY(100px);
-            background: #4e2e1e;
-            color: #fff;
-            padding: 0.7rem 1.5rem;
-            border-radius: 40px;
-            font-size: 0.8rem;
-            font-weight: 500;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 999;
+            background: linear-gradient(135deg, var(--brown), #3a2216);
+            color: #fff; padding: 0.75rem 1.6rem;
+            border-radius: 40px; font-size: 0.82rem; font-weight: 600;
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
+            opacity: 0; transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 2000; pointer-events: none; white-space: nowrap;
+            max-width: calc(100% - 30px);
+        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* ====== پاپ‌آپ ورود عدد ====== */
+        .modal-overlay {
+            position: fixed; inset: 0; background: rgba(30, 20, 15, 0.7);
+            z-index: 3000; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px);
+            display: flex; align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+
+        .modal-card {
+            background: linear-gradient(160deg, #ffffff, #fef8f3);
+            border-radius: var(--radius-lg);
+            padding: 1.8rem 1.5rem 1.5rem;
+            max-width: 380px; width: 100%;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary-light);
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .modal-overlay.active .modal-card { transform: scale(1) translateY(0); }
+
+        .modal-icon {
+            width: 60px; height: 60px; border-radius: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.8rem; margin: 0 auto 1rem;
+            box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35);
+        }
+        .modal-title {
+            font-size: 1.15rem; font-weight: 800; color: var(--brown);
+            text-align: center; margin-bottom: 0.4rem;
+        }
+        .modal-desc {
+            font-size: 0.8rem; color: var(--text-muted);
+            text-align: center; margin-bottom: 1.3rem; line-height: 1.7;
+        }
+        .modal-input-wrap {
+            position: relative; margin-bottom: 0.8rem;
+        }
+        .modal-input {
+            width: 100%; padding: 0.9rem 1rem 0.9rem 3rem;
+            border-radius: 16px; border: 2px solid var(--border);
+            background: #fff; font-family: 'Vazirmatn', sans-serif;
+            font-size: 1.1rem; font-weight: 700; color: var(--text);
+            direction: ltr; text-align: left; outline: none;
+            transition: all 0.2s;
+        }
+        .modal-input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(212, 90, 43, 0.1);
+        }
+        .modal-input::placeholder { color: #c9b5a8; font-weight: 400; }
+        .modal-input-suffix {
+            position: absolute; left: 14px; top: 50%;
+            transform: translateY(-50%);
+            font-size: 0.78rem; color: var(--text-muted); font-weight: 600;
             pointer-events: none;
-            white-space: nowrap;
+        }
+        .modal-quick-budgets {
+            display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 1rem;
+        }
+        .quick-budget-btn {
+            flex: 1; min-width: calc(33% - 6px);
+            background: #fdf2ea; border: 1.5px solid #f0d5c2;
+            color: var(--primary-dark); padding: 0.5rem 0.4rem;
+            border-radius: 12px; font-family: 'Vazirmatn', sans-serif;
+            font-size: 0.72rem; font-weight: 700; cursor: pointer;
+            transition: all 0.15s;
+        }
+        .quick-budget-btn:hover { background: #fae6db; border-color: var(--primary); }
+        .quick-budget-btn:active { transform: scale(0.95); }
+
+        .modal-actions {
+            display: flex; gap: 8px;
+        }
+        .modal-btn {
+            flex: 1; padding: 0.75rem 1rem; border-radius: 40px;
+            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.85rem;
+            cursor: pointer; transition: all 0.2s; border: none;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+        }
+        .modal-btn:active { transform: scale(0.96); }
+        .modal-btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
+        }
+        .modal-btn-ghost {
+            background: #f5ede7; color: var(--brown-2);
+            border: 1.5px solid #e6cdbb;
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
+        /* ====== تور راهنما ====== */
+        .tour-overlay {
+            position: fixed; inset: 0; background: rgba(30, 20, 15, 0.75);
+            z-index: 4000; opacity: 0; pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+        .tour-overlay.active { opacity: 1; pointer-events: auto; }
+        .tour-spotlight {
+            position: fixed; z-index: 4001; pointer-events: none;
+            border-radius: 20px; box-shadow: 0 0 0 9999px rgba(30, 20, 15, 0.75);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+        }
+        .tour-spotlight.active { opacity: 1; }
+        .tour-tooltip {
+            position: fixed; z-index: 4002;
+            background: linear-gradient(160deg, #ffffff, #fef8f3);
+            border-radius: 20px; padding: 1.1rem 1.3rem;
+            max-width: 300px; width: calc(100% - 40px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+            border: 2px solid var(--primary);
+            opacity: 0; pointer-events: none;
+            transform: translateY(10px) scale(0.95);
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .tour-tooltip.active {
+            opacity: 1; pointer-events: auto;
+            transform: translateY(0) scale(1);
+        }
+        .tour-tooltip::before {
+            content: ""; position: absolute; width: 14px; height: 14px;
+            background: #fff; border: 2px solid var(--primary);
+            transform: rotate(45deg);
+        }
+        .tour-tooltip.arrow-top::before {
+            top: -9px; left: 50%; margin-left: -7px;
+            border-bottom: none; border-left: none;
+        }
+        .tour-tooltip.arrow-bottom::before {
+            bottom: -9px; left: 50%; margin-left: -7px;
+            border-top: none; border-right: none;
+        }
+        .tour-step-badge {
+            display: inline-block; background: var(--primary); color: white;
+            font-size: 0.65rem; font-weight: 700;
+            padding: 0.15rem 0.65rem; border-radius: 30px;
+            margin-bottom: 0.5rem;
+        }
+        .tour-title {
+            font-size: 1rem; font-weight: 800; color: var(--brown);
+            margin-bottom: 0.4rem; display: flex; align-items: center; gap: 6px;
+        }
+        .tour-desc { font-size: 0.82rem; color: #6b544a; line-height: 1.7; margin-bottom: 0.9rem; }
+        .tour-actions { display: flex; gap: 0.5rem; }
+        .tour-btn {
+            flex: 1; padding: 0.55rem 0.9rem; border-radius: 30px;
+            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.78rem;
+            cursor: pointer; transition: all 0.2s; border: none;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
+        }
+        .tour-btn:active { transform: scale(0.95); }
+        .tour-btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; box-shadow: 0 4px 12px rgba(212, 90, 43, 0.3);
+        }
+        .tour-btn-ghost { background: #f5ede7; color: var(--brown-2); border: 1.5px solid #e6cdbb; }
+        .tour-dots { display: flex; gap: 5px; justify-content: center; margin-top: 0.7rem; }
+        .tour-dot {
+            width: 7px; height: 7px; border-radius: 50%;
+            background: #e6cdbb; transition: all 0.25s;
+        }
+        .tour-dot.active { background: var(--primary); width: 20px; border-radius: 10px; }
+
+        .tour-restart-btn {
+            position: fixed; bottom: 80px; left: 15px;
+            width: 46px; height: 46px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: white; border: none; cursor: pointer;
+            box-shadow: 0 6px 18px rgba(212, 90, 43, 0.4);
+            font-size: 1.2rem; z-index: 500;
+            display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .tour-restart-btn:active { transform: scale(0.9); }
+        .tour-restart-btn::after {
+            content: "؟"; position: absolute; top: -3px; right: -3px;
+            background: #fff; color: var(--primary); width: 18px; height: 18px;
+            border-radius: 50%; font-size: 0.7rem; font-weight: 800;
+            display: flex; align-items: center; justify-content: center;
+            border: 1.5px solid var(--primary);
         }
 
-        /* اسکرول بار سفارشی */
-        ::-webkit-scrollbar {
-            width: 4px;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #e6cdbb;
-            border-radius: 10px;
-        }
+        ::-webkit-scrollbar { width: 5px; height: 5px; }
+        ::-webkit-scrollbar-thumb { background: #e6cdbb; border-radius: 10px; }
+        ::-webkit-scrollbar-track { background: transparent; }
 
-        /* ریسپانسیو */
         @media (max-width: 400px) {
-            body {
-                padding: 0.5rem 0.4rem 1.5rem;
-            }
-            .invoice-container {
-                padding: 1.2rem 0.8rem;
-                border-radius: 24px;
-            }
-            .header h1 {
-                font-size: 1.3rem;
-                padding: 0.3rem 1rem;
-            }
-            .item {
-                padding: 0.6rem 0.7rem;
-                gap: 6px;
-            }
-            .item-name {
-                font-size: 0.88rem;
-            }
-            .item-meta {
-                font-size: 0.78rem;
-            }
-            .item-total {
-                font-size: 0.8rem;
-                min-width: 65px;
-            }
-            .qty-btn {
-                width: 28px;
-                height: 28px;
-                font-size: 1rem;
-            }
-            .qty-value {
-                min-width: 22px;
-                font-size: 0.85rem;
-            }
-            .total-price {
-                font-size: 1.1rem;
-            }
-            .budget-row {
-                gap: 5px;
-            }
-            .btn-random {
-                padding: 0.5rem 0.9rem;
-                font-size: 0.75rem;
-            }
-            .budget-label {
-                font-size: 0.75rem;
-            }
-            .card-number {
-                font-size: 0.95rem;
-                letter-spacing: 1px;
-            }
-            .final-invoice-card {
-                padding: 1.2rem 0.8rem;
-            }
+            body { padding: 0.5rem 0.4rem 1.5rem; }
+            .invoice-container { padding: 1.2rem 0.85rem; border-radius: 24px; }
+            .header h1 { font-size: 1.35rem; padding: 0.35rem 1.1rem; }
+            .item { padding: 0.65rem 0.7rem; gap: 6px; }
+            .item-name { font-size: 0.88rem; }
+            .item-meta { font-size: 0.78rem; gap: 8px; }
+            .item-total { font-size: 0.8rem; min-width: 66px; }
+            .qty-btn { width: 30px; height: 30px; font-size: 1.05rem; }
+            .qty-value { min-width: 24px; font-size: 0.88rem; }
+            .total-price { font-size: 1.15rem; }
+            .card-number { font-size: 0.95rem; letter-spacing: 1px; }
+            .final-invoice-card { padding: 1.2rem 0.85rem; }
+            .modal-card { padding: 1.5rem 1.1rem 1.2rem; }
+            .basket-panel { padding: 1rem 0.9rem; }
+            .budget-tool { padding: 0.9rem 1rem; gap: 8px; }
+            .budget-tool .icon { width: 38px; height: 38px; font-size: 1.1rem; }
+            .btn-random { padding: 0.6rem 1rem; font-size: 0.8rem; }
         }
-
         @media (min-width: 601px) {
-            .invoice-container {
-                padding: 2rem 1.8rem;
-            }
-            .header h1 {
-                font-size: 1.9rem;
-            }
-            .item {
-                padding: 0.85rem 1.2rem;
-            }
-            .item-name {
-                font-size: 1rem;
-            }
-            .item-meta {
-                font-size: 0.9rem;
-            }
-            .item-total {
-                font-size: 1rem;
-                min-width: 90px;
-            }
-            .total-price {
-                font-size: 1.5rem;
-            }
-            .card-number {
-                font-size: 1.4rem;
-            }
-            .final-invoice-card {
-                padding: 2rem 1.8rem;
-            }
+            .invoice-container { padding: 2rem 1.9rem; }
+            .header h1 { font-size: 1.95rem; }
+            .item { padding: 0.9rem 1.25rem; }
+            .item-name { font-size: 1rem; }
+            .item-meta { font-size: 0.9rem; }
+            .item-total { font-size: 1rem; min-width: 92px; }
+            .total-price { font-size: 1.55rem; }
+            .card-number { font-size: 1.4rem; }
+            .final-invoice-card { padding: 2rem 1.9rem; }
         }
     </style>
 </head>
 <body>
-    <!-- ================= کارت اصلی انتخاب محصولات ================= -->
     <div class="invoice-container">
-        <!-- هدر -->
-        <div class="header">
+        <div class="header" data-tour="header">
             <h1>🍃 ماماسیس <span>خانگی</span> 🍃</h1>
             <div class="subhead">
                 <i>انتخاب محصولات</i>
-                <span>خرید رندوم + بودجه</span>
+                <span>خرید رندوم + زنبیل</span>
                 <i>گوشت تازه</i>
             </div>
         </div>
 
-        <!-- ابزار بودجه و رندوم -->
-        <div class="budget-tool">
-            <div class="budget-row">
-                <span class="budget-label">💰 بودجه:</span>
-                <input type="number" id="budgetInput" class="budget-input" placeholder="مثلاً 2000000" min="0" step="50000" inputmode="numeric">
-                <button class="btn-random" id="randomBtn">
-                    <span>🎲</span> رندوم
-                </button>
+        <div class="budget-tool" data-tour="budget">
+            <div class="icon">💰</div>
+            <div class="txt">
+                <strong>خرید هوشمند با بودجه</strong>
+                <small>بودجه‌تون رو بگید، سبد رو براتون می‌چینیم</small>
             </div>
-            <div class="budget-hint">💡 بودجه را وارد کنید و دکمه رندوم را بزنید تا سبدی متناسب با بودجه شما ساخته شود.</div>
+            <button class="btn-random" id="randomBtn">
+                <span>🎲</span> رندوم
+            </button>
         </div>
 
-        <!-- سوسیس‌ها -->
         <div class="category">
-            <div class="category-title">سوسیس‌ها <span style="font-size:0.7rem; font-weight:400; color:#ab8b7a;">(نیم کیلو)</span></div>
+            <div class="category-title">سوسیس‌ها <span style="font-size:0.7rem; font-weight:500; color:#ab8b7a;">(نیم کیلو)</span></div>
             <div class="item-grid">
-                <div class="item" data-price="650000" data-cal="1200" data-name="آلمانی" data-unit="نیم کیلو">
+                <div class="item" data-tour="first-item" data-price="650000" data-cal="1200" data-name="آلمانی" data-unit="نیم کیلو" data-weight="0.5">
                     <div class="item-info">
                         <div class="item-name">🟣 آلمانی <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -839,7 +703,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="680000" data-cal="1050" data-name="کوکتل مرغ" data-unit="نیم کیلو">
+                <div class="item" data-price="680000" data-cal="1050" data-name="کوکتل مرغ" data-unit="نیم کیلو" data-weight="0.5">
                     <div class="item-info">
                         <div class="item-name">🟣 کوکتل مرغ <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -854,7 +718,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="750000" data-cal="1300" data-name="کوکتل پنیری" data-unit="نیم کیلو">
+                <div class="item" data-price="750000" data-cal="1300" data-name="کوکتل پنیری" data-unit="نیم کیلو" data-weight="0.5">
                     <div class="item-info">
                         <div class="item-name">🟣 کوکتل پنیری <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -869,7 +733,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="700000" data-cal="1150" data-name="بلغاری" data-unit="نیم کیلو">
+                <div class="item" data-price="700000" data-cal="1150" data-name="بلغاری" data-unit="نیم کیلو" data-weight="0.5">
                     <div class="item-info">
                         <div class="item-name">🟣 بلغاری <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -884,7 +748,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="990000" data-cal="1400" data-name="هاتداگ گوشت" data-unit="نیم کیلو">
+                <div class="item" data-price="990000" data-cal="1400" data-name="هاتداگ گوشت" data-unit="نیم کیلو" data-weight="0.5">
                     <div class="item-info">
                         <div class="item-name">🟣 هاتداگ گوشت <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -902,11 +766,15 @@
             </div>
         </div>
 
-        <!-- کالباس و ژامبون‌ها -->
-        <div class="category">
-            <div class="category-title">کالباس و ژامبون‌ها <span style="font-size:0.7rem; font-weight:400; color:#ab8b7a;">(نیم کیلو)</span></div>
+        <!-- کالباس و ژامبون‌ها - با زنبیل -->
+        <div class="category" data-tour="basket-category">
+            <div class="category-title">
+                کالباس و ژامبون‌ها
+                <span style="font-size:0.7rem; font-weight:500; color:#ab8b7a;">(نیم کیلو)</span>
+                <span class="basket-tag">🧺 زنبیل</span>
+            </div>
             <div class="item-grid">
-                <div class="item" data-price="830000" data-cal="1100" data-name="ژامبون مرغ و قارچ لوکس" data-unit="نیم کیلو">
+                <div class="item basket-item" data-price="830000" data-cal="1100" data-name="ژامبون مرغ و قارچ لوکس" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
                     <div class="item-info">
                         <div class="item-name">🟣 ژامبون مرغ و قارچ لوکس <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -917,11 +785,11 @@
                     <div class="qty-controls">
                         <button class="qty-btn minus" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus basket-plus">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="1100000" data-cal="1450" data-name="ژامبون گوشت لوکس" data-unit="نیم کیلو">
+                <div class="item basket-item" data-price="1100000" data-cal="1450" data-name="ژامبون گوشت لوکس" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
                     <div class="item-info">
                         <div class="item-name">🟣 ژامبون گوشت لوکس <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -932,11 +800,11 @@
                     <div class="qty-controls">
                         <button class="qty-btn minus" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus basket-plus">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="700000" data-cal="1000" data-name="کالباس مارتادلا" data-unit="نیم کیلو">
+                <div class="item basket-item" data-price="700000" data-cal="1000" data-name="کالباس مارتادلا" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
                     <div class="item-info">
                         <div class="item-name">🟣 کالباس مارتادلا <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -947,11 +815,11 @@
                     <div class="qty-controls">
                         <button class="qty-btn minus" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus basket-plus">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="850000" data-cal="1150" data-name="کالباس لیونر" data-unit="نیم کیلو">
+                <div class="item basket-item" data-price="850000" data-cal="1150" data-name="کالباس لیونر" data-unit="نیم کیلو" data-weight="0.5" data-basket="true">
                     <div class="item-info">
                         <div class="item-name">🟣 کالباس لیونر <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -962,18 +830,35 @@
                     <div class="qty-controls">
                         <button class="qty-btn minus" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus basket-plus">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
             </div>
         </div>
 
-        <!-- نیمه آماده‌ها -->
+        <!-- پنل زنبیل -->
+        <div class="basket-panel" data-tour="basket-panel">
+            <div class="basket-header">
+                <div class="basket-title">🧺 زنبیل رزرو</div>
+                <div class="basket-weight-badge" id="basketWeightBadge">۰ / ۲.۵ کیلو</div>
+            </div>
+            <div class="basket-desc">
+                📌 برای محصولات کالباس و ژامبون، حداقل <strong>۲.۵ کیلوگرم</strong> سفارش لازمه تا تولید شروع بشه. محصولات زنبیل با چند مشترک جمع می‌شن.
+            </div>
+            <div class="basket-progress-wrap">
+                <div class="basket-progress-bar" id="basketProgressBar" style="width: 0%"></div>
+            </div>
+            <div class="basket-stats">
+                <span id="basketWeightText">وزن زنبیل: ۰ کیلو</span>
+                <span class="remaining" id="basketRemaining">۲.۵ کیلو مونده</span>
+            </div>
+        </div>
+
         <div class="category">
-            <div class="category-title">نیمه آماده‌ها <span style="font-size:0.7rem; font-weight:400; color:#ab8b7a;">(نیم کیلو / تعدادی)</span></div>
+            <div class="category-title">نیمه آماده‌ها <span style="font-size:0.7rem; font-weight:500; color:#ab8b7a;">(نیم کیلو / تعدادی)</span></div>
             <div class="item-grid">
-                <div class="item" data-price="650000" data-cal="1250" data-name="ناگت مرغ" data-unit="نیم کیلو">
+                <div class="item" data-price="650000" data-cal="1250" data-name="ناگت مرغ" data-unit="نیم کیلو" data-weight="0.5">
                     <div class="item-info">
                         <div class="item-name">🟣 ناگت مرغ <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -988,7 +873,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="730000" data-cal="1350" data-name="ناگت پنیری" data-unit="نیم کیلو">
+                <div class="item" data-price="730000" data-cal="1350" data-name="ناگت پنیری" data-unit="نیم کیلو" data-weight="0.5">
                     <div class="item-info">
                         <div class="item-name">🟣 ناگت پنیری <span class="badge">نیم کیلو</span></div>
                         <div class="item-meta">
@@ -1003,8 +888,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <!-- عددی‌ها -->
-                <div class="item" data-price="325000" data-cal="350" data-name="برگر ممتاز ۱۲۵ گرمی" data-unit="عددی">
+                <div class="item" data-price="325000" data-cal="350" data-name="برگر ممتاز ۱۲۵ گرمی" data-unit="عددی" data-weight="0.125">
                     <div class="item-info">
                         <div class="item-name">🟣 برگر ممتاز <span class="badge">۱۲۵ گرمی عددی</span></div>
                         <div class="item-meta">
@@ -1019,7 +903,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="200000" data-cal="220" data-name="کباب لقمه گوشت" data-unit="عددی">
+                <div class="item" data-price="200000" data-cal="220" data-name="کباب لقمه گوشت" data-unit="عددی" data-weight="0.05">
                     <div class="item-info">
                         <div class="item-name">🟣 کباب لقمه گوشت <span class="badge">عددی</span></div>
                         <div class="item-meta">
@@ -1034,7 +918,7 @@
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
-                <div class="item" data-price="150000" data-cal="180" data-name="کباب لقمه مرغ زعفرانی" data-unit="عددی">
+                <div class="item" data-price="150000" data-cal="180" data-name="کباب لقمه مرغ زعفرانی" data-unit="عددی" data-weight="0.05">
                     <div class="item-info">
                         <div class="item-name">🟣 کباب لقمه مرغ زعفرانی <span class="badge">عددی</span></div>
                         <div class="item-meta">
@@ -1052,14 +936,13 @@
             </div>
         </div>
 
-        <!-- توضیحات -->
         <div class="note-box">
             <p>✅️ تمامی محصولات با گوشت و مرغ گرم و تازه کشتار روز تهیه می‌شود.</p>
             <p>📈 قیمت‌ها با نوسان بازار تغییر می‌کند.</p>
+            <p>🧺 محصولات زنبیل با رسیدن به ۲.۵ کیلو وارد مرحله تولید می‌شن.</p>
         </div>
 
-        <!-- کارت مقصد -->
-        <div class="payment-card">
+        <div class="payment-card" data-tour="payment">
             <div class="card-label">💳 واریز به کارت مقصد</div>
             <div class="card-number-row">
                 <div class="card-number" id="cardNumber">6037-9982-2975-7330</div>
@@ -1072,8 +955,7 @@
             </div>
         </div>
 
-        <!-- جمع کل چسبان -->
-        <div class="summary-sticky">
+        <div class="summary-sticky" data-tour="summary">
             <div class="summary-top">
                 <div class="total-items" id="totalItemsDisplay">
                     <span>۰ مورد</span>
@@ -1085,20 +967,18 @@
                 <button class="btn-clear" id="clearAllBtn">
                     <span>🧹</span> پاک کردن
                 </button>
-                <button class="btn-clear" id="randomAgainBtn" style="border-color:#d45a2b; color:#d45a2b;">
+                <button class="btn-clear" id="randomAgainBtn" style="border-color:var(--primary); color:var(--primary-dark);">
                     <span>🎲</span> رندوم مجدد
                 </button>
             </div>
         </div>
 
-        <!-- پاورقی -->
         <div class="footer-note">
             <i>ماماسیس 🌺 محصولات خانگی با عشق</i>
         </div>
     </div>
 
-    <!-- ================= کارت فاکتور نهایی (جداگانه برای ارسال به ادمین) ================= -->
-    <div class="final-invoice-card">
+    <div class="final-invoice-card" data-tour="final">
         <div class="final-header">
             <h2>📋 فاکتور نهایی <span>ماماسیس</span></h2>
             <span class="final-badge" id="finalItemCount">۰ مورد</span>
@@ -1113,19 +993,57 @@
         </div>
     </div>
 
-    <!-- توست -->
     <div class="toast" id="toast"></div>
+
+    <!-- پاپ‌آپ ورود بودجه -->
+    <div class="modal-overlay" id="budgetModal">
+        <div class="modal-card">
+            <div class="modal-icon">🎲</div>
+            <div class="modal-title">بودجه‌تون رو وارد کنید</div>
+            <div class="modal-desc">سیستم بر اساس بودجه شما یه سبد متناسب می‌سازه</div>
+            <div class="modal-input-wrap">
+                <input type="text" class="modal-input" id="modalBudgetInput" placeholder="مثلاً 2,000,000" inputmode="numeric" autocomplete="off">
+                <span class="modal-input-suffix">تومان</span>
+            </div>
+            <div class="modal-quick-budgets">
+                <button class="quick-budget-btn" data-budget="1000000">۱ میلیون</button>
+                <button class="quick-budget-btn" data-budget="2000000">۲ میلیون</button>
+                <button class="quick-budget-btn" data-budget="3000000">۳ میلیون</button>
+                <button class="quick-budget-btn" data-budget="5000000">۵ میلیون</button>
+                <button class="quick-budget-btn" data-budget="10000000">۱۰ میلیون</button>
+                <button class="quick-budget-btn" data-budget="20000000">۲۰ میلیون</button>
+            </div>
+            <div class="modal-actions">
+                <button class="modal-btn modal-btn-ghost" id="modalCancelBtn">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="modalConfirmBtn">🎲 بچین!</button>
+            </div>
+        </div>
+    </div>
+
+    <button class="tour-restart-btn" id="tourRestartBtn" title="راهنمای استفاده">🎓</button>
+
+    <div class="tour-overlay" id="tourOverlay"></div>
+    <div class="tour-spotlight" id="tourSpotlight"></div>
+    <div class="tour-tooltip" id="tourTooltip">
+        <span class="tour-step-badge" id="tourStepBadge">۱ از ۷</span>
+        <div class="tour-title" id="tourTitle"></div>
+        <div class="tour-desc" id="tourDesc"></div>
+        <div class="tour-actions">
+            <button class="tour-btn tour-btn-ghost" id="tourSkipBtn">رد کردن</button>
+            <button class="tour-btn tour-btn-primary" id="tourNextBtn">بعدی ←</button>
+        </div>
+        <div class="tour-dots" id="tourDots"></div>
+    </div>
 
     <script>
         (function() {
+            // ============ عناصر ============
             const items = document.querySelectorAll('.item');
             const totalItemsDisplay = document.getElementById('totalItemsDisplay');
-            const totalCaloriesDisplay = document.getElementById('totalCaloriesDisplay');
             const totalPriceDisplay = document.getElementById('totalPriceDisplay');
             const clearBtn = document.getElementById('clearAllBtn');
             const randomBtn = document.getElementById('randomBtn');
             const randomAgainBtn = document.getElementById('randomAgainBtn');
-            const budgetInput = document.getElementById('budgetInput');
             const toast = document.getElementById('toast');
             const cardNumberEl = document.getElementById('cardNumber');
             const copyCardBtn = document.getElementById('copyCardBtn');
@@ -1133,29 +1051,41 @@
             const finalItemCount = document.getElementById('finalItemCount');
             const copyFinalBtn = document.getElementById('copyFinalBtn');
 
-            // تبدیل اعداد به فارسی
+            const budgetModal = document.getElementById('budgetModal');
+            const modalBudgetInput = document.getElementById('modalBudgetInput');
+            const modalCancelBtn = document.getElementById('modalCancelBtn');
+            const modalConfirmBtn = document.getElementById('modalConfirmBtn');
+            const quickBudgetBtns = document.querySelectorAll('.quick-budget-btn');
+
+            const basketWeightBadge = document.getElementById('basketWeightBadge');
+            const basketProgressBar = document.getElementById('basketProgressBar');
+            const basketWeightText = document.getElementById('basketWeightText');
+            const basketRemaining = document.getElementById('basketRemaining');
+
+            const BASKET_MIN_WEIGHT = 2.5; // کیلوگرم
+
             function toPersianNumber(num) {
                 const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
                 return num.toString().replace(/\d/g, (d) => persianDigits[d]);
             }
 
-            // نمایش توست
+            function formatWeight(kg) {
+                if (kg === 0) return '۰';
+                return kg.toLocaleString('fa-IR', { maximumFractionDigits: 2 });
+            }
+
             let toastTimeout;
             function showToast(msg) {
                 clearTimeout(toastTimeout);
                 toast.textContent = msg;
                 toast.classList.add('show');
-                toastTimeout = setTimeout(() => {
-                    toast.classList.remove('show');
-                }, 2500);
+                toastTimeout = setTimeout(() => toast.classList.remove('show'), 2800);
             }
 
-            // دریافت تعداد فعلی یک آیتم
             function getQty(item) {
                 return parseInt(item.querySelector('.qty-value').textContent.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)), 10) || 0;
             }
 
-            // تنظیم تعداد
             function setQty(item, qty) {
                 if (qty < 0) qty = 0;
                 const price = parseInt(item.dataset.price, 10) || 0;
@@ -1165,24 +1095,47 @@
 
                 qtyValue.textContent = toPersianNumber(qty);
                 minusBtn.disabled = qty === 0;
+                itemTotal.innerHTML = (price * qty).toLocaleString('fa-IR') + ' <small>ت</small>';
 
-                const itemTotalPrice = price * qty;
-                itemTotal.innerHTML = itemTotalPrice.toLocaleString('fa-IR') + ' <small>ت</small>';
-
-                if (qty > 0) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
+                if (qty > 0) item.classList.add('active');
+                else item.classList.remove('active');
 
                 updateSummary();
             }
 
-            // به‌روزرسانی جمع کل و فاکتور نهایی
+            function updateBasket() {
+                let totalWeight = 0;
+                items.forEach(item => {
+                    if (item.dataset.basket === 'true') {
+                        const qty = getQty(item);
+                        const weightPer = parseFloat(item.dataset.weight) || 0;
+                        totalWeight += qty * weightPer;
+                    }
+                });
+
+                const percent = Math.min((totalWeight / BASKET_MIN_WEIGHT) * 100, 100);
+                basketProgressBar.style.width = percent + '%';
+
+                basketWeightText.textContent = 'وزن زنبیل: ' + formatWeight(totalWeight) + ' کیلو';
+
+                if (totalWeight >= BASKET_MIN_WEIGHT) {
+                    basketWeightBadge.textContent = '✅ ' + formatWeight(totalWeight) + ' / ۲.۵ کیلو';
+                    basketWeightBadge.classList.add('complete');
+                    basketRemaining.className = 'complete-msg';
+                    basketRemaining.textContent = '🎉 حد نصاب تکمیل شد!';
+                } else {
+                    const remaining = BASKET_MIN_WEIGHT - totalWeight;
+                    basketWeightBadge.textContent = formatWeight(totalWeight) + ' / ۲.۵ کیلو';
+                    basketWeightBadge.classList.remove('complete');
+                    basketRemaining.className = 'remaining';
+                    basketRemaining.textContent = formatWeight(remaining) + ' کیلو مونده';
+                }
+
+                return totalWeight;
+            }
+
             function updateSummary() {
-                let totalPrice = 0;
-                let totalCal = 0;
-                let totalCount = 0;
+                let totalPrice = 0, totalCal = 0, totalCount = 0;
                 const selectedItems = [];
 
                 items.forEach(item => {
@@ -1193,24 +1146,23 @@
                         totalPrice += price * qty;
                         totalCal += cal * qty;
                         totalCount += qty;
-
                         selectedItems.push({
                             name: item.dataset.name,
                             unit: item.dataset.unit,
                             qty: qty,
                             price: price,
                             cal: cal,
-                            lineTotal: price * qty
+                            lineTotal: price * qty,
+                            isBasket: item.dataset.basket === 'true'
                         });
                     }
                 });
 
+                const basketWeight = updateBasket();
+
                 totalItemsDisplay.innerHTML = `<span>${toPersianNumber(totalCount)} مورد</span>
-                    <span class="cal-badge" id="totalCaloriesDisplay">${toPersianNumber(totalCal)} کالری</span>`;
-
+                    <span class="cal-badge">${toPersianNumber(totalCal)} کالری</span>`;
                 totalPriceDisplay.innerHTML = totalPrice.toLocaleString('fa-IR') + ' <span>تومان</span>';
-
-                // به‌روزرسانی فاکتور نهایی
                 finalItemCount.textContent = toPersianNumber(totalCount) + ' مورد';
 
                 if (selectedItems.length === 0) {
@@ -1221,7 +1173,8 @@
                     text += '🍃 فاکتور نهایی ماماسیس 🍃\n';
                     text += '─────────────────────\n';
                     selectedItems.forEach(item => {
-                        text += `🟣 ${item.name} (${item.unit})\n`;
+                        const basketMark = item.isBasket ? '🧺 ' : '';
+                        text += `${basketMark}${item.name} (${item.unit})\n`;
                         text += `   تعداد: ${toPersianNumber(item.qty)} × ${item.price.toLocaleString('fa-IR')} ت\n`;
                         text += `   جمع: ${item.lineTotal.toLocaleString('fa-IR')} ت | کالری: ${toPersianNumber(item.cal * item.qty)}\n`;
                         text += '─────────────────────\n';
@@ -1229,6 +1182,17 @@
                     text += `📦 تعداد کل: ${toPersianNumber(totalCount)} مورد\n`;
                     text += `🔥 کالری کل: ${toPersianNumber(totalCal)}\n`;
                     text += `💰 مبلغ کل: ${totalPrice.toLocaleString('fa-IR')} تومان\n`;
+
+                    if (basketWeight > 0) {
+                        text += '🧺 ─── زنبیل ───\n';
+                        text += `وزن زنبیل: ${formatWeight(basketWeight)} از ۲.۵ کیلو\n`;
+                        if (basketWeight >= BASKET_MIN_WEIGHT) {
+                            text += '✅ حد نصاب زنبیل تکمیل شد!\n';
+                        } else {
+                            text += `⏳ ${formatWeight(BASKET_MIN_WEIGHT - basketWeight)} کیلو مونده به حد نصاب\n`;
+                        }
+                    }
+
                     text += '─────────────────────\n';
                     text += '💳 کارت مقصد:\n';
                     text += '6037-9982-2975-7330\n';
@@ -1236,19 +1200,13 @@
                     text += '─────────────────────\n';
                     text += '✅ محصولات با گوشت تازه کشتار روز\n';
                     text += '📈 قیمت‌ها با نوسان بازار تغییر می‌کند';
-
                     finalInvoiceBody.textContent = text;
                     copyFinalBtn.disabled = false;
                 }
             }
 
-            // انتخاب رندوم با محدودیت بودجه
-            function randomSelect() {
-                items.forEach(item => {
-                    setQty(item, 0);
-                });
-
-                const budget = parseInt(budgetInput.value, 10);
+            function randomSelect(budget) {
+                items.forEach(item => setQty(item, 0));
 
                 if (!budget || budget <= 0) {
                     showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید');
@@ -1267,13 +1225,9 @@
                     });
                 });
 
-                function getMinQty(data) {
-                    return data.isNumeric ? 2 : 1;
-                }
+                function getMinQty(data) { return data.isNumeric ? 2 : 1; }
 
-                let remaining = budget;
-                let selectedCount = 0;
-                let attempts = 0;
+                let remaining = budget, selectedCount = 0, attempts = 0;
                 const maxAttempts = 300;
 
                 while (attempts < maxAttempts && remaining > 0) {
@@ -1283,17 +1237,12 @@
                         if (currentQty < minQty) return true;
                         return item.price <= remaining && item.price > 0;
                     });
-
                     if (available.length === 0) break;
 
                     const underMin = available.filter(item => getQty(item.element) < getMinQty(item));
-
-                    let chosen;
-                    if (underMin.length > 0) {
-                        chosen = underMin[Math.floor(Math.random() * underMin.length)];
-                    } else {
-                        chosen = available[Math.floor(Math.random() * available.length)];
-                    }
+                    let chosen = underMin.length > 0
+                        ? underMin[Math.floor(Math.random() * underMin.length)]
+                        : available[Math.floor(Math.random() * available.length)];
 
                     const currentQty = getQty(chosen.element);
                     const minQty = getMinQty(chosen);
@@ -1316,65 +1265,106 @@
                             selectedCount++;
                         }
                     }
-
                     attempts++;
                 }
 
                 if (selectedCount === 0) {
-                    const cheapest = itemData.reduce((min, item) => 
-                        item.price < min.price ? item : min, itemData[0]);
+                    const cheapest = itemData.reduce((min, item) => item.price < min.price ? item : min, itemData[0]);
                     if (cheapest && cheapest.price <= budget) {
                         const minQty = getMinQty(cheapest);
-                        const cost = minQty * cheapest.price;
-                        if (cost <= budget) {
+                        if (minQty * cheapest.price <= budget) {
                             setQty(cheapest.element, minQty);
                             selectedCount = minQty;
-                        } else {
-                            showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
-                        }
-                    } else {
-                        showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
-                    }
+                        } else showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
+                    } else showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
                 }
 
                 updateSummary();
-
-                if (selectedCount > 0) {
-                    showToast(`🎲 ${toPersianNumber(selectedCount)} محصول انتخاب شد`);
-                }
+                if (selectedCount > 0) showToast(`🎲 ${toPersianNumber(selectedCount)} محصول انتخاب شد`);
             }
 
-            // کپی شماره کارت
+            // ============ پاپ‌آپ ============
+            let modalOpen = false;
+
+            function openBudgetModal() {
+                if (modalOpen) return;
+                modalOpen = true;
+                budgetModal.classList.add('active');
+                modalBudgetInput.value = '';
+                setTimeout(() => modalBudgetInput.focus(), 300);
+            }
+
+            function closeBudgetModal() {
+                if (!modalOpen) return;
+                modalOpen = false;
+                budgetModal.classList.remove('active');
+                modalBudgetInput.blur();
+            }
+
+            function formatNumberInput(val) {
+                const digits = val.replace(/[^0-9]/g, '');
+                if (!digits) return '';
+                return parseInt(digits, 10).toLocaleString('en-US');
+            }
+
+            modalBudgetInput.addEventListener('input', function() {
+                this.value = formatNumberInput(this.value);
+            });
+
+            modalBudgetInput.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    confirmBudget();
+                }
+            });
+
+            function confirmBudget() {
+                const raw = modalBudgetInput.value.replace(/[^0-9]/g, '');
+                const budget = parseInt(raw, 10);
+                if (!budget || budget <= 0) {
+                    showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید');
+                    return;
+                }
+                closeBudgetModal();
+                setTimeout(() => randomSelect(budget), 250);
+            }
+
+            modalConfirmBtn.addEventListener('click', confirmBudget);
+            modalCancelBtn.addEventListener('click', closeBudgetModal);
+            budgetModal.addEventListener('click', function(e) {
+                if (e.target === budgetModal) closeBudgetModal();
+            });
+
+            quickBudgetBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const val = parseInt(this.dataset.budget, 10);
+                    modalBudgetInput.value = val.toLocaleString('en-US');
+                    modalBudgetInput.focus();
+                });
+            });
+
+            randomBtn.addEventListener('click', openBudgetModal);
+            randomAgainBtn.addEventListener('click', openBudgetModal);
+
+            // ============ کپی ============
             function copyCardNumber() {
                 const rawNumber = cardNumberEl.textContent.replace(/[^0-9]/g, '');
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(rawNumber).then(() => {
-                        showToast('📋 شماره کارت کپی شد');
-                    }).catch(() => {
-                        fallbackCopy(rawNumber, '📋 شماره کارت کپی شد');
-                    });
-                } else {
-                    fallbackCopy(rawNumber, '📋 شماره کارت کپی شد');
-                }
+                    navigator.clipboard.writeText(rawNumber).then(() => showToast('📋 شماره کارت کپی شد'))
+                        .catch(() => fallbackCopy(rawNumber, '📋 شماره کارت کپی شد'));
+                } else fallbackCopy(rawNumber, '📋 شماره کارت کپی شد');
             }
 
-            // کپی فاکتور نهایی
             function copyFinalInvoice() {
                 const text = finalInvoiceBody.textContent;
                 if (!text || text.trim() === '' || finalInvoiceBody.querySelector('.empty-state')) {
                     showToast('⚠️ فاکتوری برای کپی وجود ندارد');
                     return;
                 }
-
                 if (navigator.clipboard && navigator.clipboard.writeText) {
-                    navigator.clipboard.writeText(text).then(() => {
-                        showToast('📋 فاکتور نهایی کپی شد - برای ادمین ارسال کنید');
-                    }).catch(() => {
-                        fallbackCopy(text, '📋 فاکتور نهایی کپی شد');
-                    });
-                } else {
-                    fallbackCopy(text, '📋 فاکتور نهایی کپی شد');
-                }
+                    navigator.clipboard.writeText(text).then(() => showToast('📋 فاکتور کپی شد - برای ادمین بفرستید'))
+                        .catch(() => fallbackCopy(text, '📋 فاکتور کپی شد'));
+                } else fallbackCopy(text, '📋 فاکتور کپی شد');
             }
 
             function fallbackCopy(text, successMsg) {
@@ -1387,45 +1377,193 @@
                 try {
                     document.execCommand('copy');
                     showToast(successMsg);
-                } catch (err) {
-                    showToast('⚠️ کپی نشد، دستی انتخاب کنید');
-                }
+                } catch (err) { showToast('⚠️ کپی نشد، دستی انتخاب کنید'); }
                 document.body.removeChild(textarea);
             }
 
-            // رویدادها
+            // ============ رویدادها ============
             items.forEach(item => {
                 const plusBtn = item.querySelector('.qty-btn.plus');
                 const minusBtn = item.querySelector('.qty-btn.minus');
-
-                plusBtn.addEventListener('click', function() {
-                    const qty = getQty(item);
-                    setQty(item, qty + 1);
-                });
-
-                minusBtn.addEventListener('click', function() {
-                    const qty = getQty(item);
-                    setQty(item, qty - 1);
-                });
+                plusBtn.addEventListener('click', () => setQty(item, getQty(item) + 1));
+                minusBtn.addEventListener('click', () => setQty(item, getQty(item) - 1));
             });
 
-            clearBtn.addEventListener('click', function() {
-                items.forEach(item => {
-                    setQty(item, 0);
-                });
+            clearBtn.addEventListener('click', () => {
+                items.forEach(item => setQty(item, 0));
                 showToast('🧹 همه انتخاب‌ها پاک شد');
             });
 
-            randomBtn.addEventListener('click', randomSelect);
-            randomAgainBtn.addEventListener('click', randomSelect);
             copyCardBtn.addEventListener('click', copyCardNumber);
             copyFinalBtn.addEventListener('click', copyFinalInvoice);
 
-            budgetInput.addEventListener('input', function(e) {
-                this.value = this.value.replace(/[^0-9]/g, '');
+            updateSummary();
+
+            // ============ تور راهنما ============
+            const TOUR_KEY = 'mamasis_tour_v2';
+
+            const tourSteps = [
+                { target: '[data-tour="header"]', title: '🍃 به ماماسیس خوش آمدید!', desc: 'اینجا می‌تونید محصولات خانگی تازه انتخاب کنید و فاکتور نهایی بگیرید. سریع همه‌چیز رو نشونتون می‌دم.', arrow: 'bottom' },
+                { target: '[data-tour="budget"]', title: '💰 خرید هوشمند با بودجه', desc: 'دکمه 🎲 رندوم رو بزنید، بودجه‌تون رو وارد کنید و سیستم خودش یه سبد متناسب براتون می‌چینه.', arrow: 'bottom' },
+                { target: '[data-tour="first-item"]', title: '🛒 انتخاب محصولات', desc: 'با دکمه‌های + و − تعداد هر محصول رو تنظیم کنید. قیمت و کالری هر آیتم زنده به‌روز می‌شه.', arrow: 'bottom' },
+                { target: '[data-tour="basket-category"]', title: '🧺 زنبیل رزرو', desc: 'محصولات کالباس و ژامبون برچسب زنبیل دارن! این یعنی با رسیدن به ۲.۵ کیلو، تولید شروع می‌شه و می‌تونید با چند مشترک جمع بشید.', arrow: 'bottom' },
+                { target: '[data-tour="basket-panel"]', title: '📊 نوار پیشرفت زنبیل', desc: 'اینجا می‌بینید چقدر به حد نصاب ۲.۵ کیلو مونده. با سبز شدن نوار، سفارش شما وارد مرحله تولید می‌شه!', arrow: 'top' },
+                { target: '[data-tour="summary"]', title: '📊 جمع کل زنده', desc: 'اینجا تعداد کل، کالری کل و مبلغ نهایی رو می‌بینید. با 🧹 همه انتخاب‌ها پاک می‌شن.', arrow: 'top' },
+                { target: '[data-tour="final"]', title: '📋 فاکتور نهایی', desc: 'بعد از انتخاب، اینجا فاکتور کامل با جزئیات زنبیل نمایش داده می‌شه. با دکمه کپی برای ادمین بفرستید!', arrow: 'top' }
+            ];
+
+            const tourOverlay = document.getElementById('tourOverlay');
+            const tourSpotlight = document.getElementById('tourSpotlight');
+            const tourTooltip = document.getElementById('tourTooltip');
+            const tourStepBadge = document.getElementById('tourStepBadge');
+            const tourTitle = document.getElementById('tourTitle');
+            const tourDesc = document.getElementById('tourDesc');
+            const tourNextBtn = document.getElementById('tourNextBtn');
+            const tourSkipBtn = document.getElementById('tourSkipBtn');
+            const tourDots = document.getElementById('tourDots');
+            const tourRestartBtn = document.getElementById('tourRestartBtn');
+
+            let currentStep = 0;
+            let tourActive = false;
+
+            tourSteps.forEach((_, i) => {
+                const dot = document.createElement('div');
+                dot.className = 'tour-dot' + (i === 0 ? ' active' : '');
+                tourDots.appendChild(dot);
             });
 
-            updateSummary();
+            function positionTooltip(targetEl) {
+                const rect = targetEl.getBoundingClientRect();
+                const tooltipWidth = Math.min(300, window.innerWidth - 40);
+                tourTooltip.style.width = tooltipWidth + 'px';
+
+                let top, arrowClass;
+                if (rect.bottom + 220 < window.innerHeight || rect.top < 100) {
+                    top = rect.bottom + 18;
+                    arrowClass = 'arrow-top';
+                } else {
+                    top = rect.top - 18 - tourTooltip.offsetHeight;
+                    arrowClass = 'arrow-bottom';
+                }
+
+                let left = rect.left + rect.width / 2 - tooltipWidth / 2;
+                left = Math.max(15, Math.min(left, window.innerWidth - tooltipWidth - 15));
+
+                tourTooltip.style.top = top + 'px';
+                tourTooltip.style.left = left + 'px';
+                tourTooltip.className = 'tour-tooltip active ' + arrowClass;
+
+                const arrowLeft = rect.left + rect.width / 2 - left;
+                const styleEl = tourTooltip.querySelector('style') || document.createElement('style');
+                if (!styleEl.parentNode) tourTooltip.appendChild(styleEl);
+                styleEl.textContent = `#tourTooltip::before { left: ${Math.max(20, Math.min(arrowLeft, tooltipWidth - 20))}px; margin-left: -7px; }`;
+            }
+
+            function positionSpotlight(targetEl) {
+                const rect = targetEl.getBoundingClientRect();
+                const padding = 8;
+                tourSpotlight.style.top = (rect.top - padding) + 'px';
+                tourSpotlight.style.left = (rect.left - padding) + 'px';
+                tourSpotlight.style.width = (rect.width + padding * 2) + 'px';
+                tourSpotlight.style.height = (rect.height + padding * 2) + 'px';
+                tourSpotlight.classList.add('active');
+            }
+
+            function showStep(index) {
+                if (index < 0 || index >= tourSteps.length) return;
+                currentStep = index;
+                const step = tourSteps[index];
+                const targetEl = document.querySelector(step.target);
+                if (!targetEl) return;
+
+                const rect = targetEl.getBoundingClientRect();
+                if (rect.top < 80 || rect.bottom > window.innerHeight - 80) {
+                    targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    setTimeout(() => {
+                        positionSpotlight(targetEl);
+                        positionTooltip(targetEl);
+                    }, 400);
+                } else {
+                    positionSpotlight(targetEl);
+                    positionTooltip(targetEl);
+                }
+
+                tourStepBadge.textContent = `${toPersianNumber(index + 1)} از ${toPersianNumber(tourSteps.length)}`;
+                tourTitle.textContent = step.title;
+                tourDesc.textContent = step.desc;
+
+                if (index === tourSteps.length - 1) tourNextBtn.innerHTML = '✓ متوجه شدم';
+                else tourNextBtn.innerHTML = 'بعدی ←';
+
+                tourDots.querySelectorAll('.tour-dot').forEach((dot, i) => {
+                    dot.classList.toggle('active', i === index);
+                });
+            }
+
+            function startTour() {
+                if (tourActive) return;
+                tourActive = true;
+                currentStep = 0;
+                tourOverlay.classList.add('active');
+                tourTooltip.classList.add('active');
+                setTimeout(() => showStep(0), 100);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            function endTour() {
+                tourActive = false;
+                tourOverlay.classList.remove('active');
+                tourTooltip.classList.remove('active');
+                tourSpotlight.classList.remove('active');
+                try { localStorage.setItem(TOUR_KEY, 'true'); } catch (e) {}
+            }
+
+            tourNextBtn.addEventListener('click', () => {
+                if (currentStep >= tourSteps.length - 1) {
+                    endTour();
+                    showToast('🎉 تور تموم شد! حالا خودتون امتحان کنید');
+                } else showStep(currentStep + 1);
+            });
+
+            tourSkipBtn.addEventListener('click', () => {
+                endTour();
+                showToast('با دکمه 🎓 هر وقت خواستید تور رو دوباره ببینید');
+            });
+
+            tourRestartBtn.addEventListener('click', startTour);
+            tourOverlay.addEventListener('click', endTour);
+
+            let resizeTimeout;
+            window.addEventListener('resize', () => {
+                clearTimeout(resizeTimeout);
+                resizeTimeout = setTimeout(() => { if (tourActive) showStep(currentStep); }, 150);
+            });
+
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                if (!tourActive) return;
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    const step = tourSteps[currentStep];
+                    const targetEl = document.querySelector(step.target);
+                    if (targetEl) {
+                        positionSpotlight(targetEl);
+                        positionTooltip(targetEl);
+                    }
+                }, 100);
+            }, { passive: true });
+
+            // Esc بستن
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    if (modalOpen) closeBudgetModal();
+                    if (tourActive) endTour();
+                }
+            });
+
+            let hasSeenTour = false;
+            try { hasSeenTour = localStorage.getItem(TOUR_KEY) === 'true'; } catch (e) {}
+            if (!hasSeenTour) setTimeout(startTour, 900);
         })();
     </script>
 </body>
