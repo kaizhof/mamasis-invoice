@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
     <meta name="description" content="پیش‌فاکتور هوشمند محصولات خانگی ماماسیس">
     <meta name="theme-color" content="#d45a2b">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🍃</text></svg>">
     <title>ماماسیس | فاکتور هوشمند</title>
     <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
@@ -35,7 +38,7 @@
         }
 
         body {
-            font-family: 'Vazirmatn', sans-serif;
+            font-family: 'Vazirmatn', Tahoma, Arial, sans-serif;
             background: linear-gradient(160deg, #fdf6f0 0%, #f9ece3 40%, #f5e0d2 100%);
             background-attachment: fixed;
             padding: 1rem 0.7rem 2rem;
@@ -57,7 +60,6 @@
             border: 1px solid rgba(255, 245, 235, 0.9);
         }
 
-        /* ====== هدر ====== */
         .header { text-align: center; margin-bottom: 1.5rem; }
         .header h1 {
             font-size: 1.7rem; font-weight: 800; color: var(--brown);
@@ -80,7 +82,6 @@
             font-size: 0.72rem; color: var(--primary-dark); font-weight: 500;
         }
 
-        /* ====== ابزار بودجه ====== */
         .budget-tool {
             background: linear-gradient(135deg, #fff9f4, #fdf0e8);
             border-radius: var(--radius-md);
@@ -108,7 +109,7 @@
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white; border: none;
             padding: 0.7rem 1.3rem; border-radius: 30px;
-            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.88rem;
+            font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.88rem;
             cursor: pointer; transition: all 0.2s;
             display: flex; align-items: center; gap: 6px;
             white-space: nowrap;
@@ -117,7 +118,6 @@
         .btn-random:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35); }
         .btn-random:active { transform: scale(0.96); }
 
-        /* ====== دسته‌بندی ====== */
         .category { margin-bottom: 1.6rem; }
         .category-title {
             font-size: 1.1rem; font-weight: 800; color: var(--brown-2);
@@ -174,14 +174,13 @@
         .item-meta .cal::before { content: "🔥 "; font-size: 0.7rem; }
         .item-meta .price-unit { color: var(--primary-dark); font-weight: 700; font-size: 0.88rem; }
 
-        /* ====== دکمه‌های کم و زیاد ====== */
         .qty-controls { display: flex; align-items: center; gap: 5px; flex-shrink: 0; }
         .qty-btn {
             width: 34px; height: 34px; border-radius: 50%;
             border: 1.5px solid #e6cdbb; background: #fff; color: var(--primary-dark);
             font-size: 1.2rem; font-weight: 700; cursor: pointer;
             display: flex; align-items: center; justify-content: center;
-            transition: all 0.15s; font-family: 'Vazirmatn', sans-serif;
+            transition: all 0.15s; font-family: 'Vazirmatn', Tahoma, sans-serif;
             line-height: 1; padding: 0;
         }
         .qty-btn:hover:not(:disabled) { background: #fdf2ea; }
@@ -205,7 +204,6 @@
         }
         .item-total small { font-weight: 400; font-size: 0.65rem; color: #a18170; }
 
-        /* ====== توضیحات ====== */
         .note-box {
             background: linear-gradient(135deg, #fcf2ea, #fae8dc);
             border-radius: var(--radius-sm);
@@ -216,7 +214,6 @@
         .note-box p { display: flex; align-items: flex-start; gap: 6px; margin-bottom: 0.3rem; }
         .note-box p:last-child { margin-bottom: 0; }
 
-        /* ====== کارت پرداخت ====== */
         .payment-card {
             background: linear-gradient(135deg, #2c3e50, #34495e);
             border-radius: var(--radius-md);
@@ -245,7 +242,7 @@
         .btn-copy {
             background: rgba(255,255,255,0.16); border: 1px solid rgba(255,255,255,0.28);
             color: #ecf0f1; padding: 0.35rem 0.9rem; border-radius: 30px;
-            font-family: 'Vazirmatn', sans-serif; font-size: 0.72rem;
+            font-family: 'Vazirmatn', Tahoma, sans-serif; font-size: 0.72rem;
             cursor: pointer; transition: all 0.2s;
             display: flex; align-items: center; gap: 4px;
             white-space: nowrap; flex-shrink: 0; font-weight: 600;
@@ -254,7 +251,6 @@
         .card-owner { font-size: 0.8rem; color: #ecf0f1; display: flex; align-items: center; gap: 6px; }
         .card-owner span { color: #bdc3c7; font-size: 0.72rem; }
 
-        /* ====== جمع کل ====== */
         .summary-sticky {
             position: sticky; bottom: 0.5rem;
             background: linear-gradient(135deg, #f7ede4, #fce6d8);
@@ -290,14 +286,13 @@
         .btn-clear {
             flex: 1; background: #fff; border: 1.5px solid #e6cdbb;
             color: var(--brown-2); padding: 0.6rem 0.9rem; border-radius: 40px;
-            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.8rem;
+            font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.8rem;
             cursor: pointer; transition: all 0.2s;
             display: flex; align-items: center; justify-content: center; gap: 5px;
         }
         .btn-clear:hover { background: #fae6db; }
         .btn-clear:active { transform: scale(0.96); }
 
-        /* ====== زنبیل ====== */
         .basket-panel {
             background: linear-gradient(135deg, #eaf7f1, #dff0e8);
             border-radius: var(--radius-md);
@@ -372,7 +367,6 @@
         .basket-stats .remaining { color: #c0392b; }
         .basket-stats .complete-msg { color: #27ae60; font-weight: 700; }
 
-        /* ====== فاکتور نهایی ====== */
         .final-invoice-card {
             max-width: 620px; width: 100%;
             background: linear-gradient(135deg, #ffffff, #fef8f3);
@@ -408,7 +402,7 @@
         .btn-copy-final {
             flex: 1; background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white; border: none; padding: 0.75rem 1rem; border-radius: 40px;
-            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.85rem;
+            font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.85rem;
             cursor: pointer; transition: all 0.2s;
             display: flex; align-items: center; justify-content: center; gap: 6px;
             box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
@@ -417,7 +411,6 @@
         .btn-copy-final:active { transform: scale(0.96); }
         .btn-copy-final:disabled { opacity: 0.5; cursor: not-allowed; }
 
-        /* ====== پاورقی ====== */
         .footer-note {
             text-align: center; margin-top: 1rem; font-size: 0.72rem; color: #ab9487;
             padding-top: 0.8rem; border-top: 1px dashed #e6d6cb;
@@ -427,7 +420,6 @@
             background: rgba(241, 228, 219, 0.8); padding: 0.15rem 0.8rem; border-radius: 20px;
         }
 
-        /* ====== توست ====== */
         .toast {
             position: fixed; bottom: 20px; left: 50%;
             transform: translateX(-50%) translateY(100px);
@@ -441,7 +433,6 @@
         }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        /* ====== پاپ‌آپ ورود عدد ====== */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(30, 20, 15, 0.7);
             z-index: 3000; opacity: 0; pointer-events: none;
@@ -486,7 +477,7 @@
         .modal-input {
             width: 100%; padding: 0.9rem 1rem 0.9rem 3rem;
             border-radius: 16px; border: 2px solid var(--border);
-            background: #fff; font-family: 'Vazirmatn', sans-serif;
+            background: #fff; font-family: 'Vazirmatn', Tahoma, sans-serif;
             font-size: 1.1rem; font-weight: 700; color: var(--text);
             direction: ltr; text-align: left; outline: none;
             transition: all 0.2s;
@@ -509,19 +500,17 @@
             flex: 1; min-width: calc(33% - 6px);
             background: #fdf2ea; border: 1.5px solid #f0d5c2;
             color: var(--primary-dark); padding: 0.5rem 0.4rem;
-            border-radius: 12px; font-family: 'Vazirmatn', sans-serif;
+            border-radius: 12px; font-family: 'Vazirmatn', Tahoma, sans-serif;
             font-size: 0.72rem; font-weight: 700; cursor: pointer;
             transition: all 0.15s;
         }
         .quick-budget-btn:hover { background: #fae6db; border-color: var(--primary); }
         .quick-budget-btn:active { transform: scale(0.95); }
 
-        .modal-actions {
-            display: flex; gap: 8px;
-        }
+        .modal-actions { display: flex; gap: 8px; }
         .modal-btn {
             flex: 1; padding: 0.75rem 1rem; border-radius: 40px;
-            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.85rem;
+            font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.85rem;
             cursor: pointer; transition: all 0.2s; border: none;
             display: flex; align-items: center; justify-content: center; gap: 5px;
         }
@@ -535,7 +524,6 @@
             border: 1.5px solid #e6cdbb;
         }
 
-        /* ====== تور راهنما ====== */
         .tour-overlay {
             position: fixed; inset: 0; background: rgba(30, 20, 15, 0.75);
             z-index: 4000; opacity: 0; pointer-events: none;
@@ -591,7 +579,7 @@
         .tour-actions { display: flex; gap: 0.5rem; }
         .tour-btn {
             flex: 1; padding: 0.55rem 0.9rem; border-radius: 30px;
-            font-family: 'Vazirmatn', sans-serif; font-weight: 700; font-size: 0.78rem;
+            font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.78rem;
             cursor: pointer; transition: all 0.2s; border: none;
             display: flex; align-items: center; justify-content: center; gap: 4px;
         }
@@ -680,7 +668,7 @@
                 <strong>خرید هوشمند با بودجه</strong>
                 <small>بودجه‌تون رو بگید، سبد رو براتون می‌چینیم</small>
             </div>
-            <button class="btn-random" id="randomBtn">
+            <button class="btn-random" id="randomBtn" type="button">
                 <span>🎲</span> رندوم
             </button>
         </div>
@@ -697,9 +685,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -712,9 +700,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -727,9 +715,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -742,9 +730,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -757,16 +745,15 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
             </div>
         </div>
 
-        <!-- کالباس و ژامبون‌ها - با زنبیل -->
         <div class="category" data-tour="basket-category">
             <div class="category-title">
                 کالباس و ژامبون‌ها
@@ -783,9 +770,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus">+</button>
+                        <button class="qty-btn plus basket-plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -798,9 +785,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus">+</button>
+                        <button class="qty-btn plus basket-plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -813,9 +800,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus">+</button>
+                        <button class="qty-btn plus basket-plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -828,16 +815,15 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus basket-plus">+</button>
+                        <button class="qty-btn plus basket-plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
             </div>
         </div>
 
-        <!-- پنل زنبیل -->
         <div class="basket-panel" data-tour="basket-panel">
             <div class="basket-header">
                 <div class="basket-title">🧺 زنبیل رزرو</div>
@@ -867,9 +853,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -882,9 +868,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -897,9 +883,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -912,9 +898,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -927,9 +913,9 @@
                         </div>
                     </div>
                     <div class="qty-controls">
-                        <button class="qty-btn minus" disabled>−</button>
+                        <button class="qty-btn minus" type="button" disabled>−</button>
                         <span class="qty-value">۰</span>
-                        <button class="qty-btn plus">+</button>
+                        <button class="qty-btn plus" type="button">+</button>
                     </div>
                     <div class="item-total">۰ <small>ت</small></div>
                 </div>
@@ -946,7 +932,7 @@
             <div class="card-label">💳 واریز به کارت مقصد</div>
             <div class="card-number-row">
                 <div class="card-number" id="cardNumber">6037-9982-2975-7330</div>
-                <button class="btn-copy" id="copyCardBtn">
+                <button class="btn-copy" id="copyCardBtn" type="button">
                     <span>📋</span> کپی
                 </button>
             </div>
@@ -964,10 +950,10 @@
                 <div class="total-price" id="totalPriceDisplay">۰ <span>تومان</span></div>
             </div>
             <div class="summary-actions">
-                <button class="btn-clear" id="clearAllBtn">
+                <button class="btn-clear" id="clearAllBtn" type="button">
                     <span>🧹</span> پاک کردن
                 </button>
-                <button class="btn-clear" id="randomAgainBtn" style="border-color:var(--primary); color:var(--primary-dark);">
+                <button class="btn-clear" id="randomAgainBtn" type="button" style="border-color:var(--primary); color:var(--primary-dark);">
                     <span>🎲</span> رندوم مجدد
                 </button>
             </div>
@@ -987,7 +973,7 @@
             <div class="empty-state">هنوز محصولی انتخاب نشده است...</div>
         </div>
         <div class="final-actions">
-            <button class="btn-copy-final" id="copyFinalBtn" disabled>
+            <button class="btn-copy-final" id="copyFinalBtn" type="button" disabled>
                 <span>📋</span> کپی فاکتور برای ارسال به ادمین
             </button>
         </div>
@@ -995,7 +981,6 @@
 
     <div class="toast" id="toast"></div>
 
-    <!-- پاپ‌آپ ورود بودجه -->
     <div class="modal-overlay" id="budgetModal">
         <div class="modal-card">
             <div class="modal-icon">🎲</div>
@@ -1006,21 +991,21 @@
                 <span class="modal-input-suffix">تومان</span>
             </div>
             <div class="modal-quick-budgets">
-                <button class="quick-budget-btn" data-budget="1000000">۱ میلیون</button>
-                <button class="quick-budget-btn" data-budget="2000000">۲ میلیون</button>
-                <button class="quick-budget-btn" data-budget="3000000">۳ میلیون</button>
-                <button class="quick-budget-btn" data-budget="5000000">۵ میلیون</button>
-                <button class="quick-budget-btn" data-budget="10000000">۱۰ میلیون</button>
-                <button class="quick-budget-btn" data-budget="20000000">۲۰ میلیون</button>
+                <button class="quick-budget-btn" type="button" data-budget="1000000">۱ میلیون</button>
+                <button class="quick-budget-btn" type="button" data-budget="2000000">۲ میلیون</button>
+                <button class="quick-budget-btn" type="button" data-budget="3000000">۳ میلیون</button>
+                <button class="quick-budget-btn" type="button" data-budget="5000000">۵ میلیون</button>
+                <button class="quick-budget-btn" type="button" data-budget="10000000">۱۰ میلیون</button>
+                <button class="quick-budget-btn" type="button" data-budget="20000000">۲۰ میلیون</button>
             </div>
             <div class="modal-actions">
-                <button class="modal-btn modal-btn-ghost" id="modalCancelBtn">انصراف</button>
-                <button class="modal-btn modal-btn-primary" id="modalConfirmBtn">🎲 بچین!</button>
+                <button class="modal-btn modal-btn-ghost" id="modalCancelBtn" type="button">انصراف</button>
+                <button class="modal-btn modal-btn-primary" id="modalConfirmBtn" type="button">🎲 بچین!</button>
             </div>
         </div>
     </div>
 
-    <button class="tour-restart-btn" id="tourRestartBtn" title="راهنمای استفاده">🎓</button>
+    <button class="tour-restart-btn" id="tourRestartBtn" type="button" title="راهنمای استفاده">🎓</button>
 
     <div class="tour-overlay" id="tourOverlay"></div>
     <div class="tour-spotlight" id="tourSpotlight"></div>
@@ -1029,103 +1014,607 @@
         <div class="tour-title" id="tourTitle"></div>
         <div class="tour-desc" id="tourDesc"></div>
         <div class="tour-actions">
-            <button class="tour-btn tour-btn-ghost" id="tourSkipBtn">رد کردن</button>
-            <button class="tour-btn tour-btn-primary" id="tourNextBtn">بعدی ←</button>
+            <button class="tour-btn tour-btn-ghost" id="tourSkipBtn" type="button">رد کردن</button>
+            <button class="tour-btn tour-btn-primary" id="tourNextBtn" type="button">بعدی ←</button>
         </div>
         <div class="tour-dots" id="tourDots"></div>
     </div>
 
     <script>
-        (function() {
-            // ============ عناصر ============
-            const items = document.querySelectorAll('.item');
-            const totalItemsDisplay = document.getElementById('totalItemsDisplay');
-            const totalPriceDisplay = document.getElementById('totalPriceDisplay');
-            const clearBtn = document.getElementById('clearAllBtn');
-            const randomBtn = document.getElementById('randomBtn');
-            const randomAgainBtn = document.getElementById('randomAgainBtn');
-            const toast = document.getElementById('toast');
-            const cardNumberEl = document.getElementById('cardNumber');
-            const copyCardBtn = document.getElementById('copyCardBtn');
-            const finalInvoiceBody = document.getElementById('finalInvoiceBody');
-            const finalItemCount = document.getElementById('finalItemCount');
-            const copyFinalBtn = document.getElementById('copyFinalBtn');
+    (function() {
+        'use strict';
 
-            const budgetModal = document.getElementById('budgetModal');
-            const modalBudgetInput = document.getElementById('modalBudgetInput');
-            const modalCancelBtn = document.getElementById('modalCancelBtn');
-            const modalConfirmBtn = document.getElementById('modalConfirmBtn');
-            const quickBudgetBtns = document.querySelectorAll('.quick-budget-btn');
+        // لاگ خطا برای دیباگ
+        window.addEventListener('error', function(e) {
+            console.error('[ماماسیس] خطا:', e.message, '| فایل:', e.filename, '| خط:', e.lineno);
+        });
 
-            const basketWeightBadge = document.getElementById('basketWeightBadge');
-            const basketProgressBar = document.getElementById('basketProgressBar');
-            const basketWeightText = document.getElementById('basketWeightText');
-            const basketRemaining = document.getElementById('basketRemaining');
+        // شروع پس از لود کامل DOM
+        function init() {
+            try {
+                // ============ عناصر ============
+                var items = document.querySelectorAll('.item');
+                var totalItemsDisplay = document.getElementById('totalItemsDisplay');
+                var totalPriceDisplay = document.getElementById('totalPriceDisplay');
+                var clearBtn = document.getElementById('clearAllBtn');
+                var randomBtn = document.getElementById('randomBtn');
+                var randomAgainBtn = document.getElementById('randomAgainBtn');
+                var toast = document.getElementById('toast');
+                var cardNumberEl = document.getElementById('cardNumber');
+                var copyCardBtn = document.getElementById('copyCardBtn');
+                var finalInvoiceBody = document.getElementById('finalInvoiceBody');
+                var finalItemCount = document.getElementById('finalItemCount');
+                var copyFinalBtn = document.getElementById('copyFinalBtn');
 
-            const BASKET_MIN_WEIGHT = 2.5; // کیلوگرم
+                var budgetModal = document.getElementById('budgetModal');
+                var modalBudgetInput = document.getElementById('modalBudgetInput');
+                var modalCancelBtn = document.getElementById('modalCancelBtn');
+                var modalConfirmBtn = document.getElementById('modalConfirmBtn');
+                var quickBudgetBtns = document.querySelectorAll('.quick-budget-btn');
 
-            function toPersianNumber(num) {
-                const persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
-                return num.toString().replace(/\d/g, (d) => persianDigits[d]);
-            }
+                var basketWeightBadge = document.getElementById('basketWeightBadge');
+                var basketProgressBar = document.getElementById('basketProgressBar');
+                var basketWeightText = document.getElementById('basketWeightText');
+                var basketRemaining = document.getElementById('basketRemaining');
 
-            function formatWeight(kg) {
-                if (kg === 0) return '۰';
-                return kg.toLocaleString('fa-IR', { maximumFractionDigits: 2 });
-            }
+                var BASKET_MIN_WEIGHT = 2.5;
 
-            let toastTimeout;
-            function showToast(msg) {
-                clearTimeout(toastTimeout);
-                toast.textContent = msg;
-                toast.classList.add('show');
-                toastTimeout = setTimeout(() => toast.classList.remove('show'), 2800);
-            }
+                // ============ ابزارها ============
+                var persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
+                function toPersianNumber(num) {
+                    return String(num).replace(/\d/g, function(d) { return persianDigits[d]; });
+                }
+                function toEnglishNumber(str) {
+                    return String(str).replace(/[۰-۹]/g, function(d) {
+                        return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d);
+                    });
+                }
+                function formatWeight(kg) {
+                    if (kg === 0) return '۰';
+                    return kg.toLocaleString('fa-IR', { maximumFractionDigits: 2 });
+                }
 
-            function getQty(item) {
-                return parseInt(item.querySelector('.qty-value').textContent.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d)), 10) || 0;
-            }
+                var toastTimeout;
+                function showToast(msg) {
+                    if (!toast) return;
+                    clearTimeout(toastTimeout);
+                    toast.textContent = msg;
+                    toast.classList.add('show');
+                    toastTimeout = setTimeout(function() {
+                        toast.classList.remove('show');
+                    }, 2800);
+                }
 
-            function setQty(item, qty) {
-                if (qty < 0) qty = 0;
-                const price = parseInt(item.dataset.price, 10) || 0;
-                const qtyValue = item.querySelector('.qty-value');
-                const minusBtn = item.querySelector('.qty-btn.minus');
-                const itemTotal = item.querySelector('.item-total');
+                function getQty(item) {
+                    var val = item.querySelector('.qty-value').textContent;
+                    return parseInt(toEnglishNumber(val), 10) || 0;
+                }
 
-                qtyValue.textContent = toPersianNumber(qty);
-                minusBtn.disabled = qty === 0;
-                itemTotal.innerHTML = (price * qty).toLocaleString('fa-IR') + ' <small>ت</small>';
+                function setQty(item, qty) {
+                    if (qty < 0) qty = 0;
+                    var price = parseInt(item.dataset.price, 10) || 0;
+                    var qtyValue = item.querySelector('.qty-value');
+                    var minusBtn = item.querySelector('.qty-btn.minus');
+                    var itemTotal = item.querySelector('.item-total');
 
-                if (qty > 0) item.classList.add('active');
-                else item.classList.remove('active');
+                    qtyValue.textContent = toPersianNumber(qty);
+                    minusBtn.disabled = qty === 0;
+                    itemTotal.innerHTML = (price * qty).toLocaleString('fa-IR') + ' <small>ت</small>';
+
+                    if (qty > 0) item.classList.add('active');
+                    else item.classList.remove('active');
+
+                    updateSummary();
+                }
+
+                function updateBasket() {
+                    var totalWeight = 0;
+                    items.forEach(function(item) {
+                        if (item.dataset.basket === 'true') {
+                            var qty = getQty(item);
+                            var weightPer = parseFloat(item.dataset.weight) || 0;
+                            totalWeight += qty * weightPer;
+                        }
+                    });
+
+                    var percent = Math.min((totalWeight / BASKET_MIN_WEIGHT) * 100, 100);
+                    if (basketProgressBar) basketProgressBar.style.width = percent + '%';
+                    if (basketWeightText) basketWeightText.textContent = 'وزن زنبیل: ' + formatWeight(totalWeight) + ' کیلو';
+
+                    if (basketWeightBadge && basketRemaining) {
+                        if (totalWeight >= BASKET_MIN_WEIGHT) {
+                            basketWeightBadge.textContent = '✅ ' + formatWeight(totalWeight) + ' / ۲.۵ کیلو';
+                            basketWeightBadge.classList.add('complete');
+                            basketRemaining.className = 'complete-msg';
+                            basketRemaining.textContent = '🎉 حد نصاب تکمیل شد!';
+                        } else {
+                            var remaining = BASKET_MIN_WEIGHT - totalWeight;
+                            basketWeightBadge.textContent = formatWeight(totalWeight) + ' / ۲.۵ کیلو';
+                            basketWeightBadge.classList.remove('complete');
+                            basketRemaining.className = 'remaining';
+                            basketRemaining.textContent = formatWeight(remaining) + ' کیلو مونده';
+                        }
+                    }
+                    return totalWeight;
+                }
+
+                function updateSummary() {
+                    var totalPrice = 0, totalCal = 0, totalCount = 0;
+                    var selectedItems = [];
+
+                    items.forEach(function(item) {
+                        var qty = getQty(item);
+                        if (qty > 0) {
+                            var price = parseInt(item.dataset.price, 10) || 0;
+                            var cal = parseInt(item.dataset.cal, 10) || 0;
+                            totalPrice += price * qty;
+                            totalCal += cal * qty;
+                            totalCount += qty;
+                            selectedItems.push({
+                                name: item.dataset.name,
+                                unit: item.dataset.unit,
+                                qty: qty,
+                                price: price,
+                                cal: cal,
+                                lineTotal: price * qty,
+                                isBasket: item.dataset.basket === 'true'
+                            });
+                        }
+                    });
+
+                    var basketWeight = updateBasket();
+
+                    if (totalItemsDisplay) {
+                        totalItemsDisplay.innerHTML = '<span>' + toPersianNumber(totalCount) + ' مورد</span>' +
+                            '<span class="cal-badge">' + toPersianNumber(totalCal) + ' کالری</span>';
+                    }
+                    if (totalPriceDisplay) {
+                        totalPriceDisplay.innerHTML = totalPrice.toLocaleString('fa-IR') + ' <span>تومان</span>';
+                    }
+                    if (finalItemCount) finalItemCount.textContent = toPersianNumber(totalCount) + ' مورد';
+
+                    if (!finalInvoiceBody) return;
+
+                    if (selectedItems.length === 0) {
+                        finalInvoiceBody.innerHTML = '<div class="empty-state">هنوز محصولی انتخاب نشده است...</div>';
+                        if (copyFinalBtn) copyFinalBtn.disabled = true;
+                    } else {
+                        var text = '';
+                        text += '🍃 فاکتور نهایی ماماسیس 🍃\n';
+                        text += '─────────────────────\n';
+                        selectedItems.forEach(function(item) {
+                            var basketMark = item.isBasket ? '🧺 ' : '';
+                            text += basketMark + item.name + ' (' + item.unit + ')\n';
+                            text += '   تعداد: ' + toPersianNumber(item.qty) + ' × ' + item.price.toLocaleString('fa-IR') + ' ت\n';
+                            text += '   جمع: ' + item.lineTotal.toLocaleString('fa-IR') + ' ت | کالری: ' + toPersianNumber(item.cal * item.qty) + '\n';
+                            text += '─────────────────────\n';
+                        });
+                        text += '📦 تعداد کل: ' + toPersianNumber(totalCount) + ' مورد\n';
+                        text += '🔥 کالری کل: ' + toPersianNumber(totalCal) + '\n';
+                        text += '💰 مبلغ کل: ' + totalPrice.toLocaleString('fa-IR') + ' تومان\n';
+
+                        if (basketWeight > 0) {
+                            text += '🧺 ─── زنبیل ───\n';
+                            text += 'وزن زنبیل: ' + formatWeight(basketWeight) + ' از ۲.۵ کیلو\n';
+                            if (basketWeight >= BASKET_MIN_WEIGHT) {
+                                text += '✅ حد نصاب زنبیل تکمیل شد!\n';
+                            } else {
+                                text += '⏳ ' + formatWeight(BASKET_MIN_WEIGHT - basketWeight) + ' کیلو مونده به حد نصاب\n';
+                            }
+                        }
+
+                        text += '─────────────────────\n';
+                        text += '💳 کارت مقصد:\n';
+                        text += '6037-9982-2975-7330\n';
+                        text += 'به نام: ماندانا جهاني تكليمي\n';
+                        text += '─────────────────────\n';
+                        text += '✅ محصولات با گوشت تازه کشتار روز\n';
+                        text += '📈 قیمت‌ها با نوسان بازار تغییر می‌کند';
+
+                        finalInvoiceBody.textContent = text;
+                        if (copyFinalBtn) copyFinalBtn.disabled = false;
+                    }
+                }
+
+                function randomSelect(budget) {
+                    items.forEach(function(item) { setQty(item, 0); });
+
+                    if (!budget || budget <= 0) {
+                        showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید');
+                        return;
+                    }
+
+                    var itemData = [];
+                    items.forEach(function(item) {
+                        itemData.push({
+                            element: item,
+                            price: parseInt(item.dataset.price, 10) || 0,
+                            cal: parseInt(item.dataset.cal, 10) || 0,
+                            isNumeric: item.dataset.unit === 'عددی'
+                        });
+                    });
+
+                    function getMinQty(data) { return data.isNumeric ? 2 : 1; }
+
+                    var remaining = budget, selectedCount = 0, attempts = 0;
+                    var maxAttempts = 300;
+
+                    while (attempts < maxAttempts && remaining > 0) {
+                        var available = itemData.filter(function(item) {
+                            var currentQty = getQty(item.element);
+                            var minQty = getMinQty(item);
+                            if (currentQty < minQty) return true;
+                            return item.price <= remaining && item.price > 0;
+                        });
+                        if (available.length === 0) break;
+
+                        var underMin = available.filter(function(item) {
+                            return getQty(item.element) < getMinQty(item);
+                        });
+                        var chosen = underMin.length > 0
+                            ? underMin[Math.floor(Math.random() * underMin.length)]
+                            : available[Math.floor(Math.random() * available.length)];
+
+                        var currentQty = getQty(chosen.element);
+                        var minQty = getMinQty(chosen);
+
+                        if (currentQty < minQty) {
+                            var needed = minQty - currentQty;
+                            var cost = needed * chosen.price;
+                            if (cost <= remaining) {
+                                setQty(chosen.element, minQty);
+                                remaining -= cost;
+                                selectedCount += needed;
+                            } else {
+                                itemData.splice(itemData.indexOf(chosen), 1);
+                                continue;
+                            }
+                        } else {
+                            if (chosen.price <= remaining) {
+                                setQty(chosen.element, currentQty + 1);
+                                remaining -= chosen.price;
+                                selectedCount++;
+                            }
+                        }
+                        attempts++;
+                    }
+
+                    if (selectedCount === 0) {
+                        var cheapest = itemData.reduce(function(min, item) {
+                            return item.price < min.price ? item : min;
+                        }, itemData[0]);
+                        if (cheapest && cheapest.price <= budget) {
+                            var minQ = getMinQty(cheapest);
+                            if (minQ * cheapest.price <= budget) {
+                                setQty(cheapest.element, minQ);
+                                selectedCount = minQ;
+                            } else showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
+                        } else showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
+                    }
+
+                    updateSummary();
+                    if (selectedCount > 0) showToast('🎲 ' + toPersianNumber(selectedCount) + ' محصول انتخاب شد');
+                }
+
+                // ============ پاپ‌آپ ============
+                var modalOpen = false;
+
+                function openBudgetModal() {
+                    if (modalOpen || !budgetModal) return;
+                    modalOpen = true;
+                    budgetModal.classList.add('active');
+                    modalBudgetInput.value = '';
+                    setTimeout(function() { modalBudgetInput.focus(); }, 300);
+                }
+
+                function closeBudgetModal() {
+                    if (!modalOpen || !budgetModal) return;
+                    modalOpen = false;
+                    budgetModal.classList.remove('active');
+                    modalBudgetInput.blur();
+                }
+
+                function formatNumberInput(val) {
+                    var digits = val.replace(/[^0-9]/g, '');
+                    if (!digits) return '';
+                    return parseInt(digits, 10).toLocaleString('en-US');
+                }
+
+                if (modalBudgetInput) {
+                    modalBudgetInput.addEventListener('input', function() {
+                        this.value = formatNumberInput(this.value);
+                    });
+                    modalBudgetInput.addEventListener('keydown', function(e) {
+                        if (e.key === 'Enter') {
+                            e.preventDefault();
+                            confirmBudget();
+                        }
+                    });
+                }
+
+                function confirmBudget() {
+                    var raw = modalBudgetInput.value.replace(/[^0-9]/g, '');
+                    var budget = parseInt(raw, 10);
+                    if (!budget || budget <= 0) {
+                        showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید');
+                        return;
+                    }
+                    closeBudgetModal();
+                    setTimeout(function() { randomSelect(budget); }, 250);
+                }
+
+                if (modalConfirmBtn) modalConfirmBtn.addEventListener('click', confirmBudget);
+                if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeBudgetModal);
+                if (budgetModal) {
+                    budgetModal.addEventListener('click', function(e) {
+                        if (e.target === budgetModal) closeBudgetModal();
+                    });
+                }
+
+                quickBudgetBtns.forEach(function(btn) {
+                    btn.addEventListener('click', function() {
+                        var val = parseInt(this.dataset.budget, 10);
+                        modalBudgetInput.value = val.toLocaleString('en-US');
+                        modalBudgetInput.focus();
+                    });
+                });
+
+                if (randomBtn) randomBtn.addEventListener('click', openBudgetModal);
+                if (randomAgainBtn) randomAgainBtn.addEventListener('click', openBudgetModal);
+
+                // ============ کپی ============
+                function fallbackCopy(text, successMsg) {
+                    var textarea = document.createElement('textarea');
+                    textarea.value = text;
+                    textarea.style.position = 'fixed';
+                    textarea.style.opacity = '0';
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    try {
+                        document.execCommand('copy');
+                        showToast(successMsg);
+                    } catch (err) {
+                        showToast('⚠️ کپی نشد، دستی انتخاب کنید');
+                    }
+                    document.body.removeChild(textarea);
+                }
+
+                function copyCardNumber() {
+                    if (!cardNumberEl) return;
+                    var rawNumber = cardNumberEl.textContent.replace(/[^0-9]/g, '');
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(rawNumber).then(function() {
+                            showToast('📋 شماره کارت کپی شد');
+                        }).catch(function() {
+                            fallbackCopy(rawNumber, '📋 شماره کارت کپی شد');
+                        });
+                    } else fallbackCopy(rawNumber, '📋 شماره کارت کپی شد');
+                }
+
+                function copyFinalInvoice() {
+                    if (!finalInvoiceBody) return;
+                    var text = finalInvoiceBody.textContent;
+                    if (!text || text.trim() === '' || finalInvoiceBody.querySelector('.empty-state')) {
+                        showToast('⚠️ فاکتوری برای کپی وجود ندارد');
+                        return;
+                    }
+                    if (navigator.clipboard && navigator.clipboard.writeText) {
+                        navigator.clipboard.writeText(text).then(function() {
+                            showToast('📋 فاکتور کپی شد - برای ادمین بفرستید');
+                        }).catch(function() {
+                            fallbackCopy(text, '📋 فاکتور کپی شد');
+                        });
+                    } else fallbackCopy(text, '📋 فاکتور کپی شد');
+                }
+
+                // ============ رویدادها ============
+                items.forEach(function(item) {
+                    var plusBtn = item.querySelector('.qty-btn.plus');
+                    var minusBtn = item.querySelector('.qty-btn.minus');
+                    if (plusBtn) plusBtn.addEventListener('click', function() {
+                        setQty(item, getQty(item) + 1);
+                    });
+                    if (minusBtn) minusBtn.addEventListener('click', function() {
+                        setQty(item, getQty(item) - 1);
+                    });
+                });
+
+                if (clearBtn) clearBtn.addEventListener('click', function() {
+                    items.forEach(function(item) { setQty(item, 0); });
+                    showToast('🧹 همه انتخاب‌ها پاک شد');
+                });
+
+                if (copyCardBtn) copyCardBtn.addEventListener('click', copyCardNumber);
+                if (copyFinalBtn) copyFinalBtn.addEventListener('click', copyFinalInvoice);
 
                 updateSummary();
-            }
 
-            function updateBasket() {
-                let totalWeight = 0;
-                items.forEach(item => {
-                    if (item.dataset.basket === 'true') {
-                        const qty = getQty(item);
-                        const weightPer = parseFloat(item.dataset.weight) || 0;
-                        totalWeight += qty * weightPer;
+                // ============ تور راهنما ============
+                var TOUR_KEY = 'mamasis_tour_v2';
+
+                var tourSteps = [
+                    { target: '[data-tour="header"]', title: '🍃 به ماماسیس خوش آمدید!', desc: 'اینجا می‌تونید محصولات خانگی تازه انتخاب کنید و فاکتور نهایی بگیرید. سریع همه‌چیز رو نشونتون می‌دم.' },
+                    { target: '[data-tour="budget"]', title: '💰 خرید هوشمند با بودجه', desc: 'دکمه 🎲 رندوم رو بزنید، بودجه‌تون رو وارد کنید و سیستم خودش یه سبد متناسب براتون می‌چینه.' },
+                    { target: '[data-tour="first-item"]', title: '🛒 انتخاب محصولات', desc: 'با دکمه‌های + و − تعداد هر محصول رو تنظیم کنید. قیمت و کالری هر آیتم زنده به‌روز می‌شه.' },
+                    { target: '[data-tour="basket-category"]', title: '🧺 زنبیل رزرو', desc: 'محصولات کالباس و ژامبون برچسب زنبیل دارن! با رسیدن به ۲.۵ کیلو، تولید شروع می‌شه.' },
+                    { target: '[data-tour="basket-panel"]', title: '📊 نوار پیشرفت زنبیل', desc: 'اینجا می‌بینید چقدر به حد نصاب ۲.۵ کیلو مونده. با سبز شدن نوار، سفارش وارد مرحله تولید می‌شه!' },
+                    { target: '[data-tour="summary"]', title: '📊 جمع کل زنده', desc: 'تعداد کل، کالری کل و مبلغ نهایی اینجاست. با 🧹 همه انتخاب‌ها پاک می‌شن.' },
+                    { target: '[data-tour="final"]', title: '📋 فاکتور نهایی', desc: 'فاکتور کامل با جزئیات زنبیل اینجاست. با دکمه کپی برای ادمین بفرستید!' }
+                ];
+
+                var tourOverlay = document.getElementById('tourOverlay');
+                var tourSpotlight = document.getElementById('tourSpotlight');
+                var tourTooltip = document.getElementById('tourTooltip');
+                var tourStepBadge = document.getElementById('tourStepBadge');
+                var tourTitle = document.getElementById('tourTitle');
+                var tourDesc = document.getElementById('tourDesc');
+                var tourNextBtn = document.getElementById('tourNextBtn');
+                var tourSkipBtn = document.getElementById('tourSkipBtn');
+                var tourDots = document.getElementById('tourDots');
+                var tourRestartBtn = document.getElementById('tourRestartBtn');
+
+                if (!tourOverlay || !tourSpotlight || !tourTooltip || !tourDots) {
+                    console.warn('[ماماسیس] عناصر تور پیدا نشدند');
+                    return;
+                }
+
+                var currentStep = 0;
+                var tourActive = false;
+
+                tourSteps.forEach(function(_, i) {
+                    var dot = document.createElement('div');
+                    dot.className = 'tour-dot' + (i === 0 ? ' active' : '');
+                    tourDots.appendChild(dot);
+                });
+
+                function positionTooltip(targetEl) {
+                    var rect = targetEl.getBoundingClientRect();
+                    var tooltipWidth = Math.min(300, window.innerWidth - 40);
+                    tourTooltip.style.width = tooltipWidth + 'px';
+
+                    var top, arrowClass;
+                    if (rect.bottom + 220 < window.innerHeight || rect.top < 100) {
+                        top = rect.bottom + 18;
+                        arrowClass = 'arrow-top';
+                    } else {
+                        top = rect.top - 18 - tourTooltip.offsetHeight;
+                        arrowClass = 'arrow-bottom';
+                    }
+
+                    var left = rect.left + rect.width / 2 - tooltipWidth / 2;
+                    left = Math.max(15, Math.min(left, window.innerWidth - tooltipWidth - 15));
+
+                    tourTooltip.style.top = top + 'px';
+                    tourTooltip.style.left = left + 'px';
+                    tourTooltip.className = 'tour-tooltip active ' + arrowClass;
+
+                    var arrowLeft = rect.left + rect.width / 2 - left;
+                    var styleEl = tourTooltip.querySelector('style') || document.createElement('style');
+                    if (!styleEl.parentNode) tourTooltip.appendChild(styleEl);
+                    styleEl.textContent = '#tourTooltip::before { left: ' + Math.max(20, Math.min(arrowLeft, tooltipWidth - 20)) + 'px; margin-left: -7px; }';
+                }
+
+                function positionSpotlight(targetEl) {
+                    var rect = targetEl.getBoundingClientRect();
+                    var padding = 8;
+                    tourSpotlight.style.top = (rect.top - padding) + 'px';
+                    tourSpotlight.style.left = (rect.left - padding) + 'px';
+                    tourSpotlight.style.width = (rect.width + padding * 2) + 'px';
+                    tourSpotlight.style.height = (rect.height + padding * 2) + 'px';
+                    tourSpotlight.classList.add('active');
+                }
+
+                function showStep(index) {
+                    if (index < 0 || index >= tourSteps.length) return;
+                    currentStep = index;
+                    var step = tourSteps[index];
+                    var targetEl = document.querySelector(step.target);
+                    if (!targetEl) return;
+
+                    var rect = targetEl.getBoundingClientRect();
+                    if (rect.top < 80 || rect.bottom > window.innerHeight - 80) {
+                        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        setTimeout(function() {
+                            positionSpotlight(targetEl);
+                            positionTooltip(targetEl);
+                        }, 400);
+                    } else {
+                        positionSpotlight(targetEl);
+                        positionTooltip(targetEl);
+                    }
+
+                    if (tourStepBadge) tourStepBadge.textContent = toPersianNumber(index + 1) + ' از ' + toPersianNumber(tourSteps.length);
+                    if (tourTitle) tourTitle.textContent = step.title;
+                    if (tourDesc) tourDesc.textContent = step.desc;
+
+                    if (tourNextBtn) {
+                        if (index === tourSteps.length - 1) tourNextBtn.innerHTML = '✓ متوجه شدم';
+                        else tourNextBtn.innerHTML = 'بعدی ←';
+                    }
+
+                    tourDots.querySelectorAll('.tour-dot').forEach(function(dot, i) {
+                        dot.classList.toggle('active', i === index);
+                    });
+                }
+
+                function startTour() {
+                    if (tourActive) return;
+                    tourActive = true;
+                    currentStep = 0;
+                    tourOverlay.classList.add('active');
+                    tourTooltip.classList.add('active');
+                    setTimeout(function() { showStep(0); }, 100);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+
+                function endTour() {
+                    tourActive = false;
+                    tourOverlay.classList.remove('active');
+                    tourTooltip.classList.remove('active');
+                    tourSpotlight.classList.remove('active');
+                    try { localStorage.setItem(TOUR_KEY, 'true'); } catch (e) {}
+                }
+
+                if (tourNextBtn) tourNextBtn.addEventListener('click', function() {
+                    if (currentStep >= tourSteps.length - 1) {
+                        endTour();
+                        showToast('🎉 تور تموم شد! حالا خودتون امتحان کنید');
+                    } else showStep(currentStep + 1);
+                });
+
+                if (tourSkipBtn) tourSkipBtn.addEventListener('click', function() {
+                    endTour();
+                    showToast('با دکمه 🎓 هر وقت خواستید تور رو دوباره ببینید');
+                });
+
+                if (tourRestartBtn) tourRestartBtn.addEventListener('click', startTour);
+                tourOverlay.addEventListener('click', endTour);
+
+                var resizeTimeout;
+                window.addEventListener('resize', function() {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(function() {
+                        if (tourActive) showStep(currentStep);
+                    }, 150);
+                });
+
+                var scrollTimeout;
+                window.addEventListener('scroll', function() {
+                    if (!tourActive) return;
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(function() {
+                        var step = tourSteps[currentStep];
+                        var targetEl = document.querySelector(step.target);
+                        if (targetEl) {
+                            positionSpotlight(targetEl);
+                            positionTooltip(targetEl);
+                        }
+                    }, 100);
+                }, { passive: true });
+
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        if (modalOpen) closeBudgetModal();
+                        if (tourActive) endTour();
                     }
                 });
 
-                const percent = Math.min((totalWeight / BASKET_MIN_WEIGHT) * 100, 100);
-                basketProgressBar.style.width = percent + '%';
+                var hasSeenTour = false;
+                try { hasSeenTour = localStorage.getItem(TOUR_KEY) === 'true'; } catch (e) {}
+                if (!hasSeenTour) setTimeout(startTour, 900);
 
-                basketWeightText.textContent = 'وزن زنبیل: ' + formatWeight(totalWeight) + ' کیلو';
+            } catch (err) {
+                console.error('[ماماسیس] خطای اجرای اسکریپت:', err);
+            }
+        }
 
-                if (totalWeight >= BASKET_MIN_WEIGHT) {
-                    basketWeightBadge.textContent = '✅ ' + formatWeight(totalWeight) + ' / ۲.۵ کیلو';
-                    basketWeightBadge.classList.add('complete');
-                    basketRemaining.className = 'complete-msg';
-                    basketRemaining.textContent = '🎉 حد نصاب تکمیل شد!';
-                } else {
-                    const remaining = BASKET_MIN_WEIGHT - totalWeight;
-                    basketWeightBadge.textContent = formatWeight(totalWeight) + ' / ۲.۵ کیلو';
-                    basketWeightBadge.classList.remove('complete');
-                    basketRemaining.className = 'remaining';
-             
+        // اجرا
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    })();
+    </script>
+</body>
+</html>
