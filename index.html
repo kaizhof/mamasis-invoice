@@ -34,6 +34,8 @@
             --warning: #c0392b;
             --warning-bg: #fde8e5;
             --success: #27ae60;
+            --purple: #7c5cbf;
+            --purple-dark: #634a9e;
         }
 
         body {
@@ -76,33 +78,73 @@
             font-size: 0.72rem; color: var(--primary-dark); font-weight: 500;
         }
 
-        .budget-tool {
-            background: linear-gradient(135deg, #fff9f4, #fdf0e8);
-            border-radius: var(--radius-md); padding: 1.1rem 1.3rem;
-            margin-bottom: 1.5rem; border: 1px solid #f5ddd0;
-            box-shadow: var(--shadow-sm);
-            display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+        .tools-row {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 10px; margin-bottom: 1.5rem;
         }
-        .budget-tool .icon {
-            width: 42px; height: 42px; border-radius: 14px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.3rem; flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(212, 90, 43, 0.3);
-        }
-        .budget-tool .txt { flex: 1; min-width: 120px; }
-        .budget-tool .txt strong { display: block; font-size: 0.9rem; color: var(--brown-2); margin-bottom: 2px; }
-        .budget-tool .txt small { font-size: 0.72rem; color: var(--text-muted); }
-        .btn-random {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white; border: none; padding: 0.7rem 1.3rem; border-radius: 30px;
-            font-family: 'Vazirmatn', Tahoma, sans-serif; font-weight: 700; font-size: 0.88rem;
+        @media (max-width: 520px) { .tools-row { grid-template-columns: 1fr; } }
+
+        .tool-card {
+            border-radius: var(--radius-md); padding: 1rem 1.1rem;
+            border: 1px solid; box-shadow: var(--shadow-sm);
+            display: flex; flex-direction: column; gap: 8px;
             cursor: pointer; transition: all 0.2s;
-            display: flex; align-items: center; gap: 6px; white-space: nowrap;
-            box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
+            position: relative; overflow: hidden;
         }
-        .btn-random:hover { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35); }
-        .btn-random:active { transform: scale(0.96); }
+        .tool-card:active { transform: scale(0.98); }
+        .tool-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+        .tool-card.budget-tool {
+            background: linear-gradient(135deg, #fff9f4, #fdf0e8);
+            border-color: #f5ddd0;
+        }
+        .tool-card.taste-tool {
+            background: linear-gradient(135deg, #f6f0ff, #ede4ff);
+            border-color: #d4c2f5;
+        }
+
+        .tool-card .tool-header { display: flex; align-items: center; gap: 10px; }
+        .tool-card .tool-icon {
+            width: 44px; height: 44px; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.4rem; flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        .budget-tool .tool-icon { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); }
+        .taste-tool .tool-icon { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); }
+
+        .tool-card .tool-txt { flex: 1; min-width: 0; }
+        .tool-card .tool-txt strong { display: block; font-size: 0.88rem; color: var(--brown-2); margin-bottom: 2px; font-weight: 800; }
+        .tool-card .tool-txt small { font-size: 0.7rem; color: var(--text-muted); line-height: 1.5; display: block; }
+
+        .tool-card .tool-cta {
+            padding: 0.55rem 0.9rem; border-radius: 30px;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            font-weight: 700; font-size: 0.8rem;
+            border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center;
+            gap: 5px; color: white; transition: all 0.2s;
+        }
+        .budget-tool .tool-cta { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); box-shadow: 0 4px 12px rgba(212, 90, 43, 0.25); }
+        .taste-tool .tool-cta { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); box-shadow: 0 4px 12px rgba(124, 92, 191, 0.25); }
+        .tool-cta:active { transform: scale(0.95); }
+
+        /* نشانگر وضعیت روی کارت‌ها */
+        .tool-card .status-badge {
+            position: absolute; top: 8px; left: 8px;
+            font-size: 0.6rem; font-weight: 700;
+            padding: 0.15rem 0.5rem; border-radius: 20px;
+            display: none;
+        }
+        .tool-card .status-badge.active { display: inline-block; }
+        .budget-tool .status-badge {
+            background: linear-gradient(135deg, #27ae60, #1e8449);
+            color: white;
+        }
+        .taste-tool .status-badge {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: white;
+        }
 
         .category { margin-bottom: 1.6rem; }
         .category-title {
@@ -128,6 +170,7 @@
             background: var(--cream); padding: 0.8rem 0.95rem;
             border-radius: var(--radius-sm); border: 1px solid var(--border);
             transition: all 0.18s ease; gap: 10px; flex-wrap: wrap;
+            position: relative;
         }
         .item.active {
             background: #fff5ee; border-color: var(--primary);
@@ -135,6 +178,20 @@
         }
         .item.basket-item { border-right: 3px solid var(--basket); }
         .item.basket-item.active { border-color: var(--primary); border-right-color: var(--basket); }
+
+        .item.match-badge {
+            position: absolute; top: -8px; right: 12px;
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            color: white; font-size: 0.6rem; font-weight: 700;
+            padding: 0.2rem 0.55rem; border-radius: 20px;
+            box-shadow: 0 3px 8px rgba(124, 92, 191, 0.35);
+            animation: badgePop 0.4s ease;
+        }
+        @keyframes badgePop {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
 
         .item-info { flex: 1; display: flex; flex-direction: column; gap: 4px; min-width: 0; }
         .item-name {
@@ -150,10 +207,7 @@
             display: flex; align-items: center; gap: 12px;
             flex-wrap: wrap; font-weight: 500;
         }
-        .item-meta .cal {
-            background: #fef0e8; padding: 0.15rem 0.55rem;
-            border-radius: 20px; font-size: 0.76rem; color: #a06040;
-        }
+        .item-meta .cal { background: #fef0e8; padding: 0.15rem 0.55rem; border-radius: 20px; font-size: 0.76rem; color: #a06040; }
         .item-meta .cal::before { content: "🔥 "; font-size: 0.7rem; }
         .item-meta .price-unit { color: var(--primary-dark); font-weight: 700; font-size: 0.88rem; }
 
@@ -265,9 +319,7 @@
             font-size: 0.78rem; font-weight: 700; color: var(--basket-dark);
             display: flex; align-items: center; gap: 4px;
         }
-        .basket-summary-item .bsi-weight {
-            font-size: 0.7rem; font-weight: 700; color: var(--basket-dark);
-        }
+        .basket-summary-item .bsi-weight { font-size: 0.7rem; font-weight: 700; color: var(--basket-dark); }
         .basket-summary-item .bsi-weight.complete { color: var(--success); }
         .basket-summary-item .bsi-bar-wrap {
             height: 7px; background: rgba(45, 122, 95, 0.15);
@@ -320,7 +372,7 @@
             display: flex; align-items: center; gap: 4px;
             white-space: nowrap; flex-shrink: 0; font-weight: 600;
         }
-        .btn-copy:active { transform: scale(0.94); background: rgba(255,255,255,0.28); }
+        .btn-copy:active { transform: scale(0.94); }
         .card-owner { font-size: 0.8rem; color: #ecf0f1; display: flex; align-items: center; gap: 6px; }
         .card-owner span { color: #bdc3c7; font-size: 0.72rem; }
 
@@ -397,7 +449,6 @@
             display: flex; align-items: center; justify-content: center; gap: 6px;
             box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3);
         }
-        .btn-copy-final:hover:not(:disabled) { transform: translateY(-1px); box-shadow: 0 8px 20px rgba(212, 90, 43, 0.35); }
         .btn-copy-final:active { transform: scale(0.96); }
         .btn-copy-final:disabled { opacity: 0.5; cursor: not-allowed; }
 
@@ -485,13 +536,319 @@
         }
         .modal-btn:active { transform: scale(0.96); }
         .modal-btn-primary { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: white; box-shadow: 0 6px 16px rgba(212, 90, 43, 0.3); }
+        .modal-btn-purple { background: linear-gradient(135deg, var(--purple), var(--purple-dark)); color: white; box-shadow: 0 6px 16px rgba(124, 92, 191, 0.3); }
         .modal-btn-danger { background: linear-gradient(135deg, var(--warning), #96281b); color: white; box-shadow: 0 6px 16px rgba(192, 57, 43, 0.3); }
         .modal-btn-ghost { background: #f5ede7; color: var(--brown-2); border: 1.5px solid #e6cdbb; }
 
-        /* ==================================================== */
-        /* ============ تور راهنما — طراحی جدید ============ */
-        /* ==================================================== */
+        /* ==================== مودال رندوم مجدد (تب‌دار) ==================== */
+        .reroll-modal-card {
+            max-width: 480px;
+            padding: 0;
+            max-height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+        .reroll-header {
+            padding: 1.2rem 1.3rem 0.8rem;
+            position: relative;
+        }
+        .reroll-title {
+            font-size: 1.1rem; font-weight: 800; color: var(--brown);
+            text-align: center; margin-bottom: 0.3rem;
+        }
+        .reroll-subtitle {
+            font-size: 0.76rem; color: var(--text-muted);
+            text-align: center; line-height: 1.6;
+        }
+        .reroll-close {
+            position: absolute; top: 1rem; left: 1rem;
+            width: 28px; height: 28px; border-radius: 50%;
+            background: #f5ede7; border: none;
+            color: var(--brown-2); font-size: 1rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .reroll-close:active { transform: scale(0.9); }
 
+        .reroll-tabs {
+            display: flex; padding: 0 1.3rem;
+            gap: 4px; border-bottom: 1.5px solid var(--border);
+            margin-bottom: 1rem;
+        }
+        .reroll-tab {
+            flex: 1; padding: 0.7rem 0.5rem;
+            background: transparent; border: none;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            font-weight: 700; font-size: 0.8rem;
+            color: var(--text-muted); cursor: pointer;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -1.5px;
+            transition: all 0.2s;
+            display: flex; align-items: center; justify-content: center;
+            gap: 5px;
+        }
+        .reroll-tab.active {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary);
+        }
+        .reroll-tab.active.taste-tab {
+            color: var(--purple-dark);
+            border-bottom-color: var(--purple);
+        }
+        .reroll-tab .tab-badge {
+            font-size: 0.6rem; font-weight: 700;
+            padding: 0.1rem 0.4rem; border-radius: 10px;
+            background: #f0e0d3; color: var(--text-muted);
+        }
+        .reroll-tab.active .tab-badge {
+            background: var(--primary); color: white;
+        }
+        .reroll-tab.active.taste-tab .tab-badge {
+            background: var(--purple); color: white;
+        }
+
+        .reroll-body {
+            padding: 0 1.3rem 1.3rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        /* بودجه در reroll */
+        .reroll-budget-section .modal-input-wrap { margin-bottom: 0.8rem; }
+        .reroll-current-budget {
+            background: #fdf6f0; padding: 0.6rem 0.9rem;
+            border-radius: 12px; border: 1px dashed #e6cdbb;
+            margin-bottom: 0.9rem;
+            font-size: 0.76rem; color: var(--text-muted);
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .reroll-current-budget strong { color: var(--primary-dark); font-size: 0.9rem; }
+        .reroll-current-budget.empty { color: #c9b5a8; font-style: italic; }
+
+        /* مزاج در reroll */
+        .reroll-taste-section .quiz-summary {
+            background: linear-gradient(135deg, #faf5ff, #f0e6ff);
+            border: 1.5px solid #d4c2f5;
+            border-radius: 14px; padding: 0.8rem 1rem;
+            margin-bottom: 0.9rem;
+        }
+        .quiz-summary-title {
+            font-size: 0.8rem; font-weight: 800;
+            color: var(--purple-dark); margin-bottom: 0.5rem;
+            display: flex; align-items: center; gap: 5px;
+        }
+        .quiz-summary-tags {
+            display: flex; flex-wrap: wrap; gap: 5px;
+        }
+        .quiz-summary-tag {
+            background: white; border: 1px solid #d4c2f5;
+            color: var(--purple-dark); font-size: 0.68rem; font-weight: 700;
+            padding: 0.2rem 0.6rem; border-radius: 20px;
+            display: flex; align-items: center; gap: 3px;
+        }
+        .quiz-summary-empty {
+            font-size: 0.78rem; color: var(--text-muted);
+            font-style: italic; text-align: center; padding: 0.5rem;
+        }
+        .reroll-taste-actions {
+            display: flex; gap: 8px; margin-bottom: 1rem;
+        }
+        .reroll-taste-actions .modal-btn { flex: 1; }
+
+        .reroll-hint {
+            background: #fff9f4; border: 1px dashed #f0d5c2;
+            border-radius: 12px; padding: 0.6rem 0.9rem;
+            font-size: 0.72rem; color: var(--text-muted);
+            line-height: 1.7; margin-bottom: 1rem;
+        }
+
+        .reroll-footer {
+            padding: 0.9rem 1.3rem 1.2rem;
+            border-top: 1.5px solid var(--border);
+            display: flex; gap: 8px;
+            background: rgba(255, 250, 245, 0.5);
+        }
+        .reroll-footer .modal-btn { flex: 1; }
+
+        /* ==================== تست مزاج ==================== */
+        .quiz-modal-card {
+            background: linear-gradient(160deg, #ffffff 0%, #faf5ff 60%, #f0e6ff 100%);
+            border: 2px solid var(--purple);
+            max-width: 460px;
+            padding: 0;
+            max-height: calc(100vh - 40px);
+            display: flex;
+            flex-direction: column;
+        }
+        .quiz-header-wrap {
+            padding: 1.2rem 1.3rem 0.6rem;
+            position: relative;
+            flex-shrink: 0;
+        }
+        .quiz-progress-top {
+            height: 6px; background: #ede4ff; border-radius: 10px;
+            overflow: hidden; margin-bottom: 0.9rem;
+        }
+        .quiz-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple), #b39ddb, var(--purple-dark));
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 8px rgba(124, 92, 191, 0.4);
+        }
+        .quiz-top-bar {
+            display: flex; justify-content: space-between; align-items: center;
+            gap: 8px;
+        }
+        .quiz-step-label {
+            font-size: 0.72rem; color: var(--purple-dark); font-weight: 700;
+        }
+        .quiz-mode-badge {
+            font-size: 0.62rem; font-weight: 700;
+            padding: 0.15rem 0.5rem; border-radius: 20px;
+            background: #f6f0ff; color: var(--purple-dark);
+            border: 1px solid #d4c2f5;
+        }
+        .quiz-close-top {
+            position: absolute; top: 1.2rem; left: 1rem;
+            width: 28px; height: 28px; border-radius: 50%;
+            background: #f5ede7; border: none;
+            color: var(--brown-2); font-size: 1rem;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .quiz-close-top:active { transform: scale(0.9); }
+
+        .quiz-body {
+            padding: 0 1.3rem 1.3rem;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .quiz-question {
+            font-size: 1.1rem; font-weight: 800; color: var(--brown);
+            text-align: center; margin-bottom: 0.4rem;
+            line-height: 1.5;
+        }
+        .quiz-hint {
+            font-size: 0.76rem; color: var(--text-muted);
+            text-align: center; margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+        .quiz-options {
+            display: flex; flex-direction: column; gap: 0.5rem;
+            margin-bottom: 1.2rem;
+        }
+        .quiz-option {
+            background: #fff; border: 2px solid #ede4ff;
+            border-radius: 14px; padding: 0.75rem 0.9rem;
+            font-family: 'Vazirmatn', Tahoma, sans-serif;
+            font-size: 0.9rem; font-weight: 600; color: var(--brown-2);
+            cursor: pointer; transition: all 0.15s;
+            display: flex; align-items: center; gap: 10px;
+            text-align: right;
+            position: relative;
+        }
+        .quiz-option:hover {
+            border-color: var(--purple); background: #faf5ff;
+            transform: translateX(-3px);
+        }
+        .quiz-option.selected {
+            border-color: var(--purple);
+            background: linear-gradient(135deg, #f6f0ff, #ede4ff);
+            box-shadow: 0 4px 12px rgba(124, 92, 191, 0.2);
+        }
+        .quiz-option .qo-emoji { font-size: 1.4rem; flex-shrink: 0; }
+        .quiz-option .qo-txt { flex: 1; min-width: 0; }
+        .quiz-option .qo-txt strong {
+            display: block; font-size: 0.88rem; color: var(--brown);
+            font-weight: 800;
+        }
+        .quiz-option .qo-txt small {
+            display: block; font-size: 0.68rem; color: var(--text-muted);
+            margin-top: 2px; font-weight: 400;
+        }
+        .quiz-option.selected .qo-txt strong { color: var(--purple-dark); }
+
+        .quiz-option .qo-check {
+            width: 22px; height: 22px; border-radius: 6px;
+            border: 2px solid #d4c2f5; background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.15s;
+            color: transparent; font-size: 0.85rem; font-weight: 900;
+        }
+        .quiz-option.selected .qo-check {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+            border-color: var(--purple);
+            color: white;
+        }
+
+        .quiz-option .qo-radio {
+            width: 22px; height: 22px; border-radius: 50%;
+            border: 2px solid #d4c2f5; background: #fff;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; transition: all 0.15s;
+        }
+        .quiz-option .qo-radio::after {
+            content: ""; width: 10px; height: 10px; border-radius: 50%;
+            background: transparent; transition: all 0.15s;
+        }
+        .quiz-option.selected .qo-radio { border-color: var(--purple); }
+        .quiz-option.selected .qo-radio::after {
+            background: linear-gradient(135deg, var(--purple), var(--purple-dark));
+        }
+
+        .quiz-nav {
+            display: flex; gap: 8px; align-items: center;
+            flex-wrap: wrap;
+        }
+        .quiz-nav .modal-btn { flex: 1; min-width: 90px; }
+        .quiz-skip-btn {
+            background: transparent; border: 1.5px dashed #d4c2f5;
+            color: var(--purple-dark); padding: 0.6rem 0.9rem;
+            border-radius: 40px; font-family: 'Vazirmatn', Tahoma, sans-serif;
+            font-weight: 700; font-size: 0.75rem; cursor: pointer;
+            display: flex; align-items: center; gap: 4px;
+            transition: all 0.15s;
+            flex-basis: 100%;
+            justify-content: center;
+            margin-top: 4px;
+        }
+        .quiz-skip-btn:hover { background: #faf5ff; border-style: solid; }
+        .quiz-skip-btn:active { transform: scale(0.96); }
+
+        .quiz-result-emoji {
+            font-size: 3.5rem; text-align: center; margin-bottom: 0.5rem;
+            animation: bounceIn 0.6s ease;
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0); opacity: 0; }
+            60% { transform: scale(1.15); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        .quiz-result-title {
+            font-size: 1.2rem; font-weight: 800; color: var(--purple-dark);
+            text-align: center; margin-bottom: 0.4rem;
+        }
+        .quiz-result-subtitle {
+            font-size: 0.82rem; color: var(--text-muted);
+            text-align: center; margin-bottom: 1.2rem; line-height: 1.7;
+        }
+        .quiz-result-tags {
+            display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+            margin-bottom: 1.2rem;
+        }
+        .quiz-tag {
+            background: linear-gradient(135deg, #f6f0ff, #ede4ff);
+            border: 1px solid #d4c2f5;
+            color: var(--purple-dark); font-size: 0.72rem; font-weight: 700;
+            padding: 0.3rem 0.75rem; border-radius: 30px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .quiz-tag.skipped {
+            background: #f5ede7; border-color: #e6cdbb;
+            color: var(--text-muted); font-style: italic;
+        }
+
+        /* ==================== تور راهنما ==================== */
         .tour-overlay {
             position: fixed; inset: 0;
             background: radial-gradient(circle at center, rgba(30, 20, 15, 0.55) 0%, rgba(30, 20, 15, 0.85) 100%);
@@ -501,7 +858,6 @@
             backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px);
         }
         .tour-overlay.active { opacity: 1; pointer-events: auto; }
-
         .tour-spotlight {
             position: fixed; z-index: 4001; pointer-events: none;
             border-radius: 20px;
@@ -518,12 +874,10 @@
             0%, 100% { box-shadow: 0 0 0 9999px rgba(30, 20, 15, 0.78), 0 0 0 4px var(--primary), 0 0 30px 8px rgba(212, 90, 43, 0.35); }
             50% { box-shadow: 0 0 0 9999px rgba(30, 20, 15, 0.78), 0 0 0 5px var(--primary), 0 0 45px 14px rgba(212, 90, 43, 0.5); }
         }
-
         .tour-tooltip {
             position: fixed; z-index: 4002;
             background: linear-gradient(160deg, #ffffff 0%, #fef8f3 60%, #fce6d8 100%);
-            border-radius: 22px;
-            padding: 0;
+            border-radius: 22px; padding: 0;
             max-width: 340px; width: calc(100% - 32px);
             box-shadow:
                 0 25px 60px rgba(0, 0, 0, 0.35),
@@ -535,30 +889,23 @@
             transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
             overflow: hidden;
         }
-        .tour-tooltip.active {
-            opacity: 1; pointer-events: auto;
-            transform: translateY(0) scale(1);
-        }
+        .tour-tooltip.active { opacity: 1; pointer-events: auto; transform: translateY(0) scale(1); }
         .tour-tooltip::before {
             content: ""; position: absolute; width: 16px; height: 16px;
             background: linear-gradient(135deg, #fce6d8, var(--primary));
             border: 2px solid var(--primary);
-            transform: rotate(45deg);
-            z-index: -1;
+            transform: rotate(45deg); z-index: -1;
         }
         .tour-tooltip.arrow-top::before {
-            top: -10px; left: var(--arrow-left, 50%);
-            margin-left: -8px;
+            top: -10px; left: var(--arrow-left, 50%); margin-left: -8px;
             border-bottom: none; border-left: none;
             background: linear-gradient(135deg, #ffffff, #fce6d8);
         }
         .tour-tooltip.arrow-bottom::before {
-            bottom: -10px; left: var(--arrow-left, 50%);
-            margin-left: -8px;
+            bottom: -10px; left: var(--arrow-left, 50%); margin-left: -8px;
             border-top: none; border-right: none;
             background: linear-gradient(135deg, #fce6d8, #f9ece3);
         }
-
         .tour-progress-bar {
             height: 4px;
             background: linear-gradient(90deg, var(--primary), #f5a623, var(--primary));
@@ -566,43 +913,25 @@
             transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             box-shadow: 0 0 8px rgba(212, 90, 43, 0.5);
         }
-
         .tour-tooltip-content { padding: 1.2rem 1.3rem 1.1rem; }
-
         .tour-step-badge {
             display: inline-flex; align-items: center; gap: 4px;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            font-size: 0.68rem; font-weight: 700;
+            color: white; font-size: 0.68rem; font-weight: 700;
             padding: 0.25rem 0.75rem; border-radius: 30px;
             margin-bottom: 0.7rem;
             box-shadow: 0 3px 10px rgba(212, 90, 43, 0.35);
             letter-spacing: 0.3px;
         }
-        .tour-step-badge::before {
-            content: "◆"; font-size: 0.6rem; opacity: 0.85;
-        }
-
+        .tour-step-badge::before { content: "◆"; font-size: 0.6rem; opacity: 0.85; }
         .tour-title {
             font-size: 1.08rem; font-weight: 800; color: var(--brown);
             margin-bottom: 0.5rem;
-            display: flex; align-items: center; gap: 8px;
-            line-height: 1.4;
+            display: flex; align-items: center; gap: 8px; line-height: 1.4;
         }
-        .tour-title .tour-title-emoji {
-            font-size: 1.3rem;
-            filter: drop-shadow(0 2px 4px rgba(212,90,43,0.2));
-        }
-
-        .tour-desc {
-            font-size: 0.84rem; color: #5a4338;
-            line-height: 1.85; margin-bottom: 1.1rem;
-            font-weight: 500;
-        }
-
-        .tour-actions {
-            display: flex; gap: 8px;
-        }
+        .tour-title .tour-title-emoji { font-size: 1.3rem; filter: drop-shadow(0 2px 4px rgba(212,90,43,0.2)); }
+        .tour-desc { font-size: 0.84rem; color: #5a4338; line-height: 1.85; margin-bottom: 1.1rem; font-weight: 500; }
+        .tour-actions { display: flex; gap: 8px; }
         .tour-btn {
             flex: 1; padding: 0.65rem 0.9rem; border-radius: 30px;
             font-family: 'Vazirmatn', Tahoma, sans-serif;
@@ -613,21 +942,14 @@
         .tour-btn:active { transform: scale(0.94); }
         .tour-btn-primary {
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            color: white;
-            box-shadow: 0 6px 16px rgba(212, 90, 43, 0.35);
+            color: white; box-shadow: 0 6px 16px rgba(212, 90, 43, 0.35);
         }
-        .tour-btn-primary:hover {
-            box-shadow: 0 8px 22px rgba(212, 90, 43, 0.45);
-            transform: translateY(-1px);
-        }
+        .tour-btn-primary:hover { transform: translateY(-1px); }
         .tour-btn-ghost {
             background: #f5ede7; color: var(--brown-2);
-            border: 1.5px solid #e6cdbb;
-            flex: 0 0 auto;
-            min-width: 80px;
+            border: 1.5px solid #e6cdbb; flex: 0 0 auto; min-width: 80px;
         }
         .tour-btn-ghost:hover { background: #fae6db; }
-
         .tour-dots {
             display: flex; gap: 6px; justify-content: center;
             margin-top: 0.9rem; padding-top: 0.7rem;
@@ -652,37 +974,58 @@
             width: 52px; height: 52px; border-radius: 50%;
             background: linear-gradient(135deg, var(--primary), var(--primary-dark));
             color: white; border: none; cursor: pointer;
-            box-shadow:
-                0 8px 24px rgba(212, 90, 43, 0.45),
-                0 0 0 0 rgba(212, 90, 43, 0.5);
+            box-shadow: 0 8px 24px rgba(212, 90, 43, 0.45);
             font-size: 1.35rem; z-index: 500;
             display: flex; align-items: center; justify-content: center;
             transition: all 0.3s;
-            animation: tourBtnPulse 2.5s infinite;
         }
-        @keyframes tourBtnPulse {
-            0%, 100% { box-shadow: 0 8px 24px rgba(212, 90, 43, 0.45), 0 0 0 0 rgba(212, 90, 43, 0.5); }
-            50% { box-shadow: 0 8px 24px rgba(212, 90, 43, 0.45), 0 0 0 12px rgba(212, 90, 43, 0); }
-        }
-        .tour-restart-btn:hover { transform: scale(1.08); }
-        .tour-restart-btn:active { transform: scale(0.92); }
         .tour-restart-btn::after {
             content: "؟";
             position: absolute; top: -4px; right: -4px;
             background: #fff; color: var(--primary);
-            width: 20px; height: 20px;
-            border-radius: 50%;
+            width: 20px; height: 20px; border-radius: 50%;
             font-size: 0.75rem; font-weight: 800;
             display: flex; align-items: center; justify-content: center;
             border: 2px solid var(--primary);
             box-shadow: 0 2px 6px rgba(0,0,0,0.15);
         }
+        .tour-restart-btn:hover { transform: scale(1.08); }
+        .tour-restart-btn:active { transform: scale(0.92); }
+        .tour-restart-btn.reminder { animation: tourBtnPulse 2s infinite; }
+        @keyframes tourBtnPulse {
+            0%, 100% { box-shadow: 0 8px 24px rgba(212, 90, 43, 0.45), 0 0 0 0 rgba(212, 90, 43, 0.5); }
+            50% { box-shadow: 0 8px 24px rgba(212, 90, 43, 0.45), 0 0 0 12px rgba(212, 90, 43, 0); }
+        }
 
-        /* کیبورد اسپات‌لایت هنگام اجرای تور */
-        .tour-active .invoice-container,
-        .tour-active .final-invoice-card {
-            position: relative;
-            z-index: 1;
+        .tour-reminder-badge {
+            position: fixed; bottom: 118px; left: 15px;
+            background: linear-gradient(135deg, #ff6b35, var(--primary-dark));
+            color: white; padding: 0.5rem 0.85rem;
+            border-radius: 30px; font-size: 0.72rem; font-weight: 700;
+            box-shadow: 0 8px 24px rgba(212, 90, 43, 0.5);
+            display: none; align-items: center; gap: 5px;
+            z-index: 500; cursor: pointer;
+            animation: reminderSlideIn 0.5s ease;
+            border: 1.5px solid rgba(255,255,255,0.3);
+        }
+        .tour-reminder-badge.visible { display: flex; }
+        .tour-reminder-badge::before {
+            content: ""; position: absolute;
+            bottom: -6px; left: 20px;
+            width: 12px; height: 12px;
+            background: linear-gradient(135deg, #ff6b35, var(--primary-dark));
+            transform: rotate(45deg);
+        }
+        .tour-reminder-badge .close-reminder {
+            background: rgba(255,255,255,0.25); border: none;
+            color: white; width: 18px; height: 18px;
+            border-radius: 50%; font-size: 0.7rem;
+            cursor: pointer; margin-right: 2px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        @keyframes reminderSlideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
         }
 
         .noscript-msg {
@@ -718,14 +1061,17 @@
             .card-number { font-size: 0.95rem; letter-spacing: 1px; }
             .final-invoice-card { padding: 1.2rem 0.85rem; }
             .modal-card { padding: 1.5rem 1.1rem 1.2rem; }
-            .budget-tool { padding: 0.9rem 1rem; gap: 8px; }
-            .budget-tool .icon { width: 38px; height: 38px; font-size: 1.1rem; }
-            .btn-random { padding: 0.6rem 1rem; font-size: 0.8rem; }
+            .quiz-modal-card, .reroll-modal-card { max-width: 100%; padding: 0; }
+            .quiz-header-wrap, .reroll-header { padding: 1rem 1rem 0.5rem; }
+            .quiz-body, .reroll-body { padding: 0 1rem 1rem; }
+            .reroll-footer { padding: 0.75rem 1rem 1rem; }
+            .budget-tool, .taste-tool { padding: 0.9rem 1rem; }
             .tour-tooltip { max-width: calc(100% - 24px); }
             .tour-tooltip-content { padding: 1rem 1rem 0.9rem; }
             .tour-title { font-size: 1rem; }
             .tour-desc { font-size: 0.8rem; }
             .tour-restart-btn { width: 48px; height: 48px; font-size: 1.2rem; bottom: 70px; }
+            .tour-reminder-badge { bottom: 108px; font-size: 0.68rem; }
         }
         @media (min-width: 601px) {
             .invoice-container { padding: 2rem 1.9rem; }
@@ -756,15 +1102,34 @@
             </div>
         </div>
 
-        <div class="budget-tool" data-tour="budget">
-            <div class="icon" aria-hidden="true">💰</div>
-            <div class="txt">
-                <strong>خرید هوشمند با بودجه</strong>
-                <small>بودجه‌تون رو بگید، سبد رو براتون می‌چینیم</small>
+        <div class="tools-row" data-tour="tools">
+            <div class="tool-card budget-tool" data-tour="budget">
+                <span class="status-badge" id="budgetStatusBadge">فعال</span>
+                <div class="tool-header">
+                    <div class="tool-icon" aria-hidden="true">💰</div>
+                    <div class="tool-txt">
+                        <strong>خرید با بودجه</strong>
+                        <small id="budgetToolSubtitle">بودجه می‌گید، سبد می‌چینیم</small>
+                    </div>
+                </div>
+                <button class="tool-cta" id="randomBtn" type="button" aria-label="خرید رندوم با بودجه">
+                    <span aria-hidden="true">🎲</span> شروع
+                </button>
             </div>
-            <button class="btn-random" id="randomBtn" type="button" aria-label="باز کردن پاپ‌آپ خرید رندوم">
-                <span aria-hidden="true">🎲</span> رندوم
-            </button>
+
+            <div class="tool-card taste-tool" data-tour="taste">
+                <span class="status-badge" id="tasteStatusBadge">فعال</span>
+                <div class="tool-header">
+                    <div class="tool-icon" aria-hidden="true">🔮</div>
+                    <div class="tool-txt">
+                        <strong>تست مزاج</strong>
+                        <small id="tasteToolSubtitle">سلیقه‌تون رو بگید</small>
+                    </div>
+                </div>
+                <button class="tool-cta" id="tasteBtn" type="button" aria-label="شروع تست مزاج">
+                    <span aria-hidden="true">✨</span> شروع
+                </button>
+            </div>
         </div>
 
         <div class="category">
@@ -853,12 +1218,12 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-    <!-- مودال بودجه -->
+    <!-- مودال بودجه اصلی -->
     <div class="modal-overlay" id="budgetModal" role="dialog" aria-modal="true" aria-labelledby="budgetModalTitle">
         <div class="modal-card">
             <div class="modal-icon" aria-hidden="true">🎲</div>
             <div class="modal-title" id="budgetModalTitle">بودجه‌تون رو وارد کنید</div>
-            <div class="modal-desc">سیستم بر اساس بودجه شما یه سبد متناسب می‌سازه</div>
+            <div class="modal-desc">سیستم بر اساس بودجه و مزاج شما یه سبد متناسب می‌سازه</div>
             <div class="modal-input-wrap">
                 <label for="modalBudgetInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">مبلغ بودجه به تومان</label>
                 <input type="tel" class="modal-input" id="modalBudgetInput" placeholder="مثلاً 2,000,000" inputmode="numeric" autocomplete="off">
@@ -879,6 +1244,52 @@
         </div>
     </div>
 
+    <!-- مودال رندوم مجدد (تب‌دار - مستقل) -->
+    <div class="modal-overlay" id="rerollModal" role="dialog" aria-modal="true" aria-labelledby="rerollTitle">
+        <div class="modal-card reroll-modal-card">
+            <div class="reroll-header">
+                <div class="reroll-title" id="rerollTitle">🎲 رندوم مجدد</div>
+                <div class="reroll-subtitle">بودجه و مزاج رو تنظیم کنید و سبد جدید بسازید</div>
+                <button class="reroll-close" id="rerollClose" type="button" aria-label="بستن">✕</button>
+            </div>
+
+            <div class="reroll-tabs" role="tablist">
+                <button class="reroll-tab active" data-tab="budget" type="button" role="tab" id="tabBudgetBtn">
+                    <span>💰</span> بودجه
+                    <span class="tab-badge" id="tabBudgetBadge" style="display:none;">✓</span>
+                </button>
+                <button class="reroll-tab taste-tab" data-tab="taste" type="button" role="tab" id="tabTasteBtn">
+                    <span>🔮</span> مزاج
+                    <span class="tab-badge" id="tabTasteBadge" style="display:none;">✓</span>
+                </button>
+            </div>
+
+            <div class="reroll-body" id="rerollBody"></div>
+
+            <div class="reroll-footer">
+                <button class="modal-btn modal-btn-ghost" id="rerollResetBtn" type="button">🔄 ریست</button>
+                <button class="modal-btn modal-btn-primary" id="rerollGoBtn" type="button">🎲 بساز!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- مودال تست مزاج -->
+    <div class="modal-overlay" id="quizModal" role="dialog" aria-modal="true" aria-labelledby="quizQuestionTitle">
+        <div class="modal-card quiz-modal-card">
+            <div class="quiz-header-wrap">
+                <div class="quiz-progress-top">
+                    <div class="quiz-progress-fill" id="quizProgressFill" style="width: 0%"></div>
+                </div>
+                <div class="quiz-top-bar">
+                    <div class="quiz-step-label" id="quizStepLabel">سوال ۱ از ۴</div>
+                    <div class="quiz-mode-badge" id="quizModeBadge">تک‌انتخابی</div>
+                </div>
+                <button class="quiz-close-top" id="quizCloseTop" type="button" aria-label="بستن تست">✕</button>
+            </div>
+            <div class="quiz-body" id="quizContent"></div>
+        </div>
+    </div>
+
     <!-- مودال تأیید پاک کردن -->
     <div class="modal-overlay" id="clearModal" role="dialog" aria-modal="true" aria-labelledby="clearModalTitle">
         <div class="modal-card">
@@ -893,14 +1304,18 @@
     </div>
 
     <button class="tour-restart-btn" id="tourRestartBtn" type="button" title="راهنمای استفاده" aria-label="شروع تور راهنما">🎓</button>
+    <div class="tour-reminder-badge" id="tourReminderBadge">
+        <span>💡</span>
+        <span>راهنمای استفاده</span>
+        <button class="close-reminder" id="closeReminderBtn" aria-label="بستن یادآوری">×</button>
+    </div>
 
-    <!-- ====== تور راهنما ====== -->
     <div class="tour-overlay" id="tourOverlay"></div>
     <div class="tour-spotlight" id="tourSpotlight"></div>
     <div class="tour-tooltip" id="tourTooltip" role="dialog" aria-modal="true" aria-labelledby="tourTitle">
         <div class="tour-progress-bar" id="tourProgressBar"></div>
         <div class="tour-tooltip-content">
-            <span class="tour-step-badge" id="tourStepBadge">۱ از ۷</span>
+            <span class="tour-step-badge" id="tourStepBadge">۱ از ۸</span>
             <div class="tour-title" id="tourTitle"></div>
             <div class="tour-desc" id="tourDesc"></div>
             <div class="tour-actions">
@@ -916,33 +1331,31 @@
         'use strict';
         var DEBUG = false;
 
-        // ==================== داده محصولات ====================
         var PRODUCTS = {
             sausage: [
-                { id: 's1', name: 'آلمانی', price: 650000, cal: 1200, weight: 0.5, unit: 'نیم کیلو' },
-                { id: 's2', name: 'کوکتل مرغ', price: 680000, cal: 1050, weight: 0.5, unit: 'نیم کیلو' },
-                { id: 's3', name: 'کوکتل پنیری', price: 750000, cal: 1300, weight: 0.5, unit: 'نیم کیلو' },
-                { id: 's4', name: 'بلغاری', price: 700000, cal: 1150, weight: 0.5, unit: 'نیم کیلو' },
-                { id: 's5', name: 'هاتداگ گوشت', price: 990000, cal: 1400, weight: 0.5, unit: 'نیم کیلو' }
+                { id: 's1', name: 'آلمانی', price: 650000, cal: 1200, weight: 0.5, unit: 'نیم کیلو', baseProtein: 'mixed', flavor: 'classic' },
+                { id: 's2', name: 'کوکتل مرغ', price: 680000, cal: 1050, weight: 0.5, unit: 'نیم کیلو', baseProtein: 'chicken', flavor: 'mild' },
+                { id: 's3', name: 'کوکتل پنیری', price: 750000, cal: 1300, weight: 0.5, unit: 'نیم کیلو', baseProtein: 'chicken', flavor: 'cheese' },
+                { id: 's4', name: 'بلغاری', price: 700000, cal: 1150, weight: 0.5, unit: 'نیم کیلو', baseProtein: 'beef', flavor: 'smoky' },
+                { id: 's5', name: 'هاتداگ گوشت', price: 990000, cal: 1400, weight: 0.5, unit: 'نیم کیلو', baseProtein: 'beef', flavor: 'spicy' }
             ],
             basket: [
-                { id: 'b1', name: 'ژامبون مرغ و قارچ لوکس', price: 830000, cal: 1100, weight: 0.5, unit: 'نیم کیلو', isBasket: true },
-                { id: 'b2', name: 'ژامبون گوشت لوکس', price: 1100000, cal: 1450, weight: 0.5, unit: 'نیم کیلو', isBasket: true },
-                { id: 'b3', name: 'کالباس مارتادلا', price: 700000, cal: 1000, weight: 0.5, unit: 'نیم کیلو', isBasket: true },
-                { id: 'b4', name: 'کالباس لیونر', price: 850000, cal: 1150, weight: 0.5, unit: 'نیم کیلو', isBasket: true }
+                { id: 'b1', name: 'ژامبون مرغ و قارچ لوکس', price: 830000, cal: 1100, weight: 0.5, unit: 'نیم کیلو', isBasket: true, baseProtein: 'chicken', flavor: 'mild' },
+                { id: 'b2', name: 'ژامبون گوشت لوکس', price: 1100000, cal: 1450, weight: 0.5, unit: 'نیم کیلو', isBasket: true, baseProtein: 'beef', flavor: 'classic' },
+                { id: 'b3', name: 'کالباس مارتادلا', price: 700000, cal: 1000, weight: 0.5, unit: 'نیم کیلو', isBasket: true, baseProtein: 'mixed', flavor: 'classic' },
+                { id: 'b4', name: 'کالباس لیونر', price: 850000, cal: 1150, weight: 0.5, unit: 'نیم کیلو', isBasket: true, baseProtein: 'beef', flavor: 'smoky' }
             ],
             ready: [
-                { id: 'r1', name: 'ناگت مرغ', price: 650000, cal: 1250, weight: 0.5, unit: 'نیم کیلو' },
-                { id: 'r2', name: 'ناگت پنیری', price: 730000, cal: 1350, weight: 0.5, unit: 'نیم کیلو' },
-                { id: 'r3', name: 'برگر ممتاز ۱۲۵ گرمی', price: 325000, cal: 350, weight: 0.125, unit: 'عددی' },
-                { id: 'r4', name: 'کباب لقمه گوشت', price: 200000, cal: 220, weight: 0.05, unit: 'عددی' },
-                { id: 'r5', name: 'کباب لقمه مرغ زعفرانی', price: 150000, cal: 180, weight: 0.05, unit: 'عددی' }
+                { id: 'r1', name: 'ناگت مرغ', price: 650000, cal: 1250, weight: 0.5, unit: 'نیم کیلو', baseProtein: 'chicken', flavor: 'mild' },
+                { id: 'r2', name: 'ناگت پنیری', price: 730000, cal: 1350, weight: 0.5, unit: 'نیم کیلو', baseProtein: 'chicken', flavor: 'cheese' },
+                { id: 'r3', name: 'برگر ممتاز ۱۲۵ گرمی', price: 325000, cal: 350, weight: 0.125, unit: 'عددی', baseProtein: 'beef', flavor: 'classic' },
+                { id: 'r4', name: 'کباب لقمه گوشت', price: 200000, cal: 220, weight: 0.05, unit: 'عددی', baseProtein: 'beef', flavor: 'smoky' },
+                { id: 'r5', name: 'کباب لقمه مرغ زعفرانی', price: 150000, cal: 180, weight: 0.05, unit: 'عددی', baseProtein: 'chicken', flavor: 'mild' }
             ]
         };
 
         var BASKET_MIN_WEIGHT = 2.5;
 
-        // ==================== ابزارها ====================
         var persianDigits = ['۰','۱','۲','۳','۴','۵','۶','۷','۸','۹'];
         function toPersianDigits(num) { return String(num).replace(/\d/g, function(d) { return persianDigits[d]; }); }
         function toEnglishNumber(str) { return String(str).replace(/[۰-۹]/g, function(d) { return '۰۱۲۳۴۵۶۷۸۹'.indexOf(d); }); }
@@ -955,11 +1368,12 @@
             return toPersianDigits(num);
         }
 
-        // ==================== منطق ====================
         function init() {
             try {
                 var allProducts = [];
-                Object.keys(PRODUCTS).forEach(function(cat) { PRODUCTS[cat].forEach(function(p) { allProducts.push(p); }); });
+                Object.keys(PRODUCTS).forEach(function(cat) {
+                    PRODUCTS[cat].forEach(function(p) { p.category = cat; allProducts.push(p); });
+                });
 
                 function buildItem(p) {
                     var basketClass = p.isBasket ? ' basket-item' : '';
@@ -1001,11 +1415,11 @@
 
                 var items = Array.prototype.slice.call(document.querySelectorAll('.item'));
 
-                // ==================== عناصر ====================
                 var totalItemsDisplay = document.getElementById('totalItemsDisplay');
                 var totalPriceDisplay = document.getElementById('totalPriceDisplay');
                 var clearBtn = document.getElementById('clearAllBtn');
                 var randomBtn = document.getElementById('randomBtn');
+                var tasteBtn = document.getElementById('tasteBtn');
                 var randomAgainBtn = document.getElementById('randomAgainBtn');
                 var toast = document.getElementById('toast');
                 var cardNumberEl = document.getElementById('cardNumber');
@@ -1014,11 +1428,33 @@
                 var finalItemCount = document.getElementById('finalItemCount');
                 var copyFinalBtn = document.getElementById('copyFinalBtn');
 
+                var budgetStatusBadge = document.getElementById('budgetStatusBadge');
+                var tasteStatusBadge = document.getElementById('tasteStatusBadge');
+                var budgetToolSubtitle = document.getElementById('budgetToolSubtitle');
+                var tasteToolSubtitle = document.getElementById('tasteToolSubtitle');
+
                 var budgetModal = document.getElementById('budgetModal');
                 var modalBudgetInput = document.getElementById('modalBudgetInput');
                 var modalCancelBtn = document.getElementById('modalCancelBtn');
                 var modalConfirmBtn = document.getElementById('modalConfirmBtn');
                 var quickBudgetBtns = document.querySelectorAll('.quick-budget-btn');
+
+                var rerollModal = document.getElementById('rerollModal');
+                var rerollBody = document.getElementById('rerollBody');
+                var rerollClose = document.getElementById('rerollClose');
+                var rerollGoBtn = document.getElementById('rerollGoBtn');
+                var rerollResetBtn = document.getElementById('rerollResetBtn');
+                var tabBudgetBtn = document.getElementById('tabBudgetBtn');
+                var tabTasteBtn = document.getElementById('tabTasteBtn');
+                var tabBudgetBadge = document.getElementById('tabBudgetBadge');
+                var tabTasteBadge = document.getElementById('tabTasteBadge');
+
+                var quizModal = document.getElementById('quizModal');
+                var quizContent = document.getElementById('quizContent');
+                var quizProgressFill = document.getElementById('quizProgressFill');
+                var quizStepLabel = document.getElementById('quizStepLabel');
+                var quizModeBadge = document.getElementById('quizModeBadge');
+                var quizCloseTop = document.getElementById('quizCloseTop');
 
                 var clearModal = document.getElementById('clearModal');
                 var clearCancelBtn = document.getElementById('clearCancelBtn');
@@ -1028,11 +1464,27 @@
                 var basketSummaryList = document.getElementById('basketSummaryList');
                 var basketSummaryCount = document.getElementById('basketSummaryCount');
 
-                var STORAGE_KEY = 'mamasis_state_v3';
-                var TOUR_KEY = 'mamasis_tour_v3';
-                var LAST_BUDGET_KEY = 'mamasis_last_budget';
+                var STORAGE_KEY = 'mamasis_state_v4';
+                var TOUR_KEY = 'mamasis_tour_v4';
+                var BUDGET_KEY = 'mamasis_budget';
+                var TASTE_KEY = 'mamasis_taste';
+                var TOUR_LAST_SEEN_KEY = 'mamasis_tour_last_seen';
 
-                // ==================== ذخیره state ====================
+                // State مرکزی
+                var appState = {
+                    budget: null,       // عدد یا null
+                    taste: null         // { answers, skipped } یا null
+                };
+
+                // بارگذاری
+                try {
+                    var savedBudget = localStorage.getItem(BUDGET_KEY);
+                    if (savedBudget) appState.budget = parseInt(savedBudget, 10) || null;
+                    var savedTaste = localStorage.getItem(TASTE_KEY);
+                    if (savedTaste) appState.taste = JSON.parse(savedTaste);
+                } catch (e) {}
+
+                // ---------- ذخیره و بازیابی ----------
                 var saveTimeout;
                 function saveState() {
                     clearTimeout(saveTimeout);
@@ -1048,6 +1500,60 @@
                     }, 400);
                 }
 
+                function saveBudget(b) {
+                    appState.budget = b;
+                    try {
+                        if (b) localStorage.setItem(BUDGET_KEY, String(b));
+                        else localStorage.removeItem(BUDGET_KEY);
+                    } catch (e) {}
+                    updateToolsStatus();
+                }
+
+                function saveTaste(t) {
+                    appState.taste = t;
+                    try {
+                        if (t) localStorage.setItem(TASTE_KEY, JSON.stringify(t));
+                        else localStorage.removeItem(TASTE_KEY);
+                    } catch (e) {}
+                    updateToolsStatus();
+                }
+
+                function updateToolsStatus() {
+                    // بودجه
+                    if (appState.budget) {
+                        budgetStatusBadge.classList.add('active');
+                        budgetStatusBadge.textContent = fa(appState.budget, 'price') + ' ت';
+                        budgetToolSubtitle.textContent = 'بودجه فعال';
+                    } else {
+                        budgetStatusBadge.classList.remove('active');
+                        budgetToolSubtitle.textContent = 'بودجه می‌گید، سبد می‌چینیم';
+                    }
+
+                    // مزاج
+                    if (appState.taste && appState.taste.answers) {
+                        var ans = appState.taste.answers;
+                        var labels = [];
+                        if (ans.protein) {
+                            var pl = { chicken: 'مرغ', beef: 'گوشت', turkey: 'بوقلمون', mixed: 'ترکیبی', plant: 'گیاهی', vegan: 'وگان' };
+                            if (pl[ans.protein]) labels.push(pl[ans.protein]);
+                        }
+                        if (ans.flavor && ans.flavor.length > 0) {
+                            var fl = { mild: 'ملایم', spicy: 'تند', smoky: 'دودی', cheese: 'پنیری', classic: 'کلاسیک' };
+                            labels.push(fl[ans.flavor[0]] || '');
+                        }
+                        tasteStatusBadge.classList.add('active');
+                        tasteStatusBadge.textContent = '✓ ' + (labels.join(' • ') || 'تنظیم شد');
+                        tasteToolSubtitle.textContent = 'مزاج ثبت شد';
+                    } else {
+                        tasteStatusBadge.classList.remove('active');
+                        tasteToolSubtitle.textContent = 'سلیقه‌تون رو بگید';
+                    }
+
+                    // تب‌های reroll
+                    tabBudgetBadge.style.display = appState.budget ? 'inline-block' : 'none';
+                    tabTasteBadge.style.display = (appState.taste && appState.taste.answers) ? 'inline-block' : 'none';
+                }
+
                 function loadState() {
                     try {
                         var raw = localStorage.getItem(STORAGE_KEY);
@@ -1060,17 +1566,17 @@
                     } catch (e) {}
                 }
 
-                // ==================== toast ====================
+                // ---------- toast ----------
                 var toastTimeout;
                 function showToast(msg) {
                     if (!toast) return;
                     clearTimeout(toastTimeout);
                     toast.textContent = msg;
                     toast.classList.add('show');
-                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3000);
+                    toastTimeout = setTimeout(function() { toast.classList.remove('show'); }, 3200);
                 }
 
-                // ==================== qty ====================
+                // ---------- qty ----------
                 function getQty(item) {
                     var val = item.querySelector('.qty-value').textContent;
                     return parseInt(toEnglishNumber(val), 10) || 0;
@@ -1233,7 +1739,6 @@
                             incompleteBasketItems.forEach(function(b) {
                                 text += '• ' + b.name + ': ' + fa(b.weight, 'weight') + ' از ۲.۵ کیلو (' + fa(b.remaining, 'weight') + ' مونده)\n';
                             });
-                            text += 'تولید این محصولات بعد از رسیدن به ۲.۵ کیلو شروع می‌شه.\n';
                         }
                         text += '─────────────────────\n';
                         text += '💳 کارت مقصد:\n' + cardNum + '\n';
@@ -1246,27 +1751,143 @@
                     }
                 }
 
-                function randomSelect(budget) {
-                    if (!budget || budget <= 0) { showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید'); return; }
-                    items.forEach(function(item) { applyQty(item, 0); });
+                // ==================================================
+                // ============ رندوم ترکیبی (بودجه + مزاج) ============
+                // ==================================================
+                function calculateTasteWeights(taste) {
+                    var weights = {};
+                    if (!taste || !taste.answers) {
+                        allProducts.forEach(function(p) { weights[p.id] = 0; });
+                        return weights;
+                    }
+                    var ans = taste.answers;
+                    var skipped = taste.skipped || {};
+
+                    allProducts.forEach(function(p) {
+                        var score = 0;
+
+                        // پروتئین
+                        if (!skipped.protein && ans.protein) {
+                            if (ans.protein === 'chicken') {
+                                if (p.baseProtein === 'chicken') score += 5;
+                                else if (p.baseProtein === 'mixed') score += 2;
+                                else if (p.baseProtein === 'turkey') score += 3;
+                            } else if (ans.protein === 'beef') {
+                                if (p.baseProtein === 'beef') score += 5;
+                                else if (p.baseProtein === 'mixed') score += 2;
+                            } else if (ans.protein === 'turkey') {
+                                if (p.baseProtein === 'chicken') score += 3;
+                                else if (p.baseProtein === 'beef') score += 2;
+                            } else if (ans.protein === 'mixed') {
+                                score += 2;
+                            } else if (ans.protein === 'plant' || ans.protein === 'vegan') {
+                                if (p.baseProtein === 'plant') score += 10;
+                                else if (p.baseProtein === 'vegan') score += 10;
+                                else if (p.baseProtein === 'chicken') score += 1;
+                                if (p.flavor === 'cheese') score += 1;
+                            }
+                        }
+
+                        // طعم (چندانتخابی)
+                        if (!skipped.flavor && Array.isArray(ans.flavor) && ans.flavor.length > 0) {
+                            if (ans.flavor.indexOf(p.flavor) !== -1) score += 4;
+                            // اگه چند طعم انتخاب کرده، هر تطابق اضافه وزن داره
+                            if (ans.flavor.length > 1 && ans.flavor.indexOf(p.flavor) !== -1) {
+                                score += 1; // bonus
+                            }
+                        }
+
+                        // هدف (چندانتخابی)
+                        if (!skipped.purpose && Array.isArray(ans.purpose) && ans.purpose.length > 0) {
+                            ans.purpose.forEach(function(purp) {
+                                if (purp === 'economy') {
+                                    score += (1000000 - Math.min(p.price, 1000000)) / 1000000 * 3;
+                                } else if (purp === 'premium') {
+                                    score += (Math.min(p.price, 1100000) / 1100000) * 3;
+                                } else if (purp === 'diet') {
+                                    score += (1500 - Math.min(p.cal, 1500)) / 1500 * 3;
+                                } else if (purp === 'variety') {
+                                    score += 1.5;
+                                }
+                            });
+                        }
+
+                        // محدودیت
+                        if (!skipped.restriction && ans.restriction) {
+                            if (ans.restriction === 'lowfat') {
+                                if (p.baseProtein === 'chicken') score += 2;
+                                if (p.baseProtein === 'beef') score -= 1;
+                            } else if (ans.restriction === 'highprotein') {
+                                if (p.baseProtein === 'beef') score += 2;
+                                if (p.baseProtein === 'chicken') score -= 0.5;
+                            }
+                        }
+
+                        weights[p.id] = score;
+                    });
+                    return weights;
+                }
+
+                // الگوریتم یکپارچه: بودجه + مزاج
+                function unifiedRandomSelect(opts) {
+                    opts = opts || {};
+                    var budget = opts.budget;
+                    var useTaste = !!opts.useTaste;
+                    var taste = opts.taste;
+
+                    if (!budget || budget <= 0) {
+                        showToast('⚠️ بودجه‌ای تعیین نشده. اول بودجه رو تنظیم کنید.');
+                        return false;
+                    }
+
+                    // پاک کردن
+                    items.forEach(function(item) { applyQty(item, 0); clearMatchBadges(); });
+
+                    var weights = useTaste ? calculateTasteWeights(taste) : null;
+
                     var itemData = items.map(function(item) {
+                        var id = item.dataset.productId;
                         return {
                             element: item,
+                            id: id,
                             price: parseInt(item.dataset.price, 10) || 0,
                             isNumeric: item.dataset.unit === 'عددی',
                             isBasket: item.dataset.basket === 'true',
-                            weightPer: parseFloat(item.dataset.weight) || 0
+                            weightPer: parseFloat(item.dataset.weight) || 0,
+                            tasteWeight: weights ? (weights[id] || 0) : 0
                         };
                     });
+
                     function getMinQty(d) {
                         if (d.isBasket) return Math.ceil(BASKET_MIN_WEIGHT / d.weightPer);
                         return d.isNumeric ? 2 : 1;
                     }
+
                     var remaining = budget, selectedCount = 0, stallCount = 0;
                     var maxStall = 60, hardLimit = 5000, iterations = 0;
+
+                    // اگه taste داریم، محصولاتی با وزن بالاتر اولویت دارن
+                    function pickWeighted(candidates) {
+                        if (!useTaste || !weights) {
+                            return candidates[Math.floor(Math.random() * candidates.length)];
+                        }
+                        // وزنی بر اساس tasteWeight
+                        var total = 0;
+                        candidates.forEach(function(c) { total += Math.max(0.5, c.tasteWeight); });
+                        var r = Math.random() * total;
+                        var acc = 0;
+                        for (var i = 0; i < candidates.length; i++) {
+                            acc += Math.max(0.5, candidates[i].tasteWeight);
+                            if (r <= acc) return candidates[i];
+                        }
+                        return candidates[candidates.length - 1];
+                    }
+
                     while (remaining > 0 && stallCount < maxStall && iterations < hardLimit) {
                         iterations++;
                         var progressed = false;
+
+                        // اولویت ۱: تکمیل زنبیل‌های نیمه‌کاره
                         var incompleteBasket = itemData.filter(function(d) {
                             if (!d.isBasket) return false;
                             var q = getQty(d.element);
@@ -1274,10 +1895,12 @@
                             return q * d.weightPer < BASKET_MIN_WEIGHT && d.price <= remaining;
                         });
                         if (incompleteBasket.length > 0) {
-                            var pick = incompleteBasket[Math.floor(Math.random() * incompleteBasket.length)];
+                            var pick = pickWeighted(incompleteBasket);
                             applyQty(pick.element, getQty(pick.element) + 1);
                             remaining -= pick.price; selectedCount++; progressed = true;
                         }
+
+                        // اولویت ۲: انتخاب زنبیل جدید (اگه بودجه کافی)
                         if (!progressed) {
                             var freshBasket = itemData.filter(function(d) {
                                 if (!d.isBasket) return false;
@@ -1285,20 +1908,22 @@
                                 return getMinQty(d) * d.price <= remaining;
                             });
                             if (freshBasket.length > 0 && Math.random() < 0.5) {
-                                var pickB = freshBasket[Math.floor(Math.random() * freshBasket.length)];
+                                var pickB = pickWeighted(freshBasket);
                                 var fullQty = getMinQty(pickB);
                                 applyQty(pickB.element, fullQty);
                                 remaining -= fullQty * pickB.price;
                                 selectedCount += fullQty; progressed = true;
                             }
                         }
+
+                        // اولویت ۳: تکمیل حداقل عددی‌ها
                         if (!progressed) {
                             var underMin = itemData.filter(function(d) {
                                 if (d.isBasket) return false;
                                 return getQty(d.element) < getMinQty(d);
                             });
                             if (underMin.length > 0) {
-                                var pick2 = underMin[Math.floor(Math.random() * underMin.length)];
+                                var pick2 = pickWeighted(underMin);
                                 var needed = getMinQty(pick2) - getQty(pick2.element);
                                 var cost = needed * pick2.price;
                                 if (cost <= remaining) {
@@ -1307,39 +1932,527 @@
                                 }
                             }
                         }
+
+                        // اولویت ۴: افزودن تصادفی وزنی
                         if (!progressed) {
                             var available = itemData.filter(function(d) { return d.price > 0 && d.price <= remaining; });
                             if (available.length === 0) break;
-                            var chosen = available[Math.floor(Math.random() * available.length)];
+                            var chosen = pickWeighted(available);
                             applyQty(chosen.element, getQty(chosen.element) + 1);
                             remaining -= chosen.price; selectedCount++; progressed = true;
                         }
+
                         if (progressed) stallCount = 0; else stallCount++;
                     }
+
                     updateSummary();
                     saveState();
-                    if (selectedCount === 0) { showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست'); return; }
+
+                    if (useTaste && weights) highlightMatchedItems(weights);
+
+                    if (selectedCount === 0) {
+                        showToast('❌ بودجه کافی برای خرید هیچ محصولی نیست');
+                        return false;
+                    }
+
                     var usedPercent = Math.round(((budget - remaining) / budget) * 100);
-                    showToast('🎲 ' + fa(selectedCount, 'count') + ' محصول انتخاب شد • ' + fa(usedPercent, 'count') + '٪ بودجه مصرف شد');
+                    var msg = '🎲 ' + fa(selectedCount, 'count') + ' محصول انتخاب شد • ' + fa(usedPercent, 'count') + '٪ بودجه';
+                    if (useTaste) msg = '🔮 ' + msg + ' • با مزاج شما';
+                    showToast(msg);
+                    return true;
                 }
 
-                var modalOpen = false;
+                function highlightMatchedItems(weights) {
+                    clearMatchBadges();
+                    var topProducts = allProducts.slice().sort(function(a, b) {
+                        return weights[b.id] - weights[a.id];
+                    }).slice(0, 3);
+
+                    topProducts.forEach(function(p) {
+                        var itemEl = document.querySelector('.item[data-product-id="' + p.id + '"]');
+                        if (itemEl && getQty(itemEl) > 0) {
+                            var badge = document.createElement('div');
+                            badge.className = 'item match-badge';
+                            badge.textContent = '🔮 پیشنهاد شما';
+                            itemEl.style.position = 'relative';
+                            itemEl.appendChild(badge);
+                        }
+                    });
+                }
+
+                function clearMatchBadges() {
+                    document.querySelectorAll('.item.match-badge').forEach(function(b) { b.remove(); });
+                }
+
+                // ==================================================
+                // ============ تست مزاج ============
+                // ==================================================
+                var QUIZ_QUESTIONS = [
+                    {
+                        key: 'protein', title: 'چه پروتئینی رو ترجیح می‌دید؟',
+                        hint: 'مهم‌ترین سوال — سبد بر اساسش ساخته می‌شه',
+                        multi: false,
+                        options: [
+                            { value: 'chicken', emoji: '🍗', label: 'مرغ', desc: 'سبک و ملایم' },
+                            { value: 'beef', emoji: '🥩', label: 'گوشت', desc: 'پرقدرت و سنگین' },
+                            { value: 'turkey', emoji: '🦃', label: 'بوقلمون', desc: 'کم‌چرب و لطیف' },
+                            { value: 'mixed', emoji: '🍖', label: 'ترکیبی', desc: 'تنوع مزه' },
+                            { value: 'plant', emoji: '🌱', label: 'پروتئین گیاهی', desc: 'به‌زودی...' },
+                            { value: 'vegan', emoji: '🥗', label: 'وگان', desc: 'کاملاً گیاهی' }
+                        ]
+                    },
+                    {
+                        key: 'flavor', title: 'چه طعم‌هایی رو دوست دارید؟',
+                        hint: 'می‌تونید چند گزینه انتخاب کنید (حداکثر ۳)',
+                        multi: true, maxSelections: 3,
+                        options: [
+                            { value: 'mild', emoji: '🌿', label: 'ملایم', desc: 'بی‌ادویه' },
+                            { value: 'spicy', emoji: '🌶️', label: 'تند', desc: 'با ادویه' },
+                            { value: 'smoky', emoji: '🔥', label: 'دودی', desc: 'با عطر دود' },
+                            { value: 'cheese', emoji: '🧀', label: 'پنیری', desc: 'با طعم پنیر' },
+                            { value: 'classic', emoji: '⭐', label: 'کلاسیک', desc: 'طعم اصیل' }
+                        ]
+                    },
+                    {
+                        key: 'purpose', title: 'برای چه هدفی می‌خرید؟',
+                        hint: 'می‌تونید چند هدف انتخاب کنید (حداکثر ۲)',
+                        multi: true, maxSelections: 2,
+                        options: [
+                            { value: 'economy', emoji: '💵', label: 'اقتصادی', desc: 'بهترین قیمت' },
+                            { value: 'premium', emoji: '👑', label: 'لوکس', desc: 'بهترین کیفیت' },
+                            { value: 'variety', emoji: '🎨', label: 'تنوع', desc: 'چند نوع' },
+                            { value: 'diet', emoji: '⚖️', label: 'رژیمی', desc: 'کم‌کالری' }
+                        ]
+                    },
+                    {
+                        key: 'restriction', title: 'محدودیت خاصی دارید؟',
+                        hint: 'کمک می‌کنه سبد مناسب‌تری بسازیم',
+                        multi: false,
+                        options: [
+                            { value: 'none', emoji: '✅', label: 'بدون محدودیت', desc: 'همه چیز اوکیه' },
+                            { value: 'lowfat', emoji: '🌾', label: 'کم‌چرب', desc: 'مرغ و بوقلمون' },
+                            { value: 'highprotein', emoji: '💪', label: 'پرقدرت', desc: 'گوشت و کباب' }
+                        ]
+                    }
+                ];
+
+                var quizAnswers = {};
+                var quizSkipped = {};
+                var quizStep = 0;
+                var quizModalOpen = false;
+                var quizOnFinishCallback = null;
+
+                // پر کردن اولیه از state
+                function loadTasteIntoQuiz() {
+                    if (appState.taste && appState.taste.answers) {
+                        quizAnswers = JSON.parse(JSON.stringify(appState.taste.answers));
+                        quizSkipped = appState.taste.skipped ? JSON.parse(JSON.stringify(appState.taste.skipped)) : {};
+                    } else {
+                        quizAnswers = {};
+                        quizSkipped = {};
+                    }
+                }
+
+                function openQuizModal(onFinish) {
+                    if (quizModalOpen) return;
+                    quizModalOpen = true;
+                    quizOnFinishCallback = onFinish || null;
+                    quizStep = 0;
+                    loadTasteIntoQuiz();
+                    quizModal.classList.add('active');
+                    renderQuiz();
+                }
+
+                function closeQuizModal() {
+                    if (!quizModalOpen) return;
+                    quizModalOpen = false;
+                    quizModal.classList.remove('active');
+                }
+
+                function isQuestionAnswered(q) {
+                    if (quizSkipped[q.key]) return true; // رد شده حساب می‌شه
+                    var ans = quizAnswers[q.key];
+                    if (!ans) return false;
+                    if (q.multi) return Array.isArray(ans) && ans.length > 0;
+                    return typeof ans === 'string' && ans.length > 0;
+                }
+
+                function renderQuiz() {
+                    var total = QUIZ_QUESTIONS.length;
+
+                    if (quizStep >= total) {
+                        quizProgressFill.style.width = '100%';
+                        renderQuizResult();
+                        return;
+                    }
+
+                    var q = QUIZ_QUESTIONS[quizStep];
+                    var progress = (quizStep / total) * 100;
+                    quizProgressFill.style.width = progress + '%';
+                    quizStepLabel.textContent = 'سوال ' + fa(quizStep + 1, 'count') + ' از ' + fa(total, 'count');
+                    quizModeBadge.textContent = q.multi ? 'چندانتخابی' : 'تک‌انتخابی';
+
+                    var html = '';
+                    html += '<div class="quiz-question" id="quizQuestionTitle">' + q.title + '</div>';
+                    html += '<div class="quiz-hint">' + q.hint + '</div>';
+                    html += '<div class="quiz-options">';
+
+                    var currentAns = quizAnswers[q.key];
+                    q.options.forEach(function(opt) {
+                        var isSelected = false;
+                        if (q.multi) {
+                            isSelected = Array.isArray(currentAns) && currentAns.indexOf(opt.value) !== -1;
+                        } else {
+                            isSelected = currentAns === opt.value;
+                        }
+                        var selClass = isSelected ? ' selected' : '';
+                        var indicator = q.multi
+                            ? '<span class="qo-check">✓</span>'
+                            : '<span class="qo-radio"></span>';
+                        html += (
+                            '<button class="quiz-option' + selClass + '" type="button" data-value="' + opt.value + '">' +
+                                '<span class="qo-emoji">' + opt.emoji + '</span>' +
+                                '<span class="qo-txt"><strong>' + opt.label + '</strong><small>' + opt.desc + '</small></span>' +
+                                indicator +
+                            '</button>'
+                        );
+                    });
+                    html += '</div>';
+
+                    html += '<div class="quiz-nav">';
+                    if (quizStep > 0) {
+                        html += '<button class="modal-btn modal-btn-ghost" id="quizBackBtn" type="button">← قبلی</button>';
+                    } else {
+                        html += '<button class="modal-btn modal-btn-ghost" id="quizCancelBtn" type="button">انصراف</button>';
+                    }
+                    html += '<button class="modal-btn modal-btn-purple" id="quizNextBtn" type="button">' +
+                        (quizStep === total - 1 ? 'دیدن نتیجه ✨' : 'بعدی →') + '</button>';
+                    html += '</div>';
+                    html += '<button class="quiz-skip-btn" id="quizSkipBtn" type="button">⏭ رد کردن این سوال</button>';
+
+                    quizContent.innerHTML = html;
+
+                    if (quizSkipped[q.key]) {
+                        document.getElementById('quizNextBtn').disabled = false;
+                    } else if (isQuestionAnswered(q)) {
+                        document.getElementById('quizNextBtn').disabled = false;
+                    } else {
+                        document.getElementById('quizNextBtn').disabled = true;
+                    }
+
+                    // event listeners
+                    quizContent.querySelectorAll('.quiz-option').forEach(function(opt) {
+                        opt.addEventListener('click', function() {
+                            var val = this.dataset.value;
+                            if (q.multi) {
+                                var arr = Array.isArray(quizAnswers[q.key]) ? quizAnswers[q.key].slice() : [];
+                                var idx = arr.indexOf(val);
+                                if (idx !== -1) {
+                                    arr.splice(idx, 1);
+                                } else {
+                                    if (q.maxSelections && arr.length >= q.maxSelections) {
+                                        showToast('حداکثر ' + fa(q.maxSelections, 'count') + ' گزینه می‌تونید انتخاب کنید');
+                                        return;
+                                    }
+                                    arr.push(val);
+                                }
+                                quizAnswers[q.key] = arr;
+                            } else {
+                                quizAnswers[q.key] = val;
+                            }
+                            delete quizSkipped[q.key];
+                            renderQuiz();
+                        });
+                    });
+
+                    var backBtn = document.getElementById('quizBackBtn');
+                    var cancelBtn = document.getElementById('quizCancelBtn');
+                    var nextBtn = document.getElementById('quizNextBtn');
+                    var skipBtn = document.getElementById('quizSkipBtn');
+
+                    if (backBtn) backBtn.addEventListener('click', function() { quizStep--; renderQuiz(); });
+                    if (cancelBtn) cancelBtn.addEventListener('click', closeQuizModal);
+                    if (nextBtn) nextBtn.addEventListener('click', function() {
+                        if (!quizSkipped[q.key] && !isQuestionAnswered(q)) return;
+                        quizStep++;
+                        renderQuiz();
+                    });
+                    if (skipBtn) skipBtn.addEventListener('click', function() {
+                        quizSkipped[q.key] = true;
+                        delete quizAnswers[q.key];
+                        quizStep++;
+                        renderQuiz();
+                    });
+                }
+
+                function renderQuizResult() {
+                    quizProgressFill.style.width = '100%';
+
+                    var tags = [];
+                    var proteinLabel = { chicken: 'مرغ‌دوست', beef: 'گوشت‌دوست', turkey: 'بوقلمون‌دوست', mixed: 'ترکیبی', plant: 'گیاهی', vegan: 'وگان' };
+                    var flavorLabel = { mild: 'ملایم', spicy: 'تند', smoky: 'دودی', cheese: 'پنیری', classic: 'کلاسیک' };
+                    var purposeLabel = { economy: 'اقتصادی', premium: 'لوکس', variety: 'تنوع‌طلب', diet: 'رژیمی' };
+
+                    if (quizSkipped.protein) tags.push({ emoji: '⏭', text: 'پروتئین (رد شد)', skipped: true });
+                    else if (proteinLabel[quizAnswers.protein]) tags.push({ emoji: '🍽️', text: proteinLabel[quizAnswers.protein] });
+
+                    if (quizSkipped.flavor) tags.push({ emoji: '⏭', text: 'طعم (رد شد)', skipped: true });
+                    else if (Array.isArray(quizAnswers.flavor)) {
+                        quizAnswers.flavor.forEach(function(f) {
+                            if (flavorLabel[f]) tags.push({ emoji: '👅', text: flavorLabel[f] });
+                        });
+                    }
+
+                    if (quizSkipped.purpose) tags.push({ emoji: '⏭', text: 'هدف (رد شد)', skipped: true });
+                    else if (Array.isArray(quizAnswers.purpose)) {
+                        quizAnswers.purpose.forEach(function(p) {
+                            if (purposeLabel[p]) tags.push({ emoji: '🎯', text: purposeLabel[p] });
+                        });
+                    }
+
+                    var html = '';
+                    html += '<div class="quiz-result-emoji">🔮</div>';
+                    html += '<div class="quiz-result-title">مزاج شما مشخص شد!</div>';
+                    html += '<div class="quiz-result-subtitle">حالا با دکمه «بساز» سبد اختصاصی براتون می‌سازیم</div>';
+                    html += '<div class="quiz-result-tags">';
+                    if (tags.length === 0) {
+                        html += '<div class="quiz-tag skipped">⏭ همه سوالات رد شدن</div>';
+                    } else {
+                        tags.forEach(function(t) {
+                            html += '<div class="quiz-tag' + (t.skipped ? ' skipped' : '') + '">' +
+                                '<span>' + t.emoji + '</span>' + t.text + '</div>';
+                        });
+                    }
+                    html += '</div>';
+
+                    html += '<div class="quiz-nav">';
+                    html += '<button class="modal-btn modal-btn-ghost" id="quizResultBackBtn" type="button">← ویرایش</button>';
+                    html += '<button class="modal-btn modal-btn-purple" id="quizResultSaveBtn" type="button">💾 ذخیره و ادامه</button>';
+                    html += '</div>';
+
+                    quizContent.innerHTML = html;
+
+                    document.getElementById('quizResultBackBtn').addEventListener('click', function() {
+                        quizStep = QUIZ_QUESTIONS.length - 1;
+                        renderQuiz();
+                    });
+                    document.getElementById('quizResultSaveBtn').addEventListener('click', function() {
+                        // ذخیره در state
+                        saveTaste({
+                            answers: JSON.parse(JSON.stringify(quizAnswers)),
+                            skipped: JSON.parse(JSON.stringify(quizSkipped))
+                        });
+                        closeQuizModal();
+                        showToast('🔮 مزاج شما ذخیره شد');
+                        if (quizOnFinishCallback) quizOnFinishCallback();
+                        quizOnFinishCallback = null;
+                    });
+                }
+
+                // ==================================================
+                // ============ مودال رندوم مجدد (تب‌دار) ============
+                // ==================================================
+                var rerollActiveTab = 'budget';
+                var rerollModalOpen = false;
+
+                function openRerollModal() {
+                    if (rerollModalOpen) return;
+                    rerollModalOpen = true;
+                    rerollActiveTab = 'budget';
+                    rerollModal.classList.add('active');
+                    renderRerollBody();
+                }
+
+                function closeRerollModal() {
+                    if (!rerollModalOpen) return;
+                    rerollModalOpen = false;
+                    rerollModal.classList.remove('active');
+                }
+
+                function renderRerollTabs() {
+                    tabBudgetBtn.classList.toggle('active', rerollActiveTab === 'budget');
+                    tabTasteBtn.classList.toggle('active', rerollActiveTab === 'taste');
+                }
+
+                function renderRerollBody() {
+                    renderRerollTabs();
+
+                    if (rerollActiveTab === 'budget') {
+                        var currentBudget = appState.budget;
+                        var html = '';
+                        if (currentBudget) {
+                            html += '<div class="reroll-current-budget">' +
+                                '<span>بودجه فعلی:</span>' +
+                                '<strong>' + fa(currentBudget, 'price') + ' ت</strong>' +
+                                '</div>';
+                        } else {
+                            html += '<div class="reroll-current-budget empty">هنوز بودجه‌ای تنظیم نشده</div>';
+                        }
+                        html += '<div class="modal-input-wrap">' +
+                            '<label for="rerollBudgetInput" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">مبلغ بودجه</label>' +
+                            '<input type="tel" class="modal-input" id="rerollBudgetInput" placeholder="مثلاً 2,000,000" inputmode="numeric" autocomplete="off" value="' + (currentBudget ? currentBudget.toLocaleString('en-US') : '') + '">' +
+                            '<span class="modal-input-suffix">تومان</span>' +
+                            '</div>';
+                        html += '<div class="modal-quick-budgets">';
+                        [1000000, 2000000, 3000000, 5000000, 10000000, 20000000].forEach(function(b) {
+                            html += '<button class="quick-budget-btn" type="button" data-budget="' + b + '">' + fa(b/1000000, 'count') + ' میلیون</button>';
+                        });
+                        html += '</div>';
+
+                        rerollBody.innerHTML = html;
+
+                        // event listeners
+                        var inp = document.getElementById('rerollBudgetInput');
+                        inp.addEventListener('input', function() {
+                            var digits = this.value.replace(/[^0-9]/g, '');
+                            this.value = digits ? parseInt(digits, 10).toLocaleString('en-US') : '';
+                        });
+                        inp.addEventListener('change', function() {
+                            var raw = this.value.replace(/[^0-9]/g, '');
+                            saveBudget(raw ? parseInt(raw, 10) : null);
+                        });
+
+                        rerollBody.querySelectorAll('.quick-budget-btn').forEach(function(btn) {
+                            btn.addEventListener('click', function() {
+                                var b = parseInt(this.dataset.budget, 10);
+                                saveBudget(b);
+                                renderRerollBody();
+                            });
+                        });
+                    } else {
+                        // تب مزاج
+                        var html2 = '';
+
+                        if (appState.taste && appState.taste.answers) {
+                            // نمایش خلاصه
+                            var tags = [];
+                            var ans = appState.taste.answers;
+                            var skipped = appState.taste.skipped || {};
+                            var proteinLabel = { chicken: 'مرغ', beef: 'گوشت', turkey: 'بوقلمون', mixed: 'ترکیبی', plant: 'گیاهی', vegan: 'وگان' };
+                            var flavorLabel = { mild: 'ملایم', spicy: 'تند', smoky: 'دودی', cheese: 'پنیری', classic: 'کلاسیک' };
+                            var purposeLabel = { economy: 'اقتصادی', premium: 'لوکس', variety: 'تنوع', diet: 'رژیمی' };
+
+                            if (!skipped.protein && proteinLabel[ans.protein]) tags.push({ emoji: '🍽️', text: proteinLabel[ans.protein] });
+                            if (!skipped.flavor && Array.isArray(ans.flavor)) {
+                                ans.flavor.forEach(function(f) { if (flavorLabel[f]) tags.push({ emoji: '👅', text: flavorLabel[f] }); });
+                            }
+                            if (!skipped.purpose && Array.isArray(ans.purpose)) {
+                                ans.purpose.forEach(function(p) { if (purposeLabel[p]) tags.push({ emoji: '🎯', text: purposeLabel[p] }); });
+                            }
+
+                            html2 += '<div class="quiz-summary">' +
+                                '<div class="quiz-summary-title">🔮 مزاج فعلی شما</div>' +
+                                '<div class="quiz-summary-tags">';
+                            if (tags.length === 0) {
+                                html2 += '<span class="quiz-summary-empty">همه سوالات رد شدن</span>';
+                            } else {
+                                tags.forEach(function(t) {
+                                    html2 += '<span class="quiz-summary-tag">' + t.emoji + ' ' + t.text + '</span>';
+                                });
+                            }
+                            html2 += '</div></div>';
+                        } else {
+                            html2 += '<div class="quiz-summary">' +
+                                '<div class="quiz-summary-title">🔮 هنوز مزاجی ثبت نشده</div>' +
+                                '<div class="quiz-summary-empty">روی «تست جدید» بزنید تا مزاجتون رو ثبت کنید</div>' +
+                                '</div>';
+                        }
+
+                        html2 += '<div class="reroll-taste-actions">' +
+                            '<button class="modal-btn modal-btn-purple" id="rerollStartTasteBtn" type="button">' +
+                            (appState.taste ? '✏️ ویرایش مزاج' : '✨ تست جدید') +
+                            '</button>';
+                        if (appState.taste) {
+                            html2 += '<button class="modal-btn modal-btn-ghost" id="rerollClearTasteBtn" type="button">🗑️ حذف مزاج</button>';
+                        }
+                        html2 += '</div>';
+
+                        if (appState.taste) {
+                            html2 += '<div class="reroll-hint">💡 برای شروع تازه، روی «تست جدید» بزنید. پاسخ‌های قبلی پیش‌پر می‌شن.</div>';
+                        }
+
+                        rerollBody.innerHTML = html2;
+
+                        var startTasteBtn = document.getElementById('rerollStartTasteBtn');
+                        if (startTasteBtn) {
+                            startTasteBtn.addEventListener('click', function() {
+                                closeRerollModal();
+                                setTimeout(function() {
+                                    openQuizModal(function() {
+                                        // بعد از ذخیره مزاج، دوباره reroll رو باز کن
+                                        openRerollModal();
+                                        rerollActiveTab = 'taste';
+                                        renderRerollBody();
+                                    });
+                                }, 300);
+                            });
+                        }
+
+                        var clearTasteBtn = document.getElementById('rerollClearTasteBtn');
+                        if (clearTasteBtn) {
+                            clearTasteBtn.addEventListener('click', function() {
+                                saveTaste(null);
+                                showToast('🗑️ مزاج حذف شد');
+                                renderRerollBody();
+                            });
+                        }
+                    }
+                }
+
+                // کلیک تب‌ها
+                tabBudgetBtn.addEventListener('click', function() { rerollActiveTab = 'budget'; renderRerollBody(); });
+                tabTasteBtn.addEventListener('click', function() { rerollActiveTab = 'taste'; renderRerollBody(); });
+
+                rerollClose.addEventListener('click', closeRerollModal);
+                rerollModal.addEventListener('click', function(e) { if (e.target === rerollModal) closeRerollModal(); });
+
+                rerollResetBtn.addEventListener('click', function() {
+                    saveBudget(null);
+                    saveTaste(null);
+                    showToast('🔄 همه تنظیمات ریست شد');
+                    renderRerollBody();
+                });
+
+                rerollGoBtn.addEventListener('click', function() {
+                    // چک کردن بودجه
+                    var rawBudget = document.getElementById('rerollBudgetInput');
+                    if (rawBudget) {
+                        var raw = rawBudget.value.replace(/[^0-9]/g, '');
+                        if (raw) saveBudget(parseInt(raw, 10));
+                    }
+
+                    if (!appState.budget) {
+                        showToast('⚠️ اول بودجه رو تنظیم کنید');
+                        rerollActiveTab = 'budget';
+                        renderRerollBody();
+                        return;
+                    }
+
+                    closeRerollModal();
+                    setTimeout(function() {
+                        unifiedRandomSelect({
+                            budget: appState.budget,
+                            useTaste: !!(appState.taste && appState.taste.answers),
+                            taste: appState.taste
+                        });
+                    }, 300);
+                });
+
+                // ==================================================
+                // ============ مودال بودجه اصلی (کارت) ============
+                // ==================================================
+                var budgetModalOpen = false;
                 var lastFocusedElement = null;
                 function openBudgetModal() {
-                    if (modalOpen || !budgetModal) return;
-                    modalOpen = true; lastFocusedElement = document.activeElement;
+                    if (budgetModalOpen || !budgetModal) return;
+                    budgetModalOpen = true; lastFocusedElement = document.activeElement;
                     budgetModal.classList.add('active');
-                    try {
-                        var lastBudget = localStorage.getItem(LAST_BUDGET_KEY);
-                        if (lastBudget && parseInt(lastBudget, 10) > 0) {
-                            modalBudgetInput.value = parseInt(lastBudget, 10).toLocaleString('en-US');
-                        } else modalBudgetInput.value = '';
-                    } catch (e) { modalBudgetInput.value = ''; }
+                    modalBudgetInput.value = appState.budget ? appState.budget.toLocaleString('en-US') : '';
                     setTimeout(function() { modalBudgetInput.focus(); }, 300);
                 }
                 function closeBudgetModal() {
-                    if (!modalOpen || !budgetModal) return;
-                    modalOpen = false;
+                    if (!budgetModalOpen || !budgetModal) return;
+                    budgetModalOpen = false;
                     budgetModal.classList.remove('active');
                     modalBudgetInput.blur();
                     if (lastFocusedElement) lastFocusedElement.focus();
@@ -1353,21 +2466,21 @@
                     modalBudgetInput.addEventListener('input', function() { this.value = formatNumberInput(this.value); });
                     modalBudgetInput.addEventListener('keydown', function(e) {
                         if (e.key === 'Enter') { e.preventDefault(); confirmBudget(); }
-                        if (e.key === 'Tab') {
-                            var focusable = budgetModal.querySelectorAll('button, input');
-                            var first = focusable[0]; var last = focusable[focusable.length - 1];
-                            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-                            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-                        }
                     });
                 }
                 function confirmBudget() {
                     var raw = modalBudgetInput.value.replace(/[^0-9]/g, '');
-                    var budget = parseInt(raw, 10);
-                    if (!budget || budget <= 0) { showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید'); return; }
-                    try { localStorage.setItem(LAST_BUDGET_KEY, String(budget)); } catch (e) {}
+                    var b = parseInt(raw, 10);
+                    if (!b || b <= 0) { showToast('⚠️ لطفاً یک بودجه معتبر وارد کنید'); return; }
+                    saveBudget(b);
                     closeBudgetModal();
-                    setTimeout(function() { randomSelect(budget); }, 250);
+                    setTimeout(function() {
+                        unifiedRandomSelect({
+                            budget: appState.budget,
+                            useTaste: !!(appState.taste && appState.taste.answers),
+                            taste: appState.taste
+                        });
+                    }, 300);
                 }
                 if (modalConfirmBtn) modalConfirmBtn.addEventListener('click', confirmBudget);
                 if (modalCancelBtn) modalCancelBtn.addEventListener('click', closeBudgetModal);
@@ -1379,9 +2492,31 @@
                         modalBudgetInput.focus();
                     });
                 });
-                if (randomBtn) randomBtn.addEventListener('click', openBudgetModal);
-                if (randomAgainBtn) randomAgainBtn.addEventListener('click', openBudgetModal);
 
+                if (randomBtn) randomBtn.addEventListener('click', openBudgetModal);
+                if (randomAgainBtn) randomAgainBtn.addEventListener('click', openRerollModal);
+                if (tasteBtn) tasteBtn.addEventListener('click', function() {
+                    openQuizModal(function() {
+                        // بعد از ذخیره مزاج، اگه بودجه داریم، سبد بساز
+                        if (appState.budget) {
+                            setTimeout(function() {
+                                unifiedRandomSelect({
+                                    budget: appState.budget,
+                                    useTaste: true,
+                                    taste: appState.taste
+                                });
+                            }, 300);
+                        } else {
+                            showToast('🔮 مزاج ذخیره شد. برای ساخت سبد، بودجه رو تنظیم کنید');
+                        }
+                    });
+                });
+                if (quizModal) quizModal.addEventListener('click', function(e) { if (e.target === quizModal) closeQuizModal(); });
+                if (quizCloseTop) quizCloseTop.addEventListener('click', closeQuizModal);
+
+                // ==================================================
+                // ============ پاک کردن ============
+                // ==================================================
                 var clearModalOpen = false;
                 function openClearModal() {
                     var hasSelection = false;
@@ -1402,10 +2537,14 @@
                 if (clearConfirmBtn) clearConfirmBtn.addEventListener('click', function() {
                     items.forEach(function(item) { applyQty(item, 0); });
                     updateSummary(); saveState(); closeClearModal();
+                    clearMatchBadges();
                     showToast('🧹 همه انتخاب‌ها پاک شد');
                 });
                 if (clearModal) clearModal.addEventListener('click', function(e) { if (e.target === clearModal) closeClearModal(); });
 
+                // ==================================================
+                // ============ کپی ============
+                // ==================================================
                 function copyText(text, successMsg) {
                     if (navigator.clipboard && navigator.clipboard.writeText) {
                         navigator.clipboard.writeText(text).then(function() { showToast(successMsg); })
@@ -1436,6 +2575,9 @@
                     copyText(text, '📋 فاکتور کپی شد - برای ادمین بفرستید');
                 });
 
+                // ==================================================
+                // ============ رویدادهای qty ============
+                // ==================================================
                 items.forEach(function(item) {
                     var plusBtn = item.querySelector('.qty-btn.plus');
                     var minusBtn = item.querySelector('.qty-btn.minus');
@@ -1444,25 +2586,29 @@
                 });
 
                 loadState();
+                updateToolsStatus();
                 updateSummary();
 
                 document.addEventListener('keydown', function(e) {
                     if (e.key === 'Escape') {
-                        if (modalOpen) closeBudgetModal();
+                        if (budgetModalOpen) closeBudgetModal();
+                        else if (rerollModalOpen) closeRerollModal();
+                        else if (quizModalOpen) closeQuizModal();
                         else if (clearModalOpen) closeClearModal();
                         else if (tourActive) endTour();
                     }
                 });
 
-                // ============================================
+                // ==================================================
                 // ============ تور راهنما ============
-                // ============================================
+                // ==================================================
                 var tourSteps = [
-                    { target: '[data-tour="header"]', emoji: '🍃', title: 'به ماماسیس خوش آمدید!', desc: 'اینجا می‌تونید محصولات خانگی تازه انتخاب کنید، با بودجه خرید رندوم کنید و فاکتور نهایی بگیرید.' },
-                    { target: '[data-tour="budget"]', emoji: '💰', title: 'خرید هوشمند با بودجه', desc: 'دکمه 🎲 رندوم رو بزنید و بودجه‌تون رو وارد کنید. سیستم خودش یه سبد متناسب با بودجه‌تون می‌چینه.' },
-                    { target: '[data-tour="first-item"]', emoji: '🛒', title: 'انتخاب محصولات', desc: 'با دکمه‌های + و − تعداد هر محصول رو تنظیم کنید. قیمت و کالری هر آیتم زنده به‌روز می‌شه.' },
+                    { target: '[data-tour="header"]', emoji: '🍃', title: 'به ماماسیس خوش آمدید!', desc: 'اینجا می‌تونید محصولات خانگی تازه انتخاب کنید، با بودجه یا مزاج خرید کنید و فاکتور نهایی بگیرید.' },
+                    { target: '[data-tour="budget"]', emoji: '💰', title: 'خرید با بودجه', desc: 'بودجه‌تون رو وارد کنید و سیستم خودش یه سبد متناسب می‌چینه.' },
+                    { target: '[data-tour="taste"]', emoji: '🔮', title: 'تست مزاج', desc: 'چند سوال کوتاه درباره سلیقه‌تون جواب بدید تا سبد اختصاصی بر اساس ذائقه‌تون بسازیم. می‌تونید هر سوال رو رد کنید.' },
+                    { target: '[data-tour="first-item"]', emoji: '🛒', title: 'انتخاب محصولات', desc: 'با دکمه‌های + و − تعداد هر محصول رو تنظیم کنید. قیمت و کالری زنده به‌روز می‌شه.' },
                     { target: '[data-tour="basket-category"]', emoji: '🧺', title: 'زنبیل رزرو', desc: 'هر محصول کالباس/ژامبون باید جداگانه به ۲.۵ کیلو برسه. زیر هر محصول نوار پیشرفت خودش رو ببینید.' },
-                    { target: '[data-tour="summary"]', emoji: '📊', title: 'جمع کل زنده', desc: 'تعداد کل، کالری کل و مبلغ نهایی همیشه اینجاست. با 🧹 همه انتخاب‌ها پاک می‌شن.' },
+                    { target: '[data-tour="summary"]', emoji: '📊', title: 'جمع کل زنده', desc: 'تعداد کل، کالری کل و مبلغ نهایی همیشه اینجاست. با 🧹 همه انتخاب‌ها پاک می‌شن و با 🎲 رندوم مجدد سبد جدید با بودجه + مزاج می‌سازید.' },
                     { target: '[data-tour="payment"]', emoji: '💳', title: 'کارت مقصد', desc: 'شماره کارت برای واریز اینجاست. با دکمه 📋 سریع کپی کنید.' },
                     { target: '[data-tour="final"]', emoji: '📋', title: 'فاکتور نهایی', desc: 'فاکتور کامل با هشدار محصولات زنبیل ناقص اینجاست. با دکمه کپی برای ادمین بفرستید!' }
                 ];
@@ -1478,25 +2624,20 @@
                 var tourSkipBtn = document.getElementById('tourSkipBtn');
                 var tourDots = document.getElementById('tourDots');
                 var tourRestartBtn = document.getElementById('tourRestartBtn');
+                var tourReminderBadge = document.getElementById('tourReminderBadge');
+                var closeReminderBtn = document.getElementById('closeReminderBtn');
 
-                if (!tourOverlay || !tourSpotlight || !tourTooltip || !tourDots) {
-                    if (DEBUG) console.warn('[ماماسیس] عناصر تور پیدا نشدند');
-                    return;
-                }
+                if (!tourOverlay || !tourSpotlight || !tourTooltip || !tourDots) return;
 
                 var currentStep = 0;
                 var tourActive = false;
                 var isAutoScrolling = false;
 
-                // ساخت نقطه‌ها
                 tourSteps.forEach(function(_, i) {
                     var dot = document.createElement('div');
                     dot.className = 'tour-dot' + (i === 0 ? ' active' : '');
                     dot.setAttribute('data-step', i);
-                    dot.setAttribute('aria-label', 'مرحله ' + (i + 1));
-                    dot.addEventListener('click', function() {
-                        if (tourActive) showStep(i);
-                    });
+                    dot.addEventListener('click', function() { if (tourActive) showStep(i); });
                     tourDots.appendChild(dot);
                 });
 
@@ -1504,33 +2645,21 @@
                     var rect = targetEl.getBoundingClientRect();
                     var tooltipWidth = Math.min(340, window.innerWidth - 32);
                     tourTooltip.style.width = tooltipWidth + 'px';
-
-                    // محاسبه ارتفاع بعد از رندر
                     var tooltipHeight = tourTooltip.offsetHeight || 220;
-
                     var top, arrowClass;
-                    // تصمیم: بالا یا پایین
                     var spaceBelow = window.innerHeight - rect.bottom;
                     var spaceAbove = rect.top;
-
                     if (spaceBelow > tooltipHeight + 40 || spaceBelow > spaceAbove) {
-                        top = rect.bottom + 20;
-                        arrowClass = 'arrow-top';
+                        top = rect.bottom + 20; arrowClass = 'arrow-top';
                     } else {
-                        top = rect.top - tooltipHeight - 20;
-                        arrowClass = 'arrow-bottom';
+                        top = rect.top - tooltipHeight - 20; arrowClass = 'arrow-bottom';
                     }
-
-                    // محدود کردن top به محدوده قابل مشاهده
                     top = Math.max(12, Math.min(top, window.innerHeight - tooltipHeight - 12));
-
                     var left = rect.left + rect.width / 2 - tooltipWidth / 2;
                     left = Math.max(12, Math.min(left, window.innerWidth - tooltipWidth - 12));
-
                     tourTooltip.style.top = top + 'px';
                     tourTooltip.style.left = left + 'px';
                     tourTooltip.className = 'tour-tooltip active ' + arrowClass;
-
                     var arrowLeft = rect.left + rect.width / 2 - left;
                     tourTooltip.style.setProperty('--arrow-left', Math.max(20, Math.min(arrowLeft, tooltipWidth - 20)) + 'px');
                 }
@@ -1550,37 +2679,22 @@
                     currentStep = index;
                     var step = tourSteps[index];
                     var targetEl = document.querySelector(step.target);
-
                     if (!targetEl) {
-                        if (DEBUG) console.warn('[ماماسیس] هدف تور پیدا نشد:', step.target);
-                        // برو مرحله بعد
                         if (index < tourSteps.length - 1) showStep(index + 1);
                         return;
                     }
-
-                    // پر کردن محتوا
                     if (tourStepBadge) tourStepBadge.textContent = fa(index + 1, 'count') + ' از ' + fa(tourSteps.length, 'count');
                     if (tourTitle) tourTitle.innerHTML = '<span class="tour-title-emoji">' + step.emoji + '</span>' + step.title;
                     if (tourDesc) tourDesc.textContent = step.desc;
-
-                    // دکمه بعدی
                     if (tourNextBtn) {
                         if (index === tourSteps.length - 1) tourNextBtn.innerHTML = '✓ متوجه شدم';
                         else tourNextBtn.innerHTML = 'بعدی ←';
                     }
-
-                    // progress bar
-                    if (tourProgressBar) {
-                        tourProgressBar.style.width = ((index + 1) / tourSteps.length * 100) + '%';
-                    }
-
-                    // نقطه‌ها
+                    if (tourProgressBar) tourProgressBar.style.width = ((index + 1) / tourSteps.length * 100) + '%';
                     tourDots.querySelectorAll('.tour-dot').forEach(function(dot, i) {
                         dot.classList.toggle('active', i === index);
                         dot.classList.toggle('completed', i < index);
                     });
-
-                    // اسکرول + موقعیت‌دهی
                     var rect = targetEl.getBoundingClientRect();
                     if (rect.top < 80 || rect.bottom > window.innerHeight - 80) {
                         isAutoScrolling = true;
@@ -1592,7 +2706,6 @@
                         }, 500);
                     } else {
                         positionSpotlight(targetEl);
-                        // صبر کمی برای رندر شدن محتوا
                         setTimeout(function() { positionTooltip(targetEl); }, 30);
                     }
                 }
@@ -1604,12 +2717,11 @@
                     document.body.classList.add('tour-active');
                     tourOverlay.classList.add('active');
                     tourTooltip.classList.add('active');
-
-                    // صبر برای رندر بعد از اسکرول
                     setTimeout(function() {
                         window.scrollTo({ top: 0, behavior: 'smooth' });
                         setTimeout(function() { showStep(0); }, 400);
                     }, 100);
+                    try { localStorage.setItem(TOUR_LAST_SEEN_KEY, String(Date.now())); } catch (e) {}
                 }
 
                 function endTour() {
@@ -1619,24 +2731,44 @@
                     tourTooltip.classList.remove('active');
                     tourSpotlight.classList.remove('active');
                     try { localStorage.setItem(TOUR_KEY, 'true'); } catch (e) {}
+                    showTourReminder();
+                }
+
+                function showTourReminder() {
+                    if (!tourRestartBtn || !tourReminderBadge) return;
+                    tourRestartBtn.classList.add('reminder');
+                    tourReminderBadge.classList.add('visible');
+                }
+
+                function hideTourReminder() {
+                    if (!tourRestartBtn || !tourReminderBadge) return;
+                    tourRestartBtn.classList.remove('reminder');
+                    tourReminderBadge.classList.remove('visible');
                 }
 
                 if (tourNextBtn) tourNextBtn.addEventListener('click', function() {
                     if (currentStep >= tourSteps.length - 1) {
                         endTour();
-                        showToast('🎉 تور تموم شد! حالا خودتون امتحان کنید');
+                        showToast('🎉 تور تموم شد!');
                     } else showStep(currentStep + 1);
                 });
-
                 if (tourSkipBtn) tourSkipBtn.addEventListener('click', function() {
                     endTour();
                     showToast('با دکمه 🎓 هر وقت خواستید تور رو دوباره ببینید');
                 });
-
                 if (tourRestartBtn) tourRestartBtn.addEventListener('click', function() {
-                    // ریست TOUR_KEY تا دوباره اجرا بشه
+                    hideTourReminder();
                     try { localStorage.removeItem(TOUR_KEY); } catch (e) {}
                     startTour();
+                });
+                if (tourReminderBadge) tourReminderBadge.addEventListener('click', function(e) {
+                    if (e.target === closeReminderBtn) return;
+                    hideTourReminder();
+                    startTour();
+                });
+                if (closeReminderBtn) closeReminderBtn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    hideTourReminder();
                 });
 
                 tourOverlay.addEventListener('click', endTour);
@@ -1644,9 +2776,7 @@
                 var resizeTimeout;
                 window.addEventListener('resize', function() {
                     clearTimeout(resizeTimeout);
-                    resizeTimeout = setTimeout(function() {
-                        if (tourActive) showStep(currentStep);
-                    }, 200);
+                    resizeTimeout = setTimeout(function() { if (tourActive) showStep(currentStep); }, 200);
                 });
 
                 var scrollTimeout;
@@ -1660,21 +2790,21 @@
                     }, 100);
                 }, { passive: true });
 
-                // ============ اجرای خودکار تور ============
-                // با requestAnimationFrame برای اطمینان از آماده بودن DOM
                 var hasSeenTour = false;
                 try { hasSeenTour = localStorage.getItem(TOUR_KEY) === 'true'; } catch (e) {}
 
                 if (!hasSeenTour) {
                     requestAnimationFrame(function() {
                         setTimeout(function() {
-                            try {
-                                startTour();
-                            } catch (e) {
-                                if (DEBUG) console.error('[ماماسیس] خطای شروع تور:', e);
-                            }
+                            try { startTour(); } catch (e) {}
                         }, 1200);
                     });
+                } else {
+                    var lastSeen = 0;
+                    try { lastSeen = parseInt(localStorage.getItem(TOUR_LAST_SEEN_KEY) || '0', 10); } catch (e) {}
+                    var hoursSinceLastSeen = (Date.now() - lastSeen) / (1000 * 60 * 60);
+                    if (hoursSinceLastSeen > 24) setTimeout(showTourReminder, 2000);
+                    else setTimeout(showTourReminder, 30000);
                 }
 
             } catch (err) {
