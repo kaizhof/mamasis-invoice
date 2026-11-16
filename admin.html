@@ -333,7 +333,7 @@ function loadStockFromRepo(){
   stockBadge.textContent='...';
 
   fetch(apiUrl(STOCK_PATH)+'?ref='+encodeURIComponent(BRANCH)+'&t='+Date.now(),{
-    headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Cache-Control':'no-cache'}
+    headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
   }).then(function(res){
     if(res.status===404){
       currentSha=null;localStock={};
