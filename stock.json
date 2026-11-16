@@ -1,0 +1,8 @@
+{
+  "updatedAt": "2026-11-16T00:00:00Z",
+  "items": {
+    "s1": true, "s2": true, "s3": true, "s4": true, "s5": true,
+    "b1": true, "b2": true, "b3": true, "b4": true,
+    "r1": true, "r2": true, "r3": true, "r4": true, "r5": true
+  }
+}
