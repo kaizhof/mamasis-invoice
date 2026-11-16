@@ -3,69 +3,140 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#d45a2b">
 <title>پنل ادمین ماماسیس</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔧</text></svg>">
 <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'Vazirmatn', Tahoma, sans-serif;
-    background: linear-gradient(160deg, #fdf6f0, #f5e0d2);
-    min-height: 100vh; padding: 1rem 0.7rem 2rem; color: #3e2c22;
-  }
-  .wrap { max-width: 620px; margin: 0 auto; }
-  .card {
-    background: rgba(255,255,255,0.92); border-radius: 22px;
-    padding: 1.3rem; box-shadow: 0 10px 30px rgba(180,120,80,0.15);
-    margin-bottom: 1rem; border: 1px solid #f0e0d3;
-  }
-  h1 { font-size: 1.3rem; color: #4e2e1e; margin-bottom: 0.3rem; }
-  .sub { font-size: 0.78rem; color: #766355; margin-bottom: 1rem; }
-  label { display: block; font-size: 0.78rem; font-weight: 700; color: #6b3f2a; margin-bottom: 0.3rem; }
-  input[type="text"], input[type="password"] {
-    width: 100%; padding: 0.7rem 0.9rem; border-radius: 12px;
-    border: 2px solid #f0e0d3; font-family: inherit; font-size: 0.85rem;
-    direction: ltr; text-align: left; margin-bottom: 0.7rem; outline: none;
-  }
-  input:focus { border-color: #d45a2b; }
-  .btn {
-    border: none; border-radius: 30px; padding: 0.65rem 1rem;
-    font-family: inherit; font-weight: 700; font-size: 0.85rem;
-    cursor: pointer; transition: all 0.2s; display: inline-flex;
-    align-items: center; justify-content: center; gap: 5px;
-  }
-  .btn:active { transform: scale(0.96); }
-  .btn-primary { background: linear-gradient(135deg,#d45a2b,#b84a1f); color: #fff; width: 100%; box-shadow: 0 6px 16px rgba(212,90,43,0.3); }
-  .btn-ghost { background: #f5ede7; color: #6b3f2a; border: 1.5px solid #e6cdbb; }
-  .btn-danger { background: linear-gradient(135deg,#c0392b,#96281b); color:#fff; }
-  .row { display: flex; gap: 8px; flex-wrap: wrap; }
-  .product-row {
-    display: flex; align-items: center; gap: 10px;
-    padding: 0.7rem 0.8rem; background: #fefaf7;
-    border-radius: 14px; border: 1px solid #f0e0d3; margin-bottom: 0.5rem;
-  }
-  .product-row .info { flex: 1; min-width: 0; }
-  .product-row .name { font-weight: 700; font-size: 0.9rem; }
-  .product-row .cat { font-size: 0.7rem; color: #766355; }
-  .switch { position: relative; width: 52px; height: 28px; flex-shrink: 0; }
-  .switch input { opacity: 0; width: 0; height: 0; }
-  .slider {
-    position: absolute; inset: 0; background: #d9c5b8;
-    border-radius: 30px; cursor: pointer; transition: 0.2s;
-  }
-  .slider::before {
-    content: ""; position: absolute; width: 22px; height: 22px;
-    left: 3px; top: 3px; background: #fff; border-radius: 50%;
-    transition: 0.2s; box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-  }
-  .switch input:checked + .slider { background: linear-gradient(135deg,#27ae60,#1e8449); }
-  .switch input:checked + .slider::before { transform: translateX(24px); }
-  .status { font-size: 0.72rem; font-weight: 700; padding: 0.3rem 0.8rem; border-radius: 20px; display: inline-block; margin-top: 0.4rem; }
-  .status.ok { background: #e6f5ed; color: #1f5c46; }
-  .status.err { background: #fde8e5; color: #c0392b; }
-  .status.info { background: #fdf2ea; color: #b84a1f; }
-  .hidden { display: none !important; }
-  .muted { font-size: 0.72rem; color: #766355; line-height: 1.7; margin-top: 0.5rem; }
-  a { color: #d45a2b; }
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+:root{
+  --primary:#d45a2b;--primary-dark:#b84a1f;--primary-light:#fce6d8;
+  --cream:#fefaf7;--brown:#4e2e1e;--brown-2:#6b3f2a;
+  --text:#3e2c22;--text-muted:#766355;--border:#f0e0d3;
+  --success:#27ae60;--warning:#c0392b;--warning-bg:#fde8e5;
+  --basket:#2d7a5f;--basket-dark:#1f5c46;
+}
+body{
+  font-family:'Vazirmatn',Tahoma,sans-serif;
+  background:linear-gradient(160deg,#fdf6f0,#f9ece3 40%,#f5e0d2);
+  min-height:100vh;padding:1rem .7rem 2rem;color:var(--text);
+}
+.wrap{max-width:680px;margin:0 auto}
+.card{
+  background:rgba(255,255,255,.92);border-radius:22px;padding:1.3rem;
+  box-shadow:0 10px 30px rgba(180,120,80,.15);margin-bottom:1rem;
+  border:1px solid var(--border);
+}
+h1{font-size:1.3rem;color:var(--brown);margin-bottom:.3rem;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+h1 .badge{font-size:.65rem;background:var(--primary);color:#fff;padding:.15rem .6rem;border-radius:20px;font-weight:700}
+.sub{font-size:.78rem;color:var(--text-muted);margin-bottom:1rem;line-height:1.7}
+label{display:block;font-size:.78rem;font-weight:700;color:var(--brown-2);margin-bottom:.3rem}
+input[type="text"],input[type="password"]{
+  width:100%;padding:.7rem .9rem;border-radius:12px;border:2px solid var(--border);
+  font-family:inherit;font-size:.85rem;direction:ltr;text-align:left;margin-bottom:.7rem;
+  outline:none;transition:all .2s;background:#fff;
+}
+input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(212,90,43,.1)}
+.btn{
+  border:none;border-radius:30px;padding:.65rem 1rem;font-family:inherit;
+  font-weight:700;font-size:.85rem;cursor:pointer;transition:all .2s;
+  display:inline-flex;align-items:center;justify-content:center;gap:5px;
+}
+.btn:active{transform:scale(.96)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;width:100%;box-shadow:0 6px 16px rgba(212,90,43,.3)}
+.btn-ghost{background:#f5ede7;color:var(--brown-2);border:1.5px solid #e6cdbb}
+.btn-danger{background:linear-gradient(135deg,var(--warning),#96281b);color:#fff}
+.btn-success{background:linear-gradient(135deg,var(--success),#1e8449);color:#fff}
+.row{display:flex;gap:8px;flex-wrap:wrap}
+.row .btn{flex:1;min-width:120px}
+.product-row{
+  display:flex;align-items:center;gap:10px;padding:.75rem .85rem;
+  background:var(--cream);border-radius:14px;border:1px solid var(--border);
+  margin-bottom:.5rem;flex-wrap:wrap;
+}
+.product-row .info{flex:1;min-width:0}
+.product-row .name{font-weight:700;font-size:.9rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.product-row .cat{font-size:.7rem;color:var(--text-muted);margin-top:2px}
+.product-row .status-txt{
+  font-size:.66rem;font-weight:700;padding:.1rem .5rem;border-radius:20px;
+}
+.product-row .status-txt.ok{background:#e6f5ed;color:var(--basket-dark)}
+.product-row .status-txt.out{background:var(--warning-bg);color:var(--warning)}
+.switch{position:relative;width:52px;height:28px;flex-shrink:0}
+.switch input{opacity:0;width:0;height:0}
+.slider{
+  position:absolute;inset:0;background:#d9c5b8;border-radius:30px;
+  cursor:pointer;transition:.2s;
+}
+.slider::before{
+  content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;
+  background:#fff;border-radius:50%;transition:.2s;
+  box-shadow:0 2px 6px rgba(0,0,0,.2);
+}
+.switch input:checked + .slider{background:linear-gradient(135deg,var(--success),#1e8449)}
+.switch input:checked + .slider::before{transform:translateX(24px)}
+.status{font-size:.72rem;font-weight:700;padding:.35rem .8rem;border-radius:20px;display:inline-block;margin-top:.4rem;line-height:1.6}
+.status.ok{background:#e6f5ed;color:var(--basket-dark)}
+.status.err{background:var(--warning-bg);color:var(--warning)}
+.status.info{background:#fdf2ea;color:var(--primary-dark)}
+.status.loading{background:#f0e0d3;color:var(--brown-2)}
+.hidden{display:none !important}
+.muted{font-size:.72rem;color:var(--text-muted);line-height:1.8;margin-top:.5rem}
+.muted a{color:var(--primary);text-decoration:none;font-weight:700}
+.muted code{background:#f0e0d3;padding:.1rem .4rem;border-radius:6px;font-size:.72rem;direction:ltr;display:inline-block}
+.connection-bar{
+  display:flex;align-items:center;gap:8px;flex-wrap:wrap;
+  padding:.6rem .9rem;border-radius:14px;margin-bottom:1rem;
+  background:linear-gradient(135deg,#fff9f4,#fdf0e8);
+  border:1px dashed var(--primary);font-size:.76rem;color:var(--brown-2);
+}
+.connection-bar .dot{width:9px;height:9px;border-radius:50%;background:#c9b5a8;display:inline-block;flex-shrink:0}
+.connection-bar .dot.ok{background:var(--success);box-shadow:0 0 8px rgba(39,174,96,.6)}
+.connection-bar .dot.err{background:var(--warning)}
+.connection-bar .repo-info{font-weight:700;color:var(--primary-dark);direction:ltr;font-size:.72rem}
+.help-section{margin-top:.8rem}
+.help-accordion{border:1px solid var(--border);border-radius:14px;margin-bottom:.6rem;overflow:hidden;background:var(--cream)}
+.help-accordion summary{padding:.8rem 1rem;font-weight:700;font-size:.85rem;color:var(--brown-2);cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;transition:background .2s}
+.help-accordion summary::-webkit-details-marker{display:none}
+.help-accordion summary::before{content:"▶";font-size:.7rem;color:var(--primary);transition:transform .2s}
+.help-accordion[open] summary::before{transform:rotate(90deg)}
+.help-accordion summary:hover{background:#fdf6f0}
+.help-accordion .help-content{padding:0 1rem 1rem;font-size:.8rem;line-height:1.95;color:var(--text);border-top:1px solid var(--border);padding-top:.8rem}
+.help-accordion .help-content ol,.help-accordion .help-content ul{padding-right:1.2rem;margin:.4rem 0}
+.help-accordion .help-content li{margin-bottom:.45rem}
+.help-accordion .help-content code{background:#f0e0d3;padding:.1rem .4rem;border-radius:6px;font-size:.75rem;direction:ltr;display:inline-block;font-family:monospace}
+.help-accordion .help-content .tip{background:#eaf7f1;border-right:3px solid var(--basket);padding:.55rem .85rem;border-radius:8px;margin-top:.6rem;font-size:.76rem;line-height:1.8}
+.help-accordion .help-content .warn{background:var(--warning-bg);border-right:3px solid var(--warning);padding:.55rem .85rem;border-radius:8px;margin-top:.6rem;font-size:.76rem;line-height:1.8}
+.step-list{counter-reset:step;list-style:none;padding:0}
+.step-list li{counter-increment:step;position:relative;padding-right:2.2rem;margin-bottom:.8rem;font-size:.8rem;line-height:1.8}
+.step-list li::before{
+  content:counter(step);position:absolute;right:0;top:0;
+  width:1.6rem;height:1.6rem;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
+  color:#fff;font-weight:800;font-size:.75rem;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 3px 8px rgba(212,90,43,.3);
+}
+.footer-note{text-align:center;font-size:.72rem;color:#ab9487;padding:1rem 0 .5rem}
+.footer-note i{font-style:normal;background:rgba(241,228,219,.8);padding:.15rem .8rem;border-radius:20px;display:inline-block}
+.toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%) translateY(100px);
+  background:linear-gradient(135deg,var(--brown),#3a2216);color:#fff;
+  padding:.75rem 1.6rem;border-radius:40px;font-size:.82rem;font-weight:600;
+  box-shadow:0 12px 32px rgba(0,0,0,.3);opacity:0;
+  transition:all .35s cubic-bezier(.4,0,.2,1);z-index:2000;pointer-events:none;
+  max-width:calc(100% - 30px);text-align:center;
+}
+.toast.show{transform:translateX(-50%) translateY(0);opacity:1}
+@media (max-width:400px){
+  body{padding:.5rem .4rem 1.5rem}
+  .card{padding:1rem .85rem;border-radius:18px}
+  h1{font-size:1.1rem}
+  .product-row{padding:.65rem .7rem;gap:8px}
+  .product-row .name{font-size:.85rem}
+  .btn{padding:.6rem .85rem;font-size:.8rem}
+}
 </style>
 </head>
 <body>
@@ -73,10 +144,15 @@
 
   <!-- مرحله ۱: تنظیمات اتصال -->
   <div class="card" id="setupCard">
-    <h1>🔧 پنل ادمین ماماسیس</h1>
-    <div class="sub">یک بار Token را وارد کنید، در همین دستگاه ذخیره می‌شود.</div>
+    <h1>🔧 پنل ادمین ماماسیس <span class="badge">راه‌اندازی</span></h1>
+    <div class="sub">یک بار Token را وارد کنید. در همین دستگاه ذخیره می‌شود و از این به بعد فقط سوییچ می‌زنید.</div>
 
-    <label for="tokenInput">GitHub Token (با دسترسی repo / Contents: write)</label>
+    <div class="connection-bar" id="setupConnBar" style="display:none;">
+      <span class="dot" id="setupDot"></span>
+      <span id="setupConnText">در حال بررسی اتصال...</span>
+    </div>
+
+    <label for="tokenInput">GitHub Token (دسترسی repo / Contents: write)</label>
     <input type="password" id="tokenInput" placeholder="ghp_..." autocomplete="off">
 
     <label for="repoInput">مخزن</label>
@@ -85,17 +161,43 @@
     <label for="branchInput">شاخه</label>
     <input type="text" id="branchInput" value="main" readonly>
 
-    <button class="btn btn-primary" id="saveSetupBtn" type="button">💾 ذخیره و اتصال</button>
-    <div class="muted">
-      ساخت Token: GitHub → Settings → Developer settings → Personal access tokens (classic) → Generate new token → فقط تیک <b>repo</b>.
+    <div class="row" style="margin-bottom:.8rem;">
+      <button class="btn btn-primary" id="saveSetupBtn" type="button">💾 ذخیره و اتصال</button>
     </div>
+
+    <div class="help-section">
+      <details class="help-accordion" open>
+        <summary>❓ چطور Token بسازم؟ (۳ دقیقه)</summary>
+        <div class="help-content">
+          <ol class="step-list">
+            <li>وارد <a href="https://github.com" target="_blank" rel="noopener">github.com</a> شوید.</li>
+            <li>روی عکس پروفایل بالا-راست کلیک کنید → <b>Settings</b>.</li>
+            <li>در منوی چپ، پایین‌ترین گزینه: <b>Developer settings</b>.</li>
+            <li><b>Personal access tokens</b> → <b>Tokens (classic)</b>.</li>
+            <li><b>Generate new token</b> → <b>Generate new token (classic)</b>.</li>
+            <li>در <b>Note</b> بنویسید: <code>mamasis-admin</code></li>
+            <li>در <b>Expiration</b> مقدار <code>90 days</code> یا <code>No expiration</code> انتخاب کنید.</li>
+            <li>در <b>Select scopes</b> فقط تیک <code>repo</code> را بزنید (بقیه را نزنید).</li>
+            <li><b>Generate token</b> را بزنید.</li>
+            <li>رشته طولانی <code>ghp_...</code> که نمایش داده می‌شود را <b>همین لحظه کپی کنید</b> (بعداً دیگر نشان داده نمی‌شود).</li>
+          </ol>
+          <div class="warn">⚠️ Token را در اختیار کسی قرار ندهید. اگر لو رفت، از GitHub آن را Revoke کنید و Token جدید بسازید.</div>
+        </div>
+      </details>
+    </div>
+
     <div id="setupStatus"></div>
   </div>
 
   <!-- مرحله ۲: مدیریت موجودی -->
   <div class="card hidden" id="manageCard">
-    <h1>🧺 موجودی محصولات</h1>
-    <div class="sub" id="manageSub">در حال بارگذاری...</div>
+    <h1>🧺 موجودی محصولات <span class="badge" id="stockBadge">آماده</span></h1>
+    <div class="connection-bar" id="manageConnBar">
+      <span class="dot" id="manageDot"></span>
+      <span id="manageConnText">در حال بارگذاری...</span>
+      <span class="repo-info" style="margin-right:auto;">kaizhof/mamasis-invoice</span>
+    </div>
+    <div class="sub" id="manageSub">سوییچ هر محصول را خاموش/روشن کنید. تغییرات با دکمه «ذخیره» اعمال می‌شود.</div>
 
     <div id="productsList"></div>
 
@@ -105,217 +207,298 @@
     </div>
     <div id="saveStatus"></div>
 
+    <div class="help-section" style="margin-top:1rem;">
+      <details class="help-accordion" open>
+        <summary>📖 راهنمای استفاده روزمره</summary>
+        <div class="help-content">
+          <ol class="step-list">
+            <li>هر محصولی که <b>موجود است</b>، سوییچش را روشن (سبز) بگذارید.</li>
+            <li>هر محصولی که <b>ناموجود است</b>، سوییچش را خاموش (خاکستری) کنید.</li>
+            <li>دکمه <b>«💾 ذخیره در مخزن»</b> را بزنید.</li>
+            <li>صفحه کاربر (index.html) به صورت خودکار هر ۶۰ ثانیه موجودی جدید را می‌خواند. کاربران می‌توانند با دکمه «🔄 به‌روزرسانی» فوری چک کنند.</li>
+          </ol>
+          <div class="tip">💡 محصولات ناموجود در صفحه کاربر با برچسب قرمز «ناموجود» نمایش داده می‌شوند و کاربر می‌تواند با دکمه «🔔 درخواست موجود شدن» آن را رزرو کند.</div>
+        </div>
+      </details>
+      <details class="help-accordion">
+        <summary>🔔 چطور رزروها را ببینم؟</summary>
+        <div class="help-content">
+          <p>رزروها در <code>localStorage</code> دستگاه کاربر ذخیره می‌شوند (نه در سرور). برای دیدن آن‌ها:</p>
+          <ol>
+            <li>کاربر فاکتور نهایی را از پایین صفحه کپی می‌کند و برای شما می‌فرستد.</li>
+            <li>در فاکتور، بخشی با عنوان <b>«🔔 رزروهای در انتظار موجودی»</b> وجود دارد.</li>
+            <li>بر اساس آن، محصولات رزروشده را موجود کنید.</li>
+          </ol>
+          <div class="tip">💡 اگر تعداد رزروها زیاد شد، می‌توانیم در آینده یک سرور کوچک (Vercel) اضافه کنیم تا رزروها در پنل ادمین نمایش داده شوند.</div>
+        </div>
+      </details>
+      <details class="help-accordion">
+        <summary>⚠️ عیب‌یابی</summary>
+        <div class="help-content">
+          <ul>
+            <li><b>«ذخیره شد» ولی در صفحه کاربر تغییر نکرد:</b> کش مرورگر. صفحه کاربر را با <code>Ctrl+Shift+R</code> رفرش کنید یا دکمه «🔄 به‌روزرسانی» را بزنید.</li>
+            <li><b>خطای 401:</b> Token اشتباه است یا منقضی شده. Token جدید بسازید.</li>
+            <li><b>خطای 404:</b> نام مخزن یا شاخه اشتباه است. بررسی کنید <code>kaizhof/mamasis-invoice</code> و <code>main</code> درست باشند.</li>
+            <li><b>خطای 403:</b> Token دسترسی <code>repo</code> ندارد. Token جدید با دسترسی درست بسازید.</li>
+          </ul>
+        </div>
+      </details>
+      <details class="help-accordion">
+        <summary>🔒 امنیت Token</summary>
+        <div class="help-content">
+          <ul>
+            <li>Token فقط در <code>localStorage</code> همین مرورگر ذخیره می‌شود.</li>
+            <li>هیچ‌وقت آن را در کد هاردکد نکنید یا در مخزن عمومی نگذارید.</li>
+            <li>اگر دستگاه را به کسی می‌دهید، اول <b>«🚪 خروج»</b> را بزنید.</li>
+            <li>اگر Token لو رفت، از GitHub آن را Revoke کنید و Token جدید بسازید.</li>
+          </ul>
+        </div>
+      </details>
+    </div>
+
     <div class="row" style="margin-top:1rem;">
       <button class="btn btn-danger" id="logoutBtn" type="button">🚪 خروج / حذف Token از این دستگاه</button>
     </div>
   </div>
 
+  <div class="footer-note"><i>ماماسیس 🌺 پنل مدیریت</i></div>
 </div>
+
+<div class="toast" id="toast"></div>
 
 <script>
 (function(){
-  'use strict';
+'use strict';
 
-  var REPO_OWNER = 'kaizhof';
-  var REPO_NAME  = 'mamasis-invoice';
-  var BRANCH     = 'main';
-  var STOCK_PATH = 'stock.json';
+var REPO_OWNER='kaizhof';
+var REPO_NAME='mamasis-invoice';
+var BRANCH='main';
+var STOCK_PATH='stock.json';
 
-  var TOKEN_KEY = 'mamasis_admin_token';
-  var PRODUCTS = [
-    { id:'s1', name:'آلمانی', cat:'سوسیس' },
-    { id:'s2', name:'کوکتل مرغ', cat:'سوسیس' },
-    { id:'s3', name:'کوکتل پنیری', cat:'سوسیس' },
-    { id:'s4', name:'بلغاری', cat:'سوسیس' },
-    { id:'s5', name:'هاتداگ گوشت', cat:'سوسیس' },
-    { id:'b1', name:'ژامبون مرغ و قارچ لوکس', cat:'کالباس/ژامبون' },
-    { id:'b2', name:'ژامبون گوشت لوکس', cat:'کالباس/ژامبون' },
-    { id:'b3', name:'کالباس مارتادلا', cat:'کالباس/ژامبون' },
-    { id:'b4', name:'کالباس لیونر', cat:'کالباس/ژامبون' },
-    { id:'r1', name:'ناگت مرغ', cat:'نیمه آماده' },
-    { id:'r2', name:'ناگت پنیری', cat:'نیمه آماده' },
-    { id:'r3', name:'برگر ممتاز ۱۲۵ گرمی', cat:'نیمه آماده' },
-    { id:'r4', name:'کباب لقمه گوشت', cat:'نیمه آماده' },
-    { id:'r5', name:'کباب لقمه مرغ زعفرانی', cat:'نیمه آماده' }
-  ];
+var TOKEN_KEY='mamasis_admin_token';
+var PRODUCTS=[
+  {id:'s1',name:'آلمانی',cat:'سوسیس'},
+  {id:'s2',name:'کوکتل مرغ',cat:'سوسیس'},
+  {id:'s3',name:'کوکتل پنیری',cat:'سوسیس'},
+  {id:'s4',name:'بلغاری',cat:'سوسیس'},
+  {id:'s5',name:'هاتداگ گوشت',cat:'سوسیس'},
+  {id:'b1',name:'ژامبون مرغ و قارچ لوکس',cat:'کالباس/ژامبون'},
+  {id:'b2',name:'ژامبون گوشت لوکس',cat:'کالباس/ژامبون'},
+  {id:'b3',name:'کالباس مارتادلا',cat:'کالباس/ژامبون'},
+  {id:'b4',name:'کالباس لیونر',cat:'کالباس/ژامبون'},
+  {id:'r1',name:'ناگت مرغ',cat:'نیمه آماده'},
+  {id:'r2',name:'ناگت پنیری',cat:'نیمه آماده'},
+  {id:'r3',name:'برگر ممتاز ۱۲۵ گرمی',cat:'نیمه آماده'},
+  {id:'r4',name:'کباب لقمه گوشت',cat:'نیمه آماده'},
+  {id:'r5',name:'کباب لقمه مرغ زعفرانی',cat:'نیمه آماده'}
+];
 
-  var $ = function(id){ return document.getElementById(id); };
-  var setupCard = $('setupCard');
-  var manageCard = $('manageCard');
-  var tokenInput = $('tokenInput');
-  var setupStatus = $('setupStatus');
-  var manageSub = $('manageSub');
-  var productsList = $('productsList');
-  var saveStatus = $('saveStatus');
+var $=function(id){return document.getElementById(id);};
+var setupCard=$('setupCard'),manageCard=$('manageCard');
+var tokenInput=$('tokenInput'),setupStatus=$('setupStatus');
+var manageSub=$('manageSub'),productsList=$('productsList'),saveStatus=$('saveStatus');
+var setupConnBar=$('setupConnBar'),setupDot=$('setupDot'),setupConnText=$('setupConnText');
+var manageConnBar=$('manageConnBar'),manageDot=$('manageDot'),manageConnText=$('manageConnText');
+var stockBadge=$('stockBadge');
 
-  var currentSha = null;
-  var localStock = {};
+var currentSha=null;
+var localStock={};
+var toast=$('toast');
+var toastT;
 
-  function getToken(){ try { return localStorage.getItem(TOKEN_KEY); } catch(e){ return null; } }
-  function setToken(t){ try { if(t) localStorage.setItem(TOKEN_KEY, t); else localStorage.removeItem(TOKEN_KEY); } catch(e){} }
+function showToast(msg){
+  toast.textContent=msg;toast.classList.add('show');
+  clearTimeout(toastT);toastT=setTimeout(function(){toast.classList.remove('show');},3000);
+}
+function setStatus(el,msg,type){
+  el.className='status '+(type||'info');el.textContent=msg;
+}
+function setConn(dotEl,txtEl,state,text){
+  dotEl.className='dot '+(state||'');
+  txtEl.textContent=text;
+}
+function getToken(){try{return localStorage.getItem(TOKEN_KEY);}catch(e){return null;}}
+function setToken(t){try{if(t)localStorage.setItem(TOKEN_KEY,t);else localStorage.removeItem(TOKEN_KEY);}catch(e){}}
 
-  function setStatus(el, msg, type){
-    el.className = 'status ' + (type || 'info');
-    el.textContent = msg;
-  }
+function b64EncodeUnicode(str){return btoa(unescape(encodeURIComponent(str)));}
+function b64DecodeUnicode(str){return decodeURIComponent(escape(atob(str)));}
+function apiUrl(path){return 'https://api.github.com/repos/'+REPO_OWNER+'/'+REPO_NAME+'/contents/'+path;}
 
-  // Base64 برای محتوای UTF-8 (مثل فارسی)
-  function b64EncodeUnicode(str){
-    return btoa(unescape(encodeURIComponent(str)));
-  }
-  function b64DecodeUnicode(str){
-    return decodeURIComponent(escape(atob(str)));
-  }
+function loadStockFromRepo(){
+  var token=getToken();
+  if(!token){showSetup();return;}
+  manageSub.textContent='در حال بارگذاری از مخزن...';
+  setStatus(saveStatus,'در حال خواندن stock.json از GitHub...','loading');
+  setConn(manageDot,manageConnText,'','در حال بارگذاری...');
+  stockBadge.textContent='...';
 
-  function apiUrl(path){
-    return 'https://api.github.com/repos/' + REPO_OWNER + '/' + REPO_NAME + '/contents/' + path;
-  }
-
-  function loadStockFromRepo(){
-    var token = getToken();
-    if(!token){ showSetup(); return; }
-    manageSub.textContent = 'در حال بارگذاری از مخزن...';
-    setStatus(saveStatus, 'در حال خواندن stock.json از GitHub...', 'info');
-
-    fetch(apiUrl(STOCK_PATH) + '?ref=' + encodeURIComponent(BRANCH), {
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Accept': 'application/vnd.github+json'
-      }
-    }).then(function(res){
-      if(res.status === 404){
-        // فایل وجود ندارد → با پیش‌فرض شروع کن
-        currentSha = null;
-        localStock = {};
-        PRODUCTS.forEach(function(p){ localStock[p.id] = true; });
-        renderProducts();
-        setStatus(saveStatus, 'فایل stock.json پیدا نشد. با ذخیره، ساخته می‌شود.', 'info');
-        manageSub.textContent = 'فایل جدید ایجاد می‌شود.';
-        return;
-      }
-      if(!res.ok){
-        return res.text().then(function(t){ throw new Error('HTTP ' + res.status + ': ' + t.slice(0,120)); });
-      }
-      return res.json().then(function(json){
-        currentSha = json.sha;
-        var content = b64DecodeUnicode(json.content || '');
-        var parsed;
-        try { parsed = JSON.parse(content); } catch(e){ throw new Error('stock.json معتبر نیست'); }
-        localStock = (parsed && parsed.items) ? parsed.items : {};
-        PRODUCTS.forEach(function(p){
-          if(typeof localStock[p.id] !== 'boolean') localStock[p.id] = true;
-        });
-        renderProducts();
-        manageSub.textContent = 'آخرین به‌روزرسانی: ' + (parsed.updatedAt ? new Date(parsed.updatedAt).toLocaleString('fa-IR') : 'نامشخص');
-        setStatus(saveStatus, '✅ بارگذاری شد', 'ok');
-      });
-    }).catch(function(err){
-      setStatus(saveStatus, '❌ ' + err.message, 'err');
-      manageSub.textContent = 'خطا در بارگذاری';
-    });
-  }
-
-  function renderProducts(){
-    var html = '';
-    PRODUCTS.forEach(function(p){
-      var checked = localStock[p.id] !== false;
-      html += '<div class="product-row">' +
-        '<div class="info">' +
-          '<div class="name">' + p.name + '</div>' +
-          '<div class="cat">' + p.cat + ' — کد: ' + p.id + '</div>' +
-        '</div>' +
-        '<label class="switch">' +
-          '<input type="checkbox" data-pid="' + p.id + '" ' + (checked ? 'checked' : '') + '>' +
-          '<span class="slider"></span>' +
-        '</label>' +
-      '</div>';
-    });
-    productsList.innerHTML = html;
-
-    productsList.querySelectorAll('input[type="checkbox"]').forEach(function(chk){
-      chk.addEventListener('change', function(){
-        localStock[this.dataset.pid] = this.checked;
-      });
-    });
-  }
-
-  function saveStockToRepo(){
-    var token = getToken();
-    if(!token){ showSetup(); return; }
-
-    var payload = {
-      updatedAt: new Date().toISOString(),
-      items: {}
-    };
-    PRODUCTS.forEach(function(p){
-      payload.items[p.id] = localStock[p.id] !== false;
-    });
-    var contentStr = JSON.stringify(payload, null, 2);
-    var body = {
-      message: 'به‌روزرسانی موجودی از پنل ادمین — ' + new Date().toISOString(),
-      content: b64EncodeUnicode(contentStr),
-      branch: BRANCH
-    };
-    if(currentSha) body.sha = currentSha;
-
-    setStatus(saveStatus, 'در حال ذخیره...', 'info');
-
-    fetch(apiUrl(STOCK_PATH), {
-      method: 'PUT',
-      headers: {
-        'Authorization': 'Bearer ' + token,
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(body)
-    }).then(function(res){
-      return res.text().then(function(t){
-        if(!res.ok) throw new Error('HTTP ' + res.status + ': ' + t.slice(0,200));
-        return JSON.parse(t);
-      });
-    }).then(function(json){
-      currentSha = json.content.sha;
-      setStatus(saveStatus, '✅ ذخیره شد — ' + new Date().toLocaleString('fa-IR'), 'ok');
-      manageSub.textContent = 'آخرین به‌روزرسانی: همین حالا';
-    }).catch(function(err){
-      setStatus(saveStatus, '❌ ' + err.message, 'err');
-    });
-  }
-
-  function showSetup(){
-    setupCard.classList.remove('hidden');
-    manageCard.classList.add('hidden');
-    var t = getToken();
-    if(t) tokenInput.value = t;
-  }
-
-  function showManage(){
-    setupCard.classList.add('hidden');
-    manageCard.classList.remove('hidden');
-    loadStockFromRepo();
-  }
-
-  $('saveSetupBtn').addEventListener('click', function(){
-    var t = tokenInput.value.trim();
-    if(!t){ setStatus(setupStatus, '⚠️ Token را وارد کنید', 'err'); return; }
-    setToken(t);
-    setStatus(setupStatus, '✅ ذخیره شد', 'ok');
-    setTimeout(showManage, 300);
-  });
-
-  $('saveStockBtn').addEventListener('click', saveStockToRepo);
-  $('reloadStockBtn').addEventListener('click', loadStockFromRepo);
-
-  $('logoutBtn').addEventListener('click', function(){
-    if(confirm('Token از این دستگاه حذف شود؟')){
-      setToken(null);
-      tokenInput.value = '';
-      showSetup();
+  fetch(apiUrl(STOCK_PATH)+'?ref='+encodeURIComponent(BRANCH)+'&t='+Date.now(),{
+    headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json','Cache-Control':'no-cache'}
+  }).then(function(res){
+    if(res.status===404){
+      currentSha=null;localStock={};
+      PRODUCTS.forEach(function(p){localStock[p.id]=true;});
+      renderProducts();
+      setStatus(saveStatus,'فایل stock.json پیدا نشد. با ذخیره، ساخته می‌شود.','info');
+      manageSub.textContent='فایل جدید ایجاد می‌شود.';
+      setConn(manageDot,manageConnText,'ok','متصل — فایل جدید ساخته می‌شود');
+      stockBadge.textContent='جدید';
+      return;
     }
+    if(res.status===401||res.status===403){
+      return res.text().then(function(t){throw new Error('دسترسی رد شد (HTTP '+res.status+'). Token را بررسی کنید.');});
+    }
+    if(!res.ok){
+      return res.text().then(function(t){throw new Error('HTTP '+res.status+': '+t.slice(0,120));});
+    }
+    return res.json().then(function(json){
+      currentSha=json.sha;
+      var content=b64DecodeUnicode(json.content||'');
+      var parsed;
+      try{parsed=JSON.parse(content);}catch(e){throw new Error('stock.json معتبر نیست');}
+      localStock=(parsed&&parsed.items)?parsed.items:{};
+      PRODUCTS.forEach(function(p){
+        if(typeof localStock[p.id]!=='boolean')localStock[p.id]=true;
+      });
+      renderProducts();
+      var when=parsed.updatedAt?new Date(parsed.updatedAt).toLocaleString('fa-IR'):'نامشخص';
+      manageSub.textContent='آخرین به‌روزرسانی: '+when;
+      setStatus(saveStatus,'✅ بارگذاری شد','ok');
+      setConn(manageDot,manageConnText,'ok','متصل — آخرین به‌روزرسانی: '+when);
+      stockBadge.textContent='به‌روز';
+    });
+  }).catch(function(err){
+    setStatus(saveStatus,'❌ '+err.message,'err');
+    manageSub.textContent='خطا در بارگذاری';
+    setConn(manageDot,manageConnText,'err','خطا در اتصال — '+err.message);
+    stockBadge.textContent='خطا';
   });
+}
 
-  // شروع
-  if(getToken()) showManage(); else showSetup();
+function renderProducts(){
+  var html='';
+  PRODUCTS.forEach(function(p){
+    var checked=localStock[p.id]!==false;
+    var statusTxt=checked?'<span class="status-txt ok">موجود</span>':'<span class="status-txt out">ناموجود</span>';
+    html+='<div class="product-row">'+
+      '<div class="info">'+
+        '<div class="name">'+p.name+' '+statusTxt+'</div>'+
+        '<div class="cat">'+p.cat+' — کد: <code style="font-size:.7rem;background:#f0e0d3;padding:.05rem .35rem;border-radius:6px;direction:ltr;">'+p.id+'</code></div>'+
+      '</div>'+
+      '<label class="switch"><input type="checkbox" data-pid="'+p.id+'" '+(checked?'checked':'')+'><span class="slider"></span></label>'+
+    '</div>';
+  });
+  productsList.innerHTML=html;
+  productsList.querySelectorAll('input[type="checkbox"]').forEach(function(chk){
+    chk.addEventListener('change',function(){
+      localStock[this.dataset.pid]=this.checked;
+      var nameEl=this.closest('.product-row').querySelector('.name');
+      var oldStatus=nameEl.querySelector('.status-txt');
+      if(oldStatus){
+        var newStatus=document.createElement('span');
+        newStatus.className='status-txt '+(this.checked?'ok':'out');
+        newStatus.textContent=this.checked?'موجود':'ناموجود';
+        oldStatus.replaceWith(newStatus);
+      }
+    });
+  });
+}
+
+function saveStockToRepo(){
+  var token=getToken();
+  if(!token){showSetup();return;}
+  var payload={updatedAt:new Date().toISOString(),items:{}};
+  PRODUCTS.forEach(function(p){payload.items[p.id]=localStock[p.id]!==false;});
+  var contentStr=JSON.stringify(payload,null,2);
+  var body={
+    message:'به‌روزرسانی موجودی از پنل ادمین — '+new Date().toISOString(),
+    content:b64EncodeUnicode(contentStr),
+    branch:BRANCH
+  };
+  if(currentSha)body.sha=currentSha;
+
+  setStatus(saveStatus,'در حال ذخیره...','loading');
+  stockBadge.textContent='...';
+  $('saveStockBtn').disabled=true;
+
+  fetch(apiUrl(STOCK_PATH),{
+    method:'PUT',
+    headers:{
+      'Authorization':'Bearer '+token,
+      'Accept':'application/vnd.github+json',
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(body)
+  }).then(function(res){
+    return res.text().then(function(t){
+      if(!res.ok)throw new Error('HTTP '+res.status+': '+t.slice(0,200));
+      return JSON.parse(t);
+    });
+  }).then(function(json){
+    currentSha=json.content.sha;
+    var when=new Date().toLocaleString('fa-IR');
+    setStatus(saveStatus,'✅ ذخیره شد — '+when,'ok');
+    manageSub.textContent='آخرین به‌روزرسانی: همین حالا';
+    setConn(manageDot,manageConnText,'ok','متصل — ذخیره شد در '+when);
+    stockBadge.textContent='ذخیره شد';
+    showToast('✅ موجودی با موفقیت ذخیره شد');
+  }).catch(function(err){
+    setStatus(saveStatus,'❌ '+err.message,'err');
+    stockBadge.textContent='خطا';
+    showToast('❌ خطا در ذخیره');
+  }).finally(function(){
+    $('saveStockBtn').disabled=false;
+  });
+}
+
+function showSetup(){
+  setupCard.classList.remove('hidden');
+  manageCard.classList.add('hidden');
+  var t=getToken();
+  if(t){tokenInput.value=t;checkTokenValidity(t);}
+}
+function showManage(){
+  setupCard.classList.add('hidden');
+  manageCard.classList.remove('hidden');
+  loadStockFromRepo();
+}
+
+function checkTokenValidity(token){
+  setupConnBar.style.display='flex';
+  setConn(setupDot,setupConnText,'','در حال بررسی Token...');
+  fetch('https://api.github.com/repos/'+REPO_OWNER+'/'+REPO_NAME,{
+    headers:{'Authorization':'Bearer '+token,'Accept':'application/vnd.github+json'}
+  }).then(function(res){
+    if(res.status===401){setConn(setupDot,setupConnText,'err','Token نامعتبر است');}
+    else if(res.status===403){setConn(setupDot,setupConnText,'err','دسترسی رد شد (403)');}
+    else if(res.status===404){setConn(setupDot,setupConnText,'err','مخزن پیدا نشد (404)');}
+    else if(res.ok){setConn(setupDot,setupConnText,'ok','Token معتبر — آماده اتصال');}
+    else{setConn(setupDot,setupConnText,'err','خطای HTTP '+res.status);}
+  }).catch(function(){setConn(setupDot,setupConnText,'err','اتصال به GitHub برقرار نشد');});
+}
+
+$('saveSetupBtn').addEventListener('click',function(){
+  var t=tokenInput.value.trim();
+  if(!t){setStatus(setupStatus,'⚠️ Token را وارد کنید','err');return;}
+  setToken(t);
+  setStatus(setupStatus,'✅ ذخیره شد — در حال اتصال...','ok');
+  showToast('✅ Token ذخیره شد');
+  setTimeout(showManage,400);
+});
+
+$('saveStockBtn').addEventListener('click',saveStockToRepo);
+$('reloadStockBtn').addEventListener('click',loadStockFromRepo);
+
+$('logoutBtn').addEventListener('click',function(){
+  if(confirm('Token از این دستگاه حذف شود؟ بعد از خروج باید دوباره Token وارد کنید.')){
+    setToken(null);tokenInput.value='';setupStatus.textContent='';
+    setupConnBar.style.display='none';
+    showSetup();
+    showToast('🚪 خارج شدید');
+  }
+});
+
+if(getToken())showManage();else showSetup();
 
 })();
 </script>
