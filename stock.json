@@ -1,7 +1,7 @@
 {
-  "updatedAt": "2026-11-16T13:07:06.567Z",
+  "updatedAt": "2026-11-16T13:45:18.138Z",
   "items": {
-    "s1": false,
+    "s1": true,
     "s2": false,
     "s3": false,
     "s4": false,
@@ -10,10 +10,10 @@
     "b2": false,
     "b3": false,
     "b4": false,
-    "r1": false,
+    "r1": true,
     "r2": false,
     "r3": true,
     "r4": true,
-    "r5": false
+    "r5": true
   }
 }
