@@ -47,7 +47,6 @@ input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(212,90,43,.1)}
 .btn-primary{background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;width:100%;box-shadow:0 6px 16px rgba(212,90,43,.3)}
 .btn-ghost{background:#f5ede7;color:var(--brown-2);border:1.5px solid #e6cdbb}
 .btn-danger{background:linear-gradient(135deg,var(--warning),#96281b);color:#fff}
-.btn-success{background:linear-gradient(135deg,var(--success),#1e8449);color:#fff}
 .row{display:flex;gap:8px;flex-wrap:wrap}
 .row .btn{flex:1;min-width:120px}
 .product-row{
@@ -58,22 +57,13 @@ input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(212,90,43,.1)}
 .product-row .info{flex:1;min-width:0}
 .product-row .name{font-weight:700;font-size:.9rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap}
 .product-row .cat{font-size:.7rem;color:var(--text-muted);margin-top:2px}
-.product-row .status-txt{
-  font-size:.66rem;font-weight:700;padding:.1rem .5rem;border-radius:20px;
-}
+.product-row .status-txt{font-size:.66rem;font-weight:700;padding:.1rem .5rem;border-radius:20px}
 .product-row .status-txt.ok{background:#e6f5ed;color:var(--basket-dark)}
 .product-row .status-txt.out{background:var(--warning-bg);color:var(--warning)}
 .switch{position:relative;width:52px;height:28px;flex-shrink:0}
 .switch input{opacity:0;width:0;height:0}
-.slider{
-  position:absolute;inset:0;background:#d9c5b8;border-radius:30px;
-  cursor:pointer;transition:.2s;
-}
-.slider::before{
-  content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;
-  background:#fff;border-radius:50%;transition:.2s;
-  box-shadow:0 2px 6px rgba(0,0,0,.2);
-}
+.slider{position:absolute;inset:0;background:#d9c5b8;border-radius:30px;cursor:pointer;transition:.2s}
+.slider::before{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 2px 6px rgba(0,0,0,.2)}
 .switch input:checked + .slider{background:linear-gradient(135deg,var(--success),#1e8449)}
 .switch input:checked + .slider::before{transform:translateX(24px)}
 .status{font-size:.72rem;font-weight:700;padding:.35rem .8rem;border-radius:20px;display:inline-block;margin-top:.4rem;line-height:1.6}
@@ -110,14 +100,7 @@ input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(212,90,43,.1)}
 .help-accordion .help-content .warn{background:var(--warning-bg);border-right:3px solid var(--warning);padding:.55rem .85rem;border-radius:8px;margin-top:.6rem;font-size:.76rem;line-height:1.8}
 .step-list{counter-reset:step;list-style:none;padding:0}
 .step-list li{counter-increment:step;position:relative;padding-right:2.2rem;margin-bottom:.8rem;font-size:.8rem;line-height:1.8}
-.step-list li::before{
-  content:counter(step);position:absolute;right:0;top:0;
-  width:1.6rem;height:1.6rem;border-radius:50%;
-  background:linear-gradient(135deg,var(--primary),var(--primary-dark));
-  color:#fff;font-weight:800;font-size:.75rem;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 3px 8px rgba(212,90,43,.3);
-}
+.step-list li::before{content:counter(step);position:absolute;right:0;top:0;width:1.6rem;height:1.6rem;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--primary-dark));color:#fff;font-weight:800;font-size:.75rem;display:flex;align-items:center;justify-content:center;box-shadow:0 3px 8px rgba(212,90,43,.3)}
 .footer-note{text-align:center;font-size:.72rem;color:#ab9487;padding:1rem 0 .5rem}
 .footer-note i{font-style:normal;background:rgba(241,228,219,.8);padding:.15rem .8rem;border-radius:20px;display:inline-block}
 .toast{
@@ -142,7 +125,6 @@ input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(212,90,43,.1)}
 <body>
 <div class="wrap">
 
-  <!-- مرحله ۱: تنظیمات اتصال -->
   <div class="card" id="setupCard">
     <h1>🔧 پنل ادمین ماماسیس <span class="badge">راه‌اندازی</span></h1>
     <div class="sub">یک بار Token را وارد کنید. در همین دستگاه ذخیره می‌شود و از این به بعد فقط سوییچ می‌زنید.</div>
@@ -189,7 +171,6 @@ input:focus{border-color:var(--primary);box-shadow:0 0 0 4px rgba(212,90,43,.1)}
     <div id="setupStatus"></div>
   </div>
 
-  <!-- مرحله ۲: مدیریت موجودی -->
   <div class="card hidden" id="manageCard">
     <h1>🧺 موجودی محصولات <span class="badge" id="stockBadge">آماده</span></h1>
     <div class="connection-bar" id="manageConnBar">
