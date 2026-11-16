@@ -601,6 +601,7 @@ body{
 
 <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
+<!-- مودال‌ها (بدون تغییر) -->
 <div class="modal-overlay" id="budgetModal">
     <div class="modal-card">
         <div class="modal-icon">🎲</div>
@@ -791,7 +792,6 @@ function applyStockToItems(){
             item.querySelectorAll('.qty-btn').forEach(function(btn){btn.disabled=true;});
             if(getQty(item)>0){applyQty(item,0);clearedAny=true;}
         }
-        // update request button
         if(reqBtn){
             var requested=isRequested(id);
             reqBtn.classList.toggle('active',requested);
@@ -1440,7 +1440,6 @@ function init(){
         if(st)appState.taste=JSON.parse(st);
     }catch(e){}
 
-    // درخواست موجودی
     items.forEach(function(item){
         var reqBtn=item.querySelector('.request-stock-btn');
         if(reqBtn){
@@ -1459,15 +1458,13 @@ function init(){
         if(plusBtn)plusBtn.addEventListener('click',function(){if(!isInStock(item.dataset.productId))return;applyQty(item,getQty(item)+1);updateSummary();saveState();});
     });
 
-    // دکمه بازخوانی
     document.getElementById('refreshStockBtn').addEventListener('click',function(){
-        this.disabled=true;this.textContent='⏳ ...';
-        loadStock(true).then(function(){applyStockToItems();this.disabled=false;this.textContent='🔄 به‌روزرسانی';}.bind(this))
-            .catch(function(){this.disabled=false;this.textContent='🔄 به‌روزرسانی';}.bind(this));
-        setTimeout(function(){var b=document.getElementById('refreshStockBtn');b.disabled=false;b.textContent='🔄 به‌روزرسانی';},2500);
+        var btn=this;
+        btn.disabled=true;btn.textContent='⏳ ...';
+        loadStock(true).then(function(){applyStockToItems();btn.disabled=false;btn.textContent='🔄 به‌روزرسانی';})
+            .catch(function(){btn.disabled=false;btn.textContent='🔄 به‌روزرسانی';});
     });
 
-    // بودجه
     if(modalBudgetInput)modalBudgetInput.addEventListener('input',function(){var d=this.value.replace(/[^0-9]/g,'');this.value=d?parseInt(d,10).toLocaleString('en-US'):'';});
     if(modalBudgetInput)modalBudgetInput.addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();confirmBudget();}});
     function confirmBudget(){
@@ -1488,7 +1485,6 @@ function init(){
     if(randomAgainBtn)randomAgainBtn.addEventListener('click',openRerollModal);
     if(tasteBtn)tasteBtn.addEventListener('click',function(){openQuizModal(function(){showToast('🔮 مزاج ذخیره شد');});});
 
-    // رندوم مجدد
     tabBudgetBtn.addEventListener('click',function(){rerollActiveTab='budget';renderRerollBody();});
     tabTasteBtn.addEventListener('click',function(){rerollActiveTab='taste';renderRerollBody();});
     rerollClose.addEventListener('click',closeRerollModal);
@@ -1502,7 +1498,6 @@ function init(){
         setTimeout(function(){unifiedRandomSelect({budget:appState.budget,useTaste:!!(appState.taste&&appState.taste.answers),taste:appState.taste});},200);
     });
 
-    // پاک کردن
     if(clearBtn)clearBtn.addEventListener('click',function(){clearModal.classList.add('active');});
     if(clearCancelBtn)clearCancelBtn.addEventListener('click',function(){clearModal.classList.remove('active');});
     if(clearConfirmBtn)clearConfirmBtn.addEventListener('click',function(){
@@ -1514,7 +1509,6 @@ function init(){
     });
     if(clearModal)clearModal.addEventListener('click',function(e){if(e.target===clearModal)clearModal.classList.remove('active');});
 
-    // کپی
     if(copyCardBtn)copyCardBtn.addEventListener('click',function(){
         navigator.clipboard.writeText(cardNumberEl.textContent.trim().replace(/-/g,'')).then(function(){showToast('📋 شماره کارت کپی شد');}).catch(function(){showToast('❌ کپی نشد');});
     });
@@ -1522,11 +1516,9 @@ function init(){
         navigator.clipboard.writeText(finalInvoiceBody.textContent).then(function(){showToast('📋 فاکتور کپی شد — برای ادمین بفرستید');}).catch(function(){showToast('❌ کپی نشد');});
     });
 
-    // شروع
     loadState();
     loadStock().then(function(){
         applyStockToItems();
-        // هر ۶۰ ثانیه بازخوانی
         setInterval(function(){loadStock(true).then(function(){applyStockToItems();});},60000);
     });
 }
